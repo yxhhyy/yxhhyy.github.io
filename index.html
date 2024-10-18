@@ -69,83 +69,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-SQL宽字节注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/18/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/" class="article-date">
-  <time class="dt-published" datetime="2024-10-18T13:24:01.000Z" itemprop="datePublished">2024-10-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/18/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/">SQL宽字节注入</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="宽字节的介绍"><a href="#宽字节的介绍" class="headerlink" title="宽字节的介绍"></a>宽字节的介绍</h3><ol>
-<li>GBK 是占两个字节（也就是名叫宽字节，只要字节大于1的都是）</li>
-<li>ASCII 占一个字节</li>
-<li>PHP中编码为GBK ，函数执行添加的是ASCII编码，mysql 默认字符集是GBK等宽字节字符集</li>
-</ol>
-<h3 id="为什么要介绍宽字节？"><a href="#为什么要介绍宽字节？" class="headerlink" title="为什么要介绍宽字节？"></a>为什么要介绍宽字节？</h3><p>宽字节的出现个人感觉是因为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=SQL%E8%AF%AD%E5%8F%A5&spm=1001.2101.3001.7020">SQL语句</a>过滤了一些字符，比如 ’ 转义成 &#x2F;’ 或者 “ 转义成 &#x2F;“（就是在字符前面加上一个转义字符）</p>
-<p><img src="https://gitee.com/yxhhyy/yx_typora/raw/master/Image1/202410102141508.png" alt="image-20241010214105429"></p>
-<p><strong>在这种情况下就不容易完成注入，所以出现了宽字节注入，通过宽字节绕过转义字符</strong> </p>
-<h3 id="宽字节注入原理"><a href="#宽字节注入原理" class="headerlink" title="宽字节注入原理"></a>宽字节注入原理</h3><p>宽字节注入是一种SQL注入攻击技术，它利用了某些字符集（如GBK）的特性来绕过对特殊SQL字符（如单引号）的转义处理。在宽字节字符集中，一个字符可能占用两个字节，而在某些情况下，这可以被用来绕过安全过滤。</p>
-<p>在PHP中，当使用GBK编码时，如果<strong>前一个ASCII码大于128，MySQL会将两个字符视为一个汉字</strong>。这意味着，如果攻击者在注入点前插入一个宽字节字符，如 <code>%df</code>，<strong>并跟随一个单引号，这个单引号就不会被转义函数</strong>（如<code>addslashes()</code>）正确处理。例如，<code>%df&#39;</code> 经过转义后变成 <code>%df\&#39;</code>，在GBK编码下，<code>%df%5c</code>（*%5c* 是反斜杠的URL编码）会被视为一个汉字，<strong>从而使得单引号 <em>%27</em> 成功逃逸</strong>，导致注入攻击的发生。</p>
-<h3 id="过滤的函数"><a href="#过滤的函数" class="headerlink" title="过滤的函数"></a>过滤的函数</h3><ol>
-<li><p><code>mysql_real_escape_string()</code> </p>
-</li>
-<li><p><code>addslashes()</code> </p>
-<p><code>addslashes()</code> 是 PHP 中的一个内置函数，它的作用是在字符串前添加反斜杠（\）以转义特殊字符，防止它们被解析为特殊的SQL语法。这些特殊字符通常包括<strong>单引号（’）、双引号（”）、反斜杠（\）、NULL 字符（NUL）、非打印控制字符以及某些数据库特定的转义字符</strong>。例如，如果你有一个用户输入的字符串打算插入到 SQL 查询中，为了安全起见，可以先用 <code>addslashes()</code> 函数处理，以防恶意注入攻击。</p>
-</li>
-</ol>
-<h3 id="绕过原理"><a href="#绕过原理" class="headerlink" title="绕过原理"></a>绕过原理</h3><blockquote>
-<ol>
-<li>比如使用 <code>%df’</code>：会被PHP当中的 <code>addslashes</code> 函数转义为“ <code>%df\’</code> ”。 </li>
-<li>“ <code>\</code> ”即 url 里面的“ <code>%5c</code> ”, “ <code>’</code> ”对应的 url 编码是“<code>%27</code>”，那么也就是说，“ <code>%df’</code> ”会被转义“ <code>%df%5c%27</code> ” </li>
-<li>倘若网站的字符集是GBK，mysql 使用的编码也是GBK的话，就会认为“ <code>%df%5c%27</code> ”是一个宽字节。 </li>
-<li>“ <code>%df%5c</code> ”会结合（因为宽字节是占两个字节），也就是“縗”（两个字符就会被视为一个汉字） 。后面就有一个“ <code>’</code> ”。这么一来，<code>&#39;</code> 就成功逃逸，达到了注入的目的</li>
-</ol>
-</blockquote>
-<p><img src="https://gitee.com/yxhhyy/yx_typora/raw/master/Image1/202410102149424.png" alt="image-20241010214956350"></p>
-<h3 id="使用其他宽字节"><a href="#使用其他宽字节" class="headerlink" title="使用其他宽字节"></a>使用其他宽字节</h3><blockquote>
-<ol>
-<li>不仅仅只是使用 <code>%df’</code> 进行宽字节绕过也可以使用其他的宽字节，只要满足字符串编码的要求</li>
-<li>常见使用的宽字节就是 <code>%df</code> ,其实 <strong>当我们输入第一个ascill大于128就可以</strong>，转换是将其转换成16进制，例如：129转换0x81,然后在前面加上%就是%81</li>
-<li>GBK首字节对应 **0x81-0xef(129-239)**，尾字节对应 <strong>0x40-0x7e(64-126)<strong>【</strong>除了0x80（128）</strong>】</li>
-<li>比如一些 <code>%df’</code>  <code>%81’</code>  <code>%82’</code>  <code>%de’</code> 等等（只要满足上面的要求就可以）</li>
-</ol>
-</blockquote>
-<h3 id="通过-SQLmap-进行演示"><a href="#通过-SQLmap-进行演示" class="headerlink" title="通过 SQLmap 进行演示"></a>通过 SQLmap 进行演示</h3><p><code>sqlmap.py -u &quot;url&quot; --batch --tamper=unmagicquotes.py --current-db</code> &#x2F;&#x2F; 查询数据库<br><strong>unmagicquotes.py 是专门进行宽字节绕过脚本</strong> </p>
-<p><img src="https://gitee.com/yxhhyy/yx_typora/raw/master/Image1/202410102208496.png" alt="image-20241010220851442"></p>
-<p><code>sqlmap.py -u &quot;url&quot; --batch --tamper=unmagicquotes.py -D security --tables</code> &#x2F;&#x2F; 数据表</p>
-<p><code>sqlmap.py -u &quot;url&quot; --batch --tamper=unmagicquotes.py -D security -T users --columns</code> &#x2F;&#x2F; 查询列名</p>
-<p><code>sqlmap.py -u &quot;url&quot; --batch --tamper=unmagicquotes.py -D security -T users -C &quot;username,password&quot; --dump</code> &#x2F;&#x2F; 详细数据</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/18/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/" data-id="cm2erihds00003cvw0at29dg0" data-title="SQL宽字节注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-渗透" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/18/%E6%B8%97%E9%80%8F/" class="article-date">
@@ -172,6 +95,7 @@
 <h1 id="关于黄骨鱼"><a href="#关于黄骨鱼" class="headerlink" title="关于黄骨鱼"></a>关于黄骨鱼</h1><ul>
 <li>v计划规划局</li>
 </ul>
+<p><img src="https://gitee.com/yxhhyy/yx_typora/raw/master/Image1/202410182130442.png" alt="image-20241018213030395"></p>
 
       
     </div>
@@ -217,10 +141,6 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2024/10/18/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/">SQL宽字节注入</a>
-          </li>
         
           <li>
             <a href="/2024/10/18/%E6%B8%97%E9%80%8F/">渗透</a>
