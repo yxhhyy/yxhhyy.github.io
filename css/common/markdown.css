@@ -1,294 +1,420 @@
-.markdown-body {
-  font-family: $english-font-family, $chinese-font-family, sans-serif;
-  font-size: $default-article-font-size;
+.keep-markdown-body,
+.keep-markdown-body > .post {
+  font-size: 1rem;
 }
-.markdown-body blockquote {
+.keep-markdown-body blockquote,
+.keep-markdown-body > .post blockquote {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   box-sizing: border-box;
-  margin: 20px 0;
-  color: var(--default-text-color);
-  background: var(--third-background-color);
-  padding: 0 1rem 0 0.5rem;
-  border-radius: 0 $redefine-border-radius-medium $redefine-border-radius-medium 0;
+  margin: 1.4rem 0;
+  padding: 0.8rem;
+  color: var(--text-color-3);
+  background: var(--background-color-2);
+  border-left: 0.4rem solid var(--text-color-4);
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+.keep-markdown-body blockquote p,
+.keep-markdown-body > .post blockquote p,
+.keep-markdown-body blockquote ul,
+.keep-markdown-body > .post blockquote ul,
+.keep-markdown-body blockquote ol,
+.keep-markdown-body > .post blockquote ol,
+.keep-markdown-body blockquote footer,
+.keep-markdown-body > .post blockquote footer {
   position: relative;
-  border-left: 5px solid var(--default-text-color);
+  box-sizing: border-box;
 }
-.markdown-body blockquote p,
-.markdown-body blockquote ul,
-.markdown-body blockquote ol {
-  padding: 5px 5px 5px 10px;
+.keep-markdown-body blockquote footer,
+.keep-markdown-body > .post blockquote footer {
+  margin-bottom: 0.6rem;
+  font-style: italic;
 }
-.markdown-body p {
-  line-height: $default-line-height;
-  color: var(--default-text-color);
-  font-weight: 400;
-  margin-bottom: 1rem;
-  margin-top: 0;
-}
-.markdown-body a {
+.keep-markdown-body blockquote cite,
+.keep-markdown-body > .post blockquote cite {
   position: relative;
-  outline: 0;
-  text-decoration: underline;
+  box-sizing: border-box;
+  margin-left: 1rem;
+  color: var(--text-color-4);
+}
+.keep-markdown-body blockquote cite::before,
+.keep-markdown-body > .post blockquote cite::before {
+  content: '— ';
+}
+.keep-markdown-body p,
+.keep-markdown-body > .post p {
+  margin: 0.6rem 0;
+  color: var(--text-color-3);
+  line-height: 2;
+}
+.keep-markdown-body a,
+.keep-markdown-body > .post a {
+  position: relative;
+  box-sizing: border-box;
+  padding-bottom: 0.1rem;
+  text-decoration: none;
   overflow-wrap: break-word;
+  border-bottom: 0.1rem solid var(--text-color-4);
+  outline: 0;
   cursor: pointer;
-  box-sizing: border-box;
-  padding-bottom: 2px;
 }
-.markdown-body a .fas,
-.markdown-body a .far,
-.markdown-body a fab {
-  margin: 0 2px 0 6px;
+.keep-markdown-body a .fas,
+.keep-markdown-body > .post a .fas,
+.keep-markdown-body a .far,
+.keep-markdown-body > .post a .far,
+.keep-markdown-body a .fab,
+.keep-markdown-body > .post a .fab {
   position: relative;
-  color: var(--third-text-color);
-  font-size: 0.88rem;
+  margin: 0 0.2rem 0 0.4rem;
+  color: var(--text-color-4);
+  font-size: 0.8rem;
 }
-.markdown-body a:hover {
+.keep-markdown-body a:hover,
+.keep-markdown-body > .post a:hover {
   text-decoration: underline;
 }
-.markdown-body a:hover::after {
+.keep-markdown-body a:hover::after,
+.keep-markdown-body > .post a:hover::after {
   background: var(--primary-color);
-  text-decoration: underline;
 }
-.markdown-body strong {
-  color: var(--default-text-color);
+.keep-markdown-body strong,
+.keep-markdown-body > .post strong {
+  color: var(--text-color-3);
 }
-.markdown-body hr {
-  margin: 2rem 0;
-  border: 0;
-  border-top: 2px solid var(--shadow-color-1);
+.keep-markdown-body em,
+.keep-markdown-body > .post em {
+  color: var(--text-color-3);
 }
-.markdown-body em {
-  color: var(--default-text-color);
-}
-.markdown-body ul > li,
-.markdown-body ol > li {
-  margin-left: 20px;
+.keep-markdown-body ul li,
+.keep-markdown-body > .post ul li,
+.keep-markdown-body ol li,
+.keep-markdown-body > .post ol li {
+  margin: 0.3rem 0 0.3rem 1rem;
   line-height: 2rem;
 }
-.markdown-body ul {
-  margin-bottom: 1.2rem;
-}
-.markdown-body ul li {
+.keep-markdown-body ul li,
+.keep-markdown-body > .post ul li {
   list-style: disc;
 }
-.markdown-body ul li ul li {
+.keep-markdown-body ul li ul li,
+.keep-markdown-body > .post ul li ul li {
   list-style: circle;
 }
-.markdown-body ul li ul li ul li {
+.keep-markdown-body ul li ul li ul li,
+.keep-markdown-body > .post ul li ul li ul li {
   list-style: square;
 }
-.markdown-body ol {
-  margin-bottom: 1.2rem;
-}
-.markdown-body ol li {
+.keep-markdown-body ol li,
+.keep-markdown-body > .post ol li {
   list-style: decimal;
 }
-.markdown-body ol li ul li {
-  list-style: disc;
-}
-.markdown-body ol li ul ul li {
-  list-style: circle;
-}
-.markdown-body ol li ol li {
+.keep-markdown-body ol li ol li,
+.keep-markdown-body > .post ol li ol li {
   list-style: upper-alpha;
 }
-.markdown-body ol li ol li ol li {
+.keep-markdown-body ol li ol li ol li,
+.keep-markdown-body > .post ol li ol li ol li {
   list-style: upper-roman;
 }
-.markdown-body li {
-  color: var(--default-text-color);
+.keep-markdown-body li,
+.keep-markdown-body > .post li {
+  color: var(--text-color-3);
 }
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6,
-.markdown-body .h1,
-.markdown-body .h2,
-.markdown-body .h3,
-.markdown-body .h4,
-.markdown-body .h5,
-.markdown-body .h6 {
-  font-family: $english-font-family, $chinese-font-family, sans-serif;
-  color: var(--second-text-color);
-  line-height: $default-line-height;
-redefine-tablet()
-}
-.markdown-body h1,
-.markdown-body .h1 {
-  font-size: 3.2rem;
-  font-weight: 650;
-  border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: $h1-heading-margin-top;
-  margin-bottom: 1rem;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-redefine-tablet()
-}
-.markdown-body h2,
-.markdown-body .h2 {
-  font-size: 2.5rem;
-  font-weight: 650;
-  padding: 3px 0;
-  border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: $h2-heading-margin-top;
-  margin-bottom: 1rem;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-redefine-tablet()
-}
-.markdown-body h3,
-.markdown-body .h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-top: $h3-heading-margin-top;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.025em;
-  line-height: 1.3;
-redefine-tablet()
-}
-.markdown-body h4,
-.markdown-body .h4 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: $h4-heading-margin-top;
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
-redefine-tablet()
-}
-.markdown-body h5,
-.markdown-body .h5 {
-  font-size: 1.28rem;
-  font-weight: 600;
-  margin-top: $h5-heading-margin-top;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-redefine-tablet()
-}
-.markdown-body h6,
-.markdown-body .h6 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-top: $h6-heading-margin-top;
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
-redefine-tablet()
-}
-.markdown-body img {
+.keep-markdown-body h1,
+.keep-markdown-body > .post h1,
+.keep-markdown-body h2,
+.keep-markdown-body > .post h2,
+.keep-markdown-body h3,
+.keep-markdown-body > .post h3,
+.keep-markdown-body h4,
+.keep-markdown-body > .post h4,
+.keep-markdown-body h5,
+.keep-markdown-body > .post h5,
+.keep-markdown-body h6,
+.keep-markdown-body > .post h6 {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  order: 0;
   box-sizing: border-box;
-  border-radius: $usr-img-border-radius;
+  padding-top: 0.4rem;
+  padding-bottom: 0.2rem;
+  overflow: hidden;
+  color: var(--text-color-2);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--post-h-bottom-border-color);
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h1:hover a.headerlink,
+.keep-markdown-body > .post h1:hover a.headerlink,
+.keep-markdown-body h2:hover a.headerlink,
+.keep-markdown-body > .post h2:hover a.headerlink,
+.keep-markdown-body h3:hover a.headerlink,
+.keep-markdown-body > .post h3:hover a.headerlink,
+.keep-markdown-body h4:hover a.headerlink,
+.keep-markdown-body > .post h4:hover a.headerlink,
+.keep-markdown-body h5:hover a.headerlink,
+.keep-markdown-body > .post h5:hover a.headerlink,
+.keep-markdown-body h6:hover a.headerlink,
+.keep-markdown-body > .post h6:hover a.headerlink,
+.keep-markdown-body h1:hover a.markdownIt-Anchor,
+.keep-markdown-body > .post h1:hover a.markdownIt-Anchor,
+.keep-markdown-body h2:hover a.markdownIt-Anchor,
+.keep-markdown-body > .post h2:hover a.markdownIt-Anchor,
+.keep-markdown-body h3:hover a.markdownIt-Anchor,
+.keep-markdown-body > .post h3:hover a.markdownIt-Anchor,
+.keep-markdown-body h4:hover a.markdownIt-Anchor,
+.keep-markdown-body > .post h4:hover a.markdownIt-Anchor,
+.keep-markdown-body h5:hover a.markdownIt-Anchor,
+.keep-markdown-body > .post h5:hover a.markdownIt-Anchor,
+.keep-markdown-body h6:hover a.markdownIt-Anchor,
+.keep-markdown-body > .post h6:hover a.markdownIt-Anchor {
+  visibility: visible;
+}
+.keep-markdown-body h1 a.headerlink,
+.keep-markdown-body > .post h1 a.headerlink,
+.keep-markdown-body h2 a.headerlink,
+.keep-markdown-body > .post h2 a.headerlink,
+.keep-markdown-body h3 a.headerlink,
+.keep-markdown-body > .post h3 a.headerlink,
+.keep-markdown-body h4 a.headerlink,
+.keep-markdown-body > .post h4 a.headerlink,
+.keep-markdown-body h5 a.headerlink,
+.keep-markdown-body > .post h5 a.headerlink,
+.keep-markdown-body h6 a.headerlink,
+.keep-markdown-body > .post h6 a.headerlink,
+.keep-markdown-body h1 a.markdownIt-Anchor,
+.keep-markdown-body > .post h1 a.markdownIt-Anchor,
+.keep-markdown-body h2 a.markdownIt-Anchor,
+.keep-markdown-body > .post h2 a.markdownIt-Anchor,
+.keep-markdown-body h3 a.markdownIt-Anchor,
+.keep-markdown-body > .post h3 a.markdownIt-Anchor,
+.keep-markdown-body h4 a.markdownIt-Anchor,
+.keep-markdown-body > .post h4 a.markdownIt-Anchor,
+.keep-markdown-body h5 a.markdownIt-Anchor,
+.keep-markdown-body > .post h5 a.markdownIt-Anchor,
+.keep-markdown-body h6 a.markdownIt-Anchor,
+.keep-markdown-body > .post h6 a.markdownIt-Anchor {
+  position: relative;
+  order: 1;
+  box-sizing: border-box;
+  margin-left: 0.4rem;
+  padding-top: 0.2rem;
+  color: var(--text-color-4);
+  font-size: 1.2rem;
+  text-decoration: none;
+  border: none;
+  visibility: hidden;
+}
+.keep-markdown-body h1 a.headerlink:hover,
+.keep-markdown-body > .post h1 a.headerlink:hover,
+.keep-markdown-body h2 a.headerlink:hover,
+.keep-markdown-body > .post h2 a.headerlink:hover,
+.keep-markdown-body h3 a.headerlink:hover,
+.keep-markdown-body > .post h3 a.headerlink:hover,
+.keep-markdown-body h4 a.headerlink:hover,
+.keep-markdown-body > .post h4 a.headerlink:hover,
+.keep-markdown-body h5 a.headerlink:hover,
+.keep-markdown-body > .post h5 a.headerlink:hover,
+.keep-markdown-body h6 a.headerlink:hover,
+.keep-markdown-body > .post h6 a.headerlink:hover,
+.keep-markdown-body h1 a.markdownIt-Anchor:hover,
+.keep-markdown-body > .post h1 a.markdownIt-Anchor:hover,
+.keep-markdown-body h2 a.markdownIt-Anchor:hover,
+.keep-markdown-body > .post h2 a.markdownIt-Anchor:hover,
+.keep-markdown-body h3 a.markdownIt-Anchor:hover,
+.keep-markdown-body > .post h3 a.markdownIt-Anchor:hover,
+.keep-markdown-body h4 a.markdownIt-Anchor:hover,
+.keep-markdown-body > .post h4 a.markdownIt-Anchor:hover,
+.keep-markdown-body h5 a.markdownIt-Anchor:hover,
+.keep-markdown-body > .post h5 a.markdownIt-Anchor:hover,
+.keep-markdown-body h6 a.markdownIt-Anchor:hover,
+.keep-markdown-body > .post h6 a.markdownIt-Anchor:hover {
+  color: var(--text-color-3);
+}
+.keep-markdown-body h1 a.headerlink::before,
+.keep-markdown-body > .post h1 a.headerlink::before,
+.keep-markdown-body h2 a.headerlink::before,
+.keep-markdown-body > .post h2 a.headerlink::before,
+.keep-markdown-body h3 a.headerlink::before,
+.keep-markdown-body > .post h3 a.headerlink::before,
+.keep-markdown-body h4 a.headerlink::before,
+.keep-markdown-body > .post h4 a.headerlink::before,
+.keep-markdown-body h5 a.headerlink::before,
+.keep-markdown-body > .post h5 a.headerlink::before,
+.keep-markdown-body h6 a.headerlink::before,
+.keep-markdown-body > .post h6 a.headerlink::before,
+.keep-markdown-body h1 a.markdownIt-Anchor::before,
+.keep-markdown-body > .post h1 a.markdownIt-Anchor::before,
+.keep-markdown-body h2 a.markdownIt-Anchor::before,
+.keep-markdown-body > .post h2 a.markdownIt-Anchor::before,
+.keep-markdown-body h3 a.markdownIt-Anchor::before,
+.keep-markdown-body > .post h3 a.markdownIt-Anchor::before,
+.keep-markdown-body h4 a.markdownIt-Anchor::before,
+.keep-markdown-body > .post h4 a.markdownIt-Anchor::before,
+.keep-markdown-body h5 a.markdownIt-Anchor::before,
+.keep-markdown-body > .post h5 a.markdownIt-Anchor::before,
+.keep-markdown-body h6 a.markdownIt-Anchor::before,
+.keep-markdown-body > .post h6 a.markdownIt-Anchor::before {
+  font-weight: 600;
+  font-family: 'Font Awesome 6 Free';
+  content: '\f0c1';
+}
+.keep-markdown-body h1,
+.keep-markdown-body > .post h1 {
+  font-weight: 600;
+  font-size: 1.68rem;
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h1 a.headerlink,
+.keep-markdown-body > .post h1 a.headerlink,
+.keep-markdown-body h1 a.markdownIt-Anchor,
+.keep-markdown-body > .post h1 a.markdownIt-Anchor {
+  font-size: 1.344rem;
+}
+.keep-markdown-body h2,
+.keep-markdown-body > .post h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h2 a.headerlink,
+.keep-markdown-body > .post h2 a.headerlink,
+.keep-markdown-body h2 a.markdownIt-Anchor,
+.keep-markdown-body > .post h2 a.markdownIt-Anchor {
+  font-size: 1.28rem;
+}
+.keep-markdown-body h3,
+.keep-markdown-body > .post h3 {
+  font-weight: 550;
+  font-size: 1.5rem;
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h3 a.headerlink,
+.keep-markdown-body > .post h3 a.headerlink,
+.keep-markdown-body h3 a.markdownIt-Anchor,
+.keep-markdown-body > .post h3 a.markdownIt-Anchor {
+  font-size: 1.2rem;
+}
+.keep-markdown-body h4,
+.keep-markdown-body > .post h4 {
+  font-weight: 550;
+  font-size: 1.4rem;
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h4 a.headerlink,
+.keep-markdown-body > .post h4 a.headerlink,
+.keep-markdown-body h4 a.markdownIt-Anchor,
+.keep-markdown-body > .post h4 a.markdownIt-Anchor {
+  font-size: 1.12rem;
+}
+.keep-markdown-body h5,
+.keep-markdown-body > .post h5 {
+  font-weight: 500;
+  font-size: 1.3rem;
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h5 a.headerlink,
+.keep-markdown-body > .post h5 a.headerlink,
+.keep-markdown-body h5 a.markdownIt-Anchor,
+.keep-markdown-body > .post h5 a.markdownIt-Anchor {
+  font-size: 1.04rem;
+}
+.keep-markdown-body h6,
+.keep-markdown-body > .post h6 {
+  font-weight: 500;
+  font-size: 1.2rem;
+keep-tablet()
+keep-mobile()
+}
+.keep-markdown-body h6 a.headerlink,
+.keep-markdown-body > .post h6 a.headerlink,
+.keep-markdown-body h6 a.markdownIt-Anchor,
+.keep-markdown-body > .post h6 a.markdownIt-Anchor {
+  font-size: 1.2rem;
+}
+.keep-markdown-body img,
+.keep-markdown-body > .post img {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
   max-width: 100%;
+  box-shadow: 0 0 0.2rem var(--shadow-color);
   cursor: zoom-in;
-  display: block;
-  margin: 1rem auto 1rem;
+  opacity: 1;
 }
-.markdown-body > table,
-.markdown-body .tab-pane > table {
-  border-spacing: 0;
-  border-collapse: collapse;
+.keep-markdown-body img.hide,
+.keep-markdown-body > .post img.hide {
+  opacity: 0;
+}
+.keep-markdown-body img[lazyload],
+.keep-markdown-body > .post img[lazyload] {
+  margin: 0.8rem auto 0.2rem;
+  zoom: 1 !important;
+}
+.keep-markdown-body > img,
+.keep-markdown-body > .post > img,
+.keep-markdown-body p > img,
+.keep-markdown-body > .post p > img {
+  margin: var(--post-img-align);
+}
+.keep-markdown-body > .table-container,
+.keep-markdown-body > .post > .table-container {
+  box-sizing: border-box;
   width: 100%;
+  margin: 1.5rem 0;
   overflow: auto;
-  margin-bottom: 1.2rem;
-  box-shadow: var(--redefine-box-shadow-flat);
-  border-radius: $redefine-border-radius-medium;
 }
-.markdown-body > table thead th,
-.markdown-body .tab-pane > table thead th {
-  border-bottom: 1px solid var(--shadow-color-1);
-  background-color: var(--third-background-color) !important;
+.keep-markdown-body > .table-container table,
+.keep-markdown-body > .post > .table-container table {
+  box-sizing: border-box;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-.markdown-body > table thead th:first-child,
-.markdown-body .tab-pane > table thead th:first-child {
-  border-top-left-radius: $redefine-border-radius-medium;
-}
-.markdown-body > table thead th:last-child,
-.markdown-body .tab-pane > table thead th:last-child {
-  border-top-right-radius: $redefine-border-radius-medium;
-}
-.markdown-body > table tbody tr:last-child td:first-child,
-.markdown-body .tab-pane > table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: $redefine-border-radius-medium;
-}
-.markdown-body > table tbody tr:last-child td:last-child,
-.markdown-body .tab-pane > table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: $redefine-border-radius-medium;
-}
-.markdown-body > table td,
-.markdown-body .tab-pane > table td,
-.markdown-body > table th,
-.markdown-body .tab-pane > table th {
-  padding: 8px 16px;
-  border-left: 1px solid var(--shadow-color-1);
-}
-.markdown-body > table td:first-child,
-.markdown-body .tab-pane > table td:first-child,
-.markdown-body > table th:first-child,
-.markdown-body .tab-pane > table th:first-child {
-  border-left: none;
-}
-.markdown-body > table tr,
-.markdown-body .tab-pane > table tr {
-  background-color: var(--background-color);
-}
-.markdown-body > table tr:nth-child(2n),
-.markdown-body .tab-pane > table tr:nth-child(2n) {
-  background-color: var(--second-background-color);
-}
-.markdown-body mjx-container {
-  display: inline;
-  overflow-x: auto;
+.keep-markdown-body > .table-container table td,
+.keep-markdown-body > .post > .table-container table td,
+.keep-markdown-body > .table-container table th,
+.keep-markdown-body > .post > .table-container table th {
+  padding: 0;
   white-space: nowrap;
-  margin: 0 0.2rem;
 }
-.markdown-body mjx-container:hover::-webkit-scrollbar-thumb {
-  border: 3px solid rgba(183,183,183,0.3);
+.keep-markdown-body > .table-container table td,
+.keep-markdown-body > .post > .table-container table td {
+  color: var(--text-color-3);
 }
-.markdown-body mjx-container::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  transition: all 0.2s ease;
-  display: block;
+.keep-markdown-body > .table-container table th,
+.keep-markdown-body > .post > .table-container table th {
+  color: var(--text-color-2);
+  font-weight: 600;
 }
-.markdown-body mjx-container::-webkit-scrollbar-track {
-  background: transparent;
-  border: none;
+.keep-markdown-body > .table-container table td,
+.keep-markdown-body > .post > .table-container table td,
+.keep-markdown-body > .table-container table th,
+.keep-markdown-body > .post > .table-container table th {
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid var(--border-color);
 }
-.markdown-body mjx-container::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  border: 3px solid rgba(183,183,183,0);
-  transition: all 0.2s ease;
+.keep-markdown-body > .table-container table tr,
+.keep-markdown-body > .post > .table-container table tr {
+  background-color: var(--background-color-1);
+  border: 0.1rem solid var(--border-color);
 }
-.markdown-body mjx-container svg {
-  display: inline-block /* Allow content to be centered properly */;
+.keep-markdown-body > .table-container table tr:nth-child(2n),
+.keep-markdown-body > .post > .table-container table tr:nth-child(2n) {
+  background-color: var(--background-color-2);
 }
-.markdown-body mjx-container[display="true"] {
-  display: block;
-  justify-content: center;
-  vertical-align: baseline;
-  overflow-x: auto;
-  text-align: center;
-  white-space: nowrap;
-  scrollbar-width: thin;
-  padding-bottom: 8px;
-}
-.markdown-body mjx-container[display="true"]:hover::-webkit-scrollbar-thumb {
-  border: 3px solid rgba(183,183,183,0.3);
-}
-.markdown-body mjx-container[display="true"]::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  transition: all 0.2s ease;
-  display: block;
-}
-.markdown-body mjx-container[display="true"]::-webkit-scrollbar-track {
-  background: transparent;
-  border: none;
-}
-.markdown-body mjx-container[display="true"]::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  border: 3px solid rgba(183,183,183,0);
-  transition: all 0.2s ease;
-}
-.markdown-body mjx-container[display="true"] svg {
-  display: inline-block;
+.keep-markdown-body .mermaid,
+.keep-markdown-body > .post .mermaid {
+  background: #f5f5f5 !important;
+  border-radius: 0.3rem;
 }
