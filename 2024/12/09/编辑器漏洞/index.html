@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Ehiyor">
+    
+    <title>
+        
+            编辑器漏洞 |
+        
+        Ehiyor&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/hide.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yxhhyy.github.io","root":"/","language":"zh","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Ehiyor's blog","author":"Ehiyor","avatar":"/images/1.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                  || fa-solid fa-tags","links":"/links                || fa-solid fa-link","about":"/about                || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"童年的我偷偷抽了一口烟，厌弃又皱眉地递给了现在的我","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/yxhhyy","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":false,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"渗透测试learner"},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":false,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"gitalk","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"unpkg"},"pjax":{"enable":true},"footer":{"since":null,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":true,"css":["/css/hide.css"],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Ehiyor&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                LINKS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            LINKS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        编辑器漏洞
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Ehiyor</span>
+                                
+                                    <span class="author-badge">渗透测试learner</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-12-09 21:52:49</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Mon Dec 09 2024 21:53:35 GMT+0800">2024-12-09 21:53:35</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <blockquote>
+<p>编辑器配合解析漏洞利用</p>
+<p>编辑器自身的漏洞利用</p>
+<p>比如说我们要搭建一个博客，就可能用到 wordpress、emlog、zblog，那比如我要搭建一个论坛，就可能用到 dz，搭建企业网站可能会用到 dedecms 等等这些 CMS，这些CMS的源码里面就可能会调用一些编辑器，比如说：eweb、fck、kindeditor、ueditor、ckfinder、texteditor，这些编辑器都是有专门的团队运营开发的，我们可以直接在CMS写好之后，直接使用接口进行调用就可以了</p>
+<p>源码本身可能没有漏洞，但是编辑器可能存在漏洞。如果网站本身找不到漏洞的话，我们就可以侧重于挖掘一下编辑器漏洞</p>
+</blockquote>
+<h2 id="编辑器路径查找"><a class="markdownIt-Anchor" href="#编辑器路径查找"></a> 编辑器路径查找</h2>
+<p><img lazyload alt="image" data-src="image-20241207161633108.png"></p>
+<blockquote>
+<ol>
+<li>
+<p>确定编辑器</p>
+<p>网站可能会存在多个编辑器</p>
+<p><strong>端口搭建的站点 经常存在编辑器漏洞</strong></p>
+<p>编辑器不一定在根目录下面，也可能在二级目录下面</p>
+<p>一般情况下，带有 <strong>editor 或 edit</strong> 的都是编辑器的目录</p>
+<p>编辑器还会有一些固定的目录：<code>ewebeditor.asp/htm 或 html</code> 可以尝试访问一下</p>
+</li>
+<li>
+<p>找编辑器版本对应的漏洞</p>
+</li>
+<li>
+<p>漏洞利用</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="fck编辑器漏洞"><a class="markdownIt-Anchor" href="#fck编辑器漏洞"></a> FCK编辑器漏洞</h2>
+<blockquote>
+<p>fckeditor<br>
+一般放在根目录<br>
+有可能也放在admin目录下<br>
+include目录下 echosp cms</p>
+</blockquote>
+<p><img lazyload alt="image" data-src="image-20241207164706593.png"></p>
+<p>一般存在 <code>/usrfiles/image</code> 这种目录都是使用的 FCK编辑器</p>
+<blockquote>
+<p>fck  ==&gt;  更新之后：ckeditor（漏洞相对较少）<br>
+针对于版本漏洞利用<br>
+fck &lt; 2.6.4<br>
+fck配合解析漏洞利用<br>
+看看网站容器有没有可以利用的解析漏洞<br>
+查看编辑器版本找上传点 找漏洞利用</p>
+<p>IIS6.0存在很多解析漏洞，可以在上传文件的时候进行利用，比如：<strong>目录解析、畸形文件名解析、分号解析</strong></p>
+<p>利用截断直接 getshell ：</p>
+<ul>
+<li>点前截断：<code>1.asp%00.jpg</code> （这个大概率会被再次解析为 jpg 文件）</li>
+<li>点后截断：<code>1.asp%00jpg</code> （选中 %00，然后 ctrl+shift+u 进行编码）</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>版本：2.4</p>
+<ol>
+<li>配合解析漏洞</li>
+<li>利用%00截断getshell</li>
+</ol>
+<p>版本：2.5</p>
+<ol>
+<li>
+<p>利用解析漏洞 递归创建 <code>a.asp/1.asp</code></p>
+</li>
+<li>
+<p>利用%00截断getshell：<code>a.asp%00jpg</code> <code>a.asp%00.jpg</code> 这两种截断都要进行一下尝试</p>
+<p>如果碰到阿里云，上传后的文件名会被改为 a_asp，还会封你 IP</p>
+<p>解决方案：换 ip上传，截断连发三个包</p>
+<ol>
+<li>a_asp</li>
+<li>a(1)_asp</li>
+<li>a(1).asp</li>
+</ol>
+<p>这种适用于 2.4.3 以下的，因为2.6.4以上的就会重命名为时间戳</p>
+</li>
+</ol>
+<p>版本：2.6.3</p>
+<ul>
+<li>
+<p>依旧可以尝试抓包进行截断：</p>
+<p>版本要求：[2.6.0，2.6.3]</p>
+<p>截断格式：URL %2F 00截断</p>
+<p><img lazyload alt="image" data-src="image-20241207172249809.png"></p>
+<p><strong>%2Fa.php%00</strong>：%2F是它本身就有的也就是/，我们可以上传一个1.jpg文件，然后抓包直接在%2F后面跟一个 <code>a.php</code> 之后使用 %00 截断，这样就可以在image目录下面创建出：<code>image/a.php/1.jpg</code></p>
+</li>
+</ul>
+</blockquote>
+<p><img lazyload alt="image" data-src="image-20241207172803343.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207172823734.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207172844345.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207172907139.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207172922284.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207172951542.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207173001645.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207173012593.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207173122741.png"></p>
+<p><img lazyload alt="image" data-src="image-20241207173158384.png"><br>
+<img lazyload alt="image" data-src="image-20241207173221290.png"></p>
+<h2 id="eweb编辑器漏洞"><a class="markdownIt-Anchor" href="#eweb编辑器漏洞"></a> EWEB编辑器漏洞</h2>
+<blockquote>
+<ol>
+<li>
+<p>找后台-登录后台-修改上传类型或上传样式，-getshell<br>
+eweb后台<br>
+<strong>ewebeditor目录下：</strong><br>
+<strong>admin/login.asp/php/aspx/jsp</strong><br>
+<strong>admin_login.asp</strong><br>
+<strong>admin_style.asp</strong></p>
+<p>想办法登录后台：</p>
+<ol>
+<li>
+<p>尝试弱口令</p>
+</li>
+<li>
+<p>爆破</p>
+</li>
+<li>
+<p>下载默认数据库地址（可以尝试一下下面的地址，如果有数据库的话会直接下载）</p>
+<p><strong>/ewebeditor/db/ewebeditor.mdb</strong><br>
+<strong>/ewebeditor/db/%23ewebeditor.mdb</strong> (有一些如果把#修改为%23就可以下载数据库)<br>
+<strong>/ewebeditor/db/data.mdb</strong><br>
+<strong>/ewebeditor/db/db.mdb</strong><br>
+适用于03 iis6.版本可以下载，如果是08以上的服务器，禁止下载mdb文件</p>
+</li>
+<li>
+<p>注入得到账号密码</p>
+</li>
+</ol>
+</li>
+<li>
+<p>如果没后台-或者进不去后台<br>
+通过目录遍历漏洞（…/…），找网站数据库地址，下载网站数据库 解密-登录网站后台-getshell<br>
+百度查找编辑器对应漏洞利用，找相关的EXP<br>
+如果之前被别人修改过上传类型，可以下载数据库查看类型样式id，构造上传getshell</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="其他编辑器利用"><a class="markdownIt-Anchor" href="#其他编辑器利用"></a> 其他编辑器利用</h2>
+<h3 id="ckfinder任意文件上传漏洞"><a class="markdownIt-Anchor" href="#ckfinder任意文件上传漏洞"></a> CKFinder任意文件上传漏洞</h3>
+<p><img lazyload alt="image" data-src="image-20241208153048691.png"></p>
+<h3 id="南方数据编辑器southidceditor"><a class="markdownIt-Anchor" href="#南方数据编辑器southidceditor"></a> 南方数据编辑器southidceditor</h3>
+<p><img lazyload alt="image" data-src="image-20241208153354403.png"><br>
+<img lazyload alt="image" data-src="image-20241208153411331.png"></p>
+<h3 id="ueditor"><a class="markdownIt-Anchor" href="#ueditor"></a> ueditor</h3>
+<p><img lazyload alt="image" data-src="image-20241208153438200.png"></p>
+<h3 id="dotnettextbox编辑器漏洞"><a class="markdownIt-Anchor" href="#dotnettextbox编辑器漏洞"></a> DotNetTextBox编辑器漏洞</h3>
+<p><img lazyload alt="image" data-src="image-20241208153600949.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208153620235.png"></p>
+<h3 id="phpweb网站管理系统后台kedit编辑器"><a class="markdownIt-Anchor" href="#phpweb网站管理系统后台kedit编辑器"></a> phpweb网站管理系统后台kedit编辑器</h3>
+<p><img lazyload alt="image" data-src="image-20241208153655392.png"></p>
+<h3 id="cute-editor在线编辑器本地包含漏洞"><a class="markdownIt-Anchor" href="#cute-editor在线编辑器本地包含漏洞"></a> Cute Editor在线编辑器本地包含漏洞</h3>
+<p><img lazyload alt="image" data-src="image-20241208153733969.png"></p>
+<h3 id="cute-editor-aspnet版利用iis解析漏洞获得权限"><a class="markdownIt-Anchor" href="#cute-editor-aspnet版利用iis解析漏洞获得权限"></a> Cute Editor Asp.Net版利用iis解析漏洞获得权限</h3>
+<p><img lazyload alt="image" data-src="image-20241208153820999.png"></p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/12/08/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"
+                                   title="渗透测试"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">渗透测试</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E8%B7%AF%E5%BE%84%E6%9F%A5%E6%89%BE"><span class="nav-text"> 编辑器路径查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fck%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="nav-text"> FCK编辑器漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eweb%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="nav-text"> EWEB编辑器漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BC%96%E8%BE%91%E5%99%A8%E5%88%A9%E7%94%A8"><span class="nav-text"> 其他编辑器利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ckfinder%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="nav-text"> CKFinder任意文件上传漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%97%E6%96%B9%E6%95%B0%E6%8D%AE%E7%BC%96%E8%BE%91%E5%99%A8southidceditor"><span class="nav-text"> 南方数据编辑器southidceditor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ueditor"><span class="nav-text"> ueditor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dotnettextbox%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="nav-text"> DotNetTextBox编辑器漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phpweb%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0kedit%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-text"> phpweb网站管理系统后台kedit编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cute-editor%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8%E6%9C%AC%E5%9C%B0%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="nav-text"> Cute Editor在线编辑器本地包含漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cute-editor-aspnet%E7%89%88%E5%88%A9%E7%94%A8iis%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E8%8E%B7%E5%BE%97%E6%9D%83%E9%99%90"><span class="nav-text"> Cute Editor Asp.Net版利用iis解析漏洞获得权限</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Ehiyor</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E8%B7%AF%E5%BE%84%E6%9F%A5%E6%89%BE"><span class="nav-text"> 编辑器路径查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fck%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="nav-text"> FCK编辑器漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eweb%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="nav-text"> EWEB编辑器漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BC%96%E8%BE%91%E5%99%A8%E5%88%A9%E7%94%A8"><span class="nav-text"> 其他编辑器利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ckfinder%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="nav-text"> CKFinder任意文件上传漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%97%E6%96%B9%E6%95%B0%E6%8D%AE%E7%BC%96%E8%BE%91%E5%99%A8southidceditor"><span class="nav-text"> 南方数据编辑器southidceditor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ueditor"><span class="nav-text"> ueditor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dotnettextbox%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="nav-text"> DotNetTextBox编辑器漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phpweb%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0kedit%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-text"> phpweb网站管理系统后台kedit编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cute-editor%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8%E6%9C%AC%E5%9C%B0%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="nav-text"> Cute Editor在线编辑器本地包含漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cute-editor-aspnet%E7%89%88%E5%88%A9%E7%94%A8iis%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E8%8E%B7%E5%BE%97%E6%9D%83%E9%99%90"><span class="nav-text"> Cute Editor Asp.Net版利用iis解析漏洞获得权限</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/toggle-theme.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/code-block.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/share.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+    
+        
+    
+
+</body>
+</html>
