@@ -22,7 +22,6 @@ document.addEventListener('pjax:complete', function () {
     if (newPlayer && window.aplayerState) {
         let audio = newPlayer.querySelector('audio');
         if (audio) {
-            // 只在相同歌曲时恢复进度
             if (audio.src === window.aplayerState.songUrl) {
                 audio.currentTime = window.aplayerState.currentTime;
             }
@@ -30,6 +29,14 @@ document.addEventListener('pjax:complete', function () {
             if (!window.aplayerState.paused) {
                 audio.play();
             }
+        }
+    } else {
+        // 重新加载 MetingJS 组件，确保播放器存在
+        console.log("重新初始化 MetingJS 播放器");
+        let oldMeting = document.querySelector('meting-js');
+        if (oldMeting) {
+            let newMeting = oldMeting.cloneNode();
+            oldMeting.parentNode.replaceChild(newMeting, oldMeting);
         }
     }
 });
