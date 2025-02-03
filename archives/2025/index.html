@@ -40,6 +40,18 @@
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
+
+<!-- APlayer 样式 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<!-- APlayer JS -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<!-- MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+
+
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -325,17 +337,27 @@
     
 
 <!-- 引入 APlayer 和 MetingJS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> -->
 
 <!-- 固定音乐播放器 -->
-<meting-js
+<!-- <meting-js
     server="netease"
     type="playlist"
     id="7828112982"
     fixed="true"
     autoplay="false"
+    order="random"
+    theme="#42b983">
+</meting-js> -->
+
+<meting-js
+    server="netease"
+    type="playlist"
+    id="7828112982"
+    fixed="true"
+    autoplay="true"
     order="random"
     theme="#42b983">
 </meting-js>
