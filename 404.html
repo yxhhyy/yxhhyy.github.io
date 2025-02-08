@@ -41,15 +41,12 @@
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
 
-<!-- APlayer 样式 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
-<!-- APlayer JS -->
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 
-<!-- MetingJS -->
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script> -->
 
 
 <meta name="generator" content="Hexo 7.3.0"></head>
@@ -315,12 +312,11 @@
 
     
 
-<!-- 引入 APlayer 和 MetingJS -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script> -->
 
-<!-- 固定音乐播放器 -->
 <!-- <meting-js
     server="netease"
     type="playlist"
@@ -331,15 +327,28 @@
     theme="#42b983">
 </meting-js> -->
 
+
+<!-- 保持播放器组件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<!-- 使用 id 来指定网易云歌单 ID，使用 class 作为播放器的唯一标识符 -->
 <meting-js
+    id="7828112982"         
+    class="global-music"    
     server="netease"
     type="playlist"
-    id="7828112982"
     fixed="true"
     autoplay="false"
     order="random"
-    theme="#42b983">
+    theme="#42b983"
+    style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
 </meting-js>
+
+
+
 
 
 </footer>
@@ -510,6 +519,69 @@
     });
 </script>
 
+
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        // 保存播放器状态
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+
+            // 保存当前播放器状态
+            let oldPlayer = document.querySelector('.global-music');
+            if (oldPlayer) {
+                let audio = oldPlayer.querySelector('audio');
+                if (audio) {
+                    window.aplayerState = {
+                        paused: audio.paused,
+                        currentTime: audio.currentTime,
+                        volume: audio.volume,
+                        songUrl: audio.src
+                    };
+                }
+            }
+        });
+
+        // 恢复播放器状态
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+
+            // 恢复播放器状态
+            let newPlayer = document.querySelector('.global-music');
+            if (newPlayer && window.aplayerState) {
+                let audio = newPlayer.querySelector('audio');
+                if (audio && audio.src === window.aplayerState.songUrl) {
+                    audio.currentTime = window.aplayerState.currentTime;
+                    audio.volume = window.aplayerState.volume;
+                    if (!window.aplayerState.paused) {
+                        audio.play();
+                    }
+                }
+            }
+
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
 
 
 
