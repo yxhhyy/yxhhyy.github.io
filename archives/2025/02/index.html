@@ -574,47 +574,26 @@
             scrollRestoration: false,
         });
 
-        // 保存播放器状态
+        // 在页面切换时只刷新播放器组件
         document.addEventListener('pjax:send', () => {
             KEEP.utils.pjaxProgressBarStart()
-
-            // 保存当前播放器状态
-            let oldPlayer = document.querySelector('.global-music');
-            if (oldPlayer) {
-                let audio = oldPlayer.querySelector('audio');
-                if (audio) {
-                    window.aplayerState = {
-                        paused: audio.paused,
-                        currentTime: audio.currentTime,
-                        volume: audio.volume,
-                        songUrl: audio.src
-                    };
-                }
-            }
         });
 
-        // 恢复播放器状态
         document.addEventListener('pjax:complete', () => {
             KEEP.utils.pjaxProgressBarEnd()
-
-            // 恢复播放器状态
-            let newPlayer = document.querySelector('.global-music');
-            if (newPlayer && window.aplayerState) {
-                let audio = newPlayer.querySelector('audio');
-                if (audio && audio.src === window.aplayerState.songUrl) {
-                    audio.currentTime = window.aplayerState.currentTime;
-                    audio.volume = window.aplayerState.volume;
-                    if (!window.aplayerState.paused) {
-                        audio.play();
-                    }
-                }
-            }
-
             window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
             KEEP.initExecute()
+
+            // 重新加载播放器组件，确保刷新速度快
+            let oldMeting = document.querySelector('.global-music');
+            if (oldMeting) {
+                let newMeting = oldMeting.cloneNode();
+                oldMeting.parentNode.replaceChild(newMeting, oldMeting);
+            }
         });
     });
 </script>
+
 
 
 
