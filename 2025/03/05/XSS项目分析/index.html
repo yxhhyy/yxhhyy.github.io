@@ -9,7 +9,7 @@
     
     <title>
         
-            项目分析 |
+            XSS项目分析 |
         
         Ehiyor&#39;s blog
     </title>
@@ -275,7 +275,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        项目分析
+                        XSS项目分析
                     </div>
                 
 
@@ -303,13 +303,13 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2025-03-05 13:08:55</span>
+                <span class="datetime">2025-03-05 13:23:23</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Wed Mar 05 2025 13:11:21 GMT+0800">2025-03-05 13:11:21</span>
+                    <span class="datetime" data-updated="Wed Mar 05 2025 13:55:03 GMT+0800">2025-03-05 13:55:03</span>
                 </span>
             
         
@@ -320,7 +320,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/web%E6%BC%8F%E6%B4%9E/">web漏洞</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%BC%8F%E6%B4%9E%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90/">漏洞工具分析</a></li>
                         
                     
                 </ul>
@@ -349,9 +349,8 @@
                     
 
                     
-                         <h1 id="项目分析"><a class="markdownIt-Anchor" href="#项目分析"></a> 项目分析</h1>
-<h1 id="xsstrike"><a class="markdownIt-Anchor" href="#xsstrike"></a> XSStrike</h1>
-<h2 id="主程序入口-xsstrikepy"><a class="markdownIt-Anchor" href="#主程序入口-xsstrikepy"></a> 主程序入口 (<a class="link" target="_blank" rel="noopener" href="http://xsstrike.py">xsstrike.py<i class="fas fa-external-link-alt"></i></a>)</h2>
+                         <h1 id="xsstrike"><a class="markdownIt-Anchor" href="#xsstrike"></a> XSStrike</h1>
+<h2 id="主程序入口"><a class="markdownIt-Anchor" href="#主程序入口"></a> 主程序入口</h2>
 <p>总体上可以由如下形式的代码概括说明：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> core.colors <span class="keyword">import</span> bad, info, good, run, green, red, white, end</span><br><span class="line"><span class="keyword">from</span> core.config <span class="keyword">import</span> verbose, update</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="comment"># 解析命令行参数</span></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 处理不同的扫描模式</span></span><br><span class="line">    <span class="keyword">if</span> args.update:  <span class="comment"># 更新程序</span></span><br><span class="line">        update()</span><br><span class="line">    <span class="keyword">if</span> args.url:     <span class="comment"># 单URL扫描</span></span><br><span class="line">        singleScan(args.url, args.cookie, args.recursive)</span><br><span class="line">    <span class="keyword">if</span> args.seeds:   <span class="comment"># 批量URL扫描</span></span><br><span class="line">        massScan(args.seeds, args.cookie, args.recursive)</span><br></pre></td></tr></table></figure>
 <p>主要功能:</p>
@@ -408,7 +407,7 @@
 <li>定义了两个正则表达式：</li>
 <li>sources: 匹配可能的XSS源，如document.URL、location.href等</li>
 <li>sinks: 匹配可能的XSS接收器，如eval、innerHTML等</li>
-<li>从响应中提取所有<script>标签内的JavaScript代码</li>
+<li>从响应中提取所有<code>&lt;script&gt;</code>标签内的JavaScript代码</li>
 <li>分析每个脚本，寻找潜在的源和接收器</li>
 <li>特别关注document.write方法，这是一个常见的DOM XSS漏洞点</li>
 <li>如果同时发现源和接收器，则认为存在DOM XSS漏洞</li>
@@ -469,12 +468,7 @@
 </ul>
 <h2 id="有效载荷生成器-coregeneratorpy"><a class="markdownIt-Anchor" href="#有效载荷生成器-coregeneratorpy"></a> 有效载荷生成器 (core/generator.py)</h2>
 <p>该模块根据之前的测试结果生成定制的XSS有效载荷。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302135933-f0l6sf7.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302135933-f0l6sf7.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>根据之前的测试结果生成定制的XSS有效载荷</li>
@@ -488,12 +482,7 @@
 </ul>
 <h2 id="html解析模块-corehtmlparserpy"><a class="markdownIt-Anchor" href="#html解析模块-corehtmlparserpy"></a> HTML解析模块 (core/htmlParser.py)</h2>
 <p>该模块解析HTML响应，确定XSS检查点的上下文。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302140426-wwwfi9p.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302140426-wwwfi9p.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>
@@ -502,11 +491,11 @@
 <li>
 <p>使用正则表达式识别不同的上下文:</p>
 <ul>
-<li>脚本上下文: 检查点在<script>标签内</li>
+<li>脚本上下文: 检查点在<code>&lt;script&gt;</code>标签内</li>
 <li>属性上下文: 检查点在HTML标签的属性中</li>
 <li>HTML上下文: 检查点在HTML标签之间的文本中</li>
 <li>注释上下文: 检查点在HTML注释中</li>
-<li>样式上下文: 检查点在<style>标签内</li>
+<li>样式上下文: 检查点在<code>&lt;style&gt;</code>标签内</li>
 </ul>
 </li>
 <li>
@@ -553,12 +542,7 @@
 </ul>
 <h2 id="日志记录模块-corelogpy"><a class="markdownIt-Anchor" href="#日志记录模块-corelogpy"></a> 日志记录模块 (core/log.py)</h2>
 <p>该模块提供日志记录功能，用于记录扫描过程中的信息、警告和错误。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302140837-ug9xo6v.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302140837-ug9xo6v.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>
@@ -591,12 +575,7 @@
 </ul>
 <h2 id="网站爬虫模块-corephotonpy"><a class="markdownIt-Anchor" href="#网站爬虫模块-corephotonpy"></a> 网站爬虫模块 (core/photon.py)</h2>
 <p>该模块实现了一个简单的网站爬虫，用于发现潜在的XSS注入点。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302140945-lwm31fb.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302140945-lwm31fb.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>
@@ -635,7 +614,7 @@
 <h2 id="用户交互模块-corepromptpy"><a class="markdownIt-Anchor" href="#用户交互模块-corepromptpy"></a> 用户交互模块 (core/prompt.py)</h2>
 <p>该代码实现了一个<strong>交互式文本编辑器输入功能</strong>，允许用户在外部文本编辑器（如 <code>nano</code>​ 或 <code>vim</code>​）中输入内容，并在编辑完成后返回输入的文本。</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">prompt</span>(<span class="params">default=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># try assigning default editor, if fails, use default</span></span><br><span class="line">    editor = os.environ.get(<span class="string">&#x27;EDITOR&#x27;</span>, defaultEditor)</span><br><span class="line">    <span class="comment"># create a temporary file and open it</span></span><br><span class="line">    <span class="keyword">with</span> tempfile.NamedTemporaryFile(mode=<span class="string">&#x27;r+&#x27;</span>) <span class="keyword">as</span> tmpfile:</span><br><span class="line">        <span class="keyword">if</span> default:  <span class="comment"># if prompt should have some predefined text</span></span><br><span class="line">            tmpfile.write(default)</span><br><span class="line">            tmpfile.flush()</span><br><span class="line">        child_pid = os.fork()</span><br><span class="line">        is_child = child_pid == <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> is_child:</span><br><span class="line">            <span class="comment"># opens the file in the editor</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                os.execvp(editor, [editor, tmpfile.name])</span><br><span class="line">            <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">                logger.error(<span class="string">&#x27;You don\&#x27;t have either a default $EDITOR \</span></span><br><span class="line"><span class="string">value defined nor \&#x27;nano\&#x27; text editor&#x27;</span>)</span><br><span class="line">                logger.info(<span class="string">&#x27;Execute %s`export EDITOR=/pat/to/your/editor` \</span></span><br><span class="line"><span class="string">%sthen run XSStrike again.\n\n&#x27;</span> % (yellow,white))</span><br><span class="line">                exit(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            os.waitpid(child_pid, <span class="number">0</span>)  <span class="comment"># wait till the editor gets closed</span></span><br><span class="line">            tmpfile.seek(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> tmpfile.read().strip()  <span class="comment"># read the file</span></span><br></pre></td></tr></table></figure>
-<p><strong>功能</strong>：使用外部文本编辑器让用户输入内容，并返回编辑后的文本。<br />
+<p><strong>功能</strong>：使用外部文本编辑器让用户输入内容，并返回编辑后的文本。<br>
 <strong>关键技术</strong>：</p>
 <ul>
 <li>
@@ -648,7 +627,7 @@
 <p><strong>​<code>os.execvp()</code>​</strong> ​ 启动编辑器并传入临时文件。</p>
 </li>
 <li>
-<p><strong>​<code>os.waitpid()</code>​</strong> ​ 等待用户完成编辑。<br />
+<p><strong>​<code>os.waitpid()</code>​</strong> ​ 等待用户完成编辑。<br>
 <strong>适用场景</strong>：</p>
 <ul>
 <li>适用于 <strong>命令行工具</strong>（如安全测试工具 <code>XSStrike</code>​）。</li>
@@ -728,12 +707,7 @@
 </ul>
 <h2 id="工具函数模块-coreutilspy"><a class="markdownIt-Anchor" href="#工具函数模块-coreutilspy"></a> 工具函数模块 (core/utils.py)</h2>
 <p>该模块包含各种辅助函数，供其他模块使用。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302141735-ezqi3my.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302141735-ezqi3my.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>
@@ -763,12 +737,7 @@
 <h2 id="waf检测模块-corewafdetectorpy"><a class="markdownIt-Anchor" href="#waf检测模块-corewafdetectorpy"></a> WAF检测模块 (core/wafDetector.py)</h2>
 <p>该模块用于检测目标网站是否使用了Web应用防火墙(WAF)，以及WAF的类型。借助db目录下的wafSignatuers.json里面的waf签名</p>
 <p>该代码是 <strong>Web 应用防火墙（WAF）检测模块</strong>，用于判断目标网站是否部署了 WAF，并尝试识别其具体厂商或类型。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302141911-152cvz3.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302141911-152cvz3.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>
@@ -799,12 +768,7 @@
 </ul>
 <h2 id="表单处理模块-corezetanizepy"><a class="markdownIt-Anchor" href="#表单处理模块-corezetanizepy"></a> 表单处理模块 (core/zetanize.py)</h2>
 <p>该模块用于处理和分析HTML表单，提取表单字段和属性。</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="image-20250302142233-60t92yg.png"
-                        alt="image" 
-                 >​</p>
+<p><img lazyload alt="image" data-src="image-20250302142233-60t92yg.png">​</p>
 <p>详细功能说明:</p>
 <ul>
 <li>
@@ -835,8 +799,8 @@
 </li>
 </ul>
 <h2 id="modes目录下文件分析"><a class="markdownIt-Anchor" href="#modes目录下文件分析"></a> modes目录下文件分析</h2>
-<h3 id="bruteforcerpy"><a class="markdownIt-Anchor" href="#bruteforcerpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://bruteforcer.py" >bruteforcer.py<i class="fas fa-external-link-alt"></i></a></h3>
-<p><a class="link"   target="_blank" rel="noopener" href="http://bruteforcer.py" >bruteforcer.py<i class="fas fa-external-link-alt"></i></a> 文件实现了一个暴力破解功能，用于测试网站参数对 XSS (跨站脚本) 攻击的脆弱性。它通过以下步骤工作：</p>
+<h3 id="bruteforcerpy"><a class="markdownIt-Anchor" href="#bruteforcerpy"></a> <a class="link" target="_blank" rel="noopener" href="http://bruteforcer.py">bruteforcer.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link" target="_blank" rel="noopener" href="http://bruteforcer.py">bruteforcer.py<i class="fas fa-external-link-alt"></i></a> 文件实现了一个暴力破解功能，用于测试网站参数对 XSS (跨站脚本) 攻击的脆弱性。它通过以下步骤工作：</p>
 <ul>
 <li>接收目标 URL、参数数据、有效载荷列表和其他配置</li>
 <li>确定请求类型（GET 或 POST）</li>
@@ -854,8 +818,8 @@
 <li>delay: 请求之间的延迟时间</li>
 <li>timeout: 请求超时时间</li>
 </ul>
-<h3 id="crawlpy"><a class="markdownIt-Anchor" href="#crawlpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://crawl.py" >crawl.py<i class="fas fa-external-link-alt"></i></a></h3>
-<p><a class="link"   target="_blank" rel="noopener" href="http://crawl.py" >crawl.py<i class="fas fa-external-link-alt"></i></a> 实现了网站爬虫功能，用于发现网站中的表单和可能存在的 XSS 漏洞。</p>
+<h3 id="crawlpy"><a class="markdownIt-Anchor" href="#crawlpy"></a> <a class="link" target="_blank" rel="noopener" href="http://crawl.py">crawl.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link" target="_blank" rel="noopener" href="http://crawl.py">crawl.py<i class="fas fa-external-link-alt"></i></a> 实现了网站爬虫功能，用于发现网站中的表单和可能存在的 XSS 漏洞。</p>
 <p>功能：</p>
 <ul>
 <li>爬取网站表单</li>
@@ -873,8 +837,8 @@
 <li>如果发现漏洞，生成有效载荷并报告</li>
 <li>如果启用了盲 XSS，则发送盲 XSS 有效载荷</li>
 </ul>
-<h3 id="scanpy"><a class="markdownIt-Anchor" href="#scanpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://scan.py" >scan.py<i class="fas fa-external-link-alt"></i></a></h3>
-<p><a class="link"   target="_blank" rel="noopener" href="http://scan.py" >scan.py<i class="fas fa-external-link-alt"></i></a> 是 XSStrike 的核心扫描模块，用于对单个 URL 进行全面的 XSS 漏洞扫描。</p>
+<h3 id="scanpy"><a class="markdownIt-Anchor" href="#scanpy"></a> <a class="link" target="_blank" rel="noopener" href="http://scan.py">scan.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link" target="_blank" rel="noopener" href="http://scan.py">scan.py<i class="fas fa-external-link-alt"></i></a> 是 XSStrike 的核心扫描模块，用于对单个 URL 进行全面的 XSS 漏洞扫描。</p>
 <p>功能：</p>
 <ul>
 <li>检测 DOM XSS 漏洞</li>
@@ -896,8 +860,8 @@
 <li>测试有效载荷的有效性</li>
 <li>报告成功的有效载荷</li>
 </ul>
-<h3 id="singlefuzzpy"><a class="markdownIt-Anchor" href="#singlefuzzpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://singleFuzz.py" >singleFuzz.py<i class="fas fa-external-link-alt"></i></a></h3>
-<p><a class="link"   target="_blank" rel="noopener" href="http://singleFuzz.py" >singleFuzz.py<i class="fas fa-external-link-alt"></i></a> 实现了模糊测试功能，用于测试目标对各种 XSS 相关字符和模式的响应。</p>
+<h3 id="singlefuzzpy"><a class="markdownIt-Anchor" href="#singlefuzzpy"></a> <a class="link" target="_blank" rel="noopener" href="http://singleFuzz.py">singleFuzz.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link" target="_blank" rel="noopener" href="http://singleFuzz.py">singleFuzz.py<i class="fas fa-external-link-alt"></i></a> 实现了模糊测试功能，用于测试目标对各种 XSS 相关字符和模式的响应。</p>
 <p>功能：</p>
 <ul>
 <li>检测 WAF</li>
@@ -915,8 +879,8 @@
 <li>fuzzer 函数会使用预定义的模糊字符串列表，并分析响应</li>
 </ul>
 <h2 id="plugins目录下文件分析"><a class="markdownIt-Anchor" href="#plugins目录下文件分析"></a> plugins目录下文件分析</h2>
-<h3 id="retirejspy"><a class="markdownIt-Anchor" href="#retirejspy"></a> <a class="link"   target="_blank" rel="noopener" href="http://retireJs.py" >retireJs.py<i class="fas fa-external-link-alt"></i></a></h3>
-<p><a class="link"   target="_blank" rel="noopener" href="http://retireJs.py" >retireJs.py<i class="fas fa-external-link-alt"></i></a> 是一个用于检测网页中使用的过时或有漏洞的 JavaScript 库的插件。 ----会调用db目录下的<code>definitions.json</code>​文件</p>
+<h3 id="retirejspy"><a class="markdownIt-Anchor" href="#retirejspy"></a> <a class="link" target="_blank" rel="noopener" href="http://retireJs.py">retireJs.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link" target="_blank" rel="noopener" href="http://retireJs.py">retireJs.py<i class="fas fa-external-link-alt"></i></a> 是一个用于检测网页中使用的过时或有漏洞的 JavaScript 库的插件。 ----会调用db目录下的<code>definitions.json</code>​文件</p>
 <p>功能：</p>
 <ul>
 <li>扫描网页中引用的 JavaScript 文件</li>
@@ -1208,10 +1172,10 @@
 <h3 id="需要整合的功能"><a class="markdownIt-Anchor" href="#需要整合的功能"></a> 需要整合的功能</h3>
 <p>大致如下：</p>
 <ol>
-<li>从 XSStrike 整合到 DalFox 的功能；<br />
-高级有效载荷生成；<br />
-增强的 WAF 检测和绕过；<br />
-爬虫功能；<br />
+<li>从 XSStrike 整合到 DalFox 的功能；<br>
+高级有效载荷生成；<br>
+增强的 WAF 检测和绕过；<br>
+爬虫功能；<br>
 上下文感知的有效载荷生成；</li>
 <li>命令行接口扩展。</li>
 <li>配置结构扩展</li>
@@ -1221,7 +1185,7 @@
 <li>
 <p>创建爬虫模块</p>
 <ul>
-<li>基于 XSStrike 的 <a class="link"   target="_blank" rel="noopener" href="http://crawl.py" >crawl.py<i class="fas fa-external-link-alt"></i></a> 创建 Go 版本的爬虫</li>
+<li>基于 XSStrike 的 <a class="link" target="_blank" rel="noopener" href="http://crawl.py">crawl.py<i class="fas fa-external-link-alt"></i></a> 创建 Go 版本的爬虫</li>
 <li>集成到 DalFox 的扫描流程中</li>
 </ul>
 </li>
@@ -1271,7 +1235,7 @@
 </li>
 </ol>
 <p>这种整合将结合 Go 语言的高性能和 XSStrike 的高级功能，为用户提供更好的 XSS 扫描体验。建议从实现爬虫模块开始，然后逐步整合其他功能。</p>
-</script></li></ul>
+
                     
                 </div>
 
@@ -1283,7 +1247,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/web%E6%BC%8F%E6%B4%9E/">web漏洞</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90/">漏洞工具分析</a>
                                     </li>
                                 
                             </ul>
@@ -1358,7 +1322,7 @@
             <div class="pc-post-toc left-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-text"> 项目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xsstrike"><span class="nav-text"> XSStrike</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3-xsstrikepy"><span class="nav-text"> 主程序入口 (xsstrike.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%A3%80%E6%B5%8B%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9D%97-corecheckerpy"><span class="nav-text"> XSS检测验证模块 (core&#x2F;checker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97-corecolorspy"><span class="nav-text"> 终端颜色输出模块 (core&#x2F;colors.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97-coreconfigpy"><span class="nav-text"> 全局配置模块 (core&#x2F;config.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-xss%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-coredompy"><span class="nav-text"> DOM XSS扫描模块 (core&#x2F;dom.py)</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xsstrike"><span class="nav-text"> XSStrike</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3"><span class="nav-text"> 主程序入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%A3%80%E6%B5%8B%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9D%97-corecheckerpy"><span class="nav-text"> XSS检测验证模块 (core&#x2F;checker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97-corecolorspy"><span class="nav-text"> 终端颜色输出模块 (core&#x2F;colors.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97-coreconfigpy"><span class="nav-text"> 全局配置模块 (core&#x2F;config.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-xss%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-coredompy"><span class="nav-text"> DOM XSS扫描模块 (core&#x2F;dom.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%A8%A1%E5%9D%97-coreencoderspy"><span class="nav-text"> 编码模块 (core&#x2F;encoders.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97-corefiltercheckerpy"><span class="nav-text"> 过滤器检测模块 (core&#x2F;filterChecker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9D%97-corefuzzerpy"><span class="nav-text"> 模糊测试模块 (core&#x2F;fuzzer.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E8%BD%BD%E8%8D%B7%E7%94%9F%E6%88%90%E5%99%A8-coregeneratorpy"><span class="nav-text"> 有效载荷生成器 (core&#x2F;generator.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html%E8%A7%A3%E6%9E%90%E6%A8%A1%E5%9D%97-corehtmlparserpy"><span class="nav-text"> HTML解析模块 (core&#x2F;htmlParser.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%86%E6%9E%90%E6%A8%A1%E5%9D%97-corejscontexterpy"><span class="nav-text"> JavaScript上下文分析模块 (core&#x2F;jsContexter.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E6%A8%A1%E5%9D%97-corelogpy"><span class="nav-text"> 日志记录模块 (core&#x2F;log.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E7%88%AC%E8%99%AB%E6%A8%A1%E5%9D%97-corephotonpy"><span class="nav-text"> 网站爬虫模块 (core&#x2F;photon.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9D%97-corepromptpy"><span class="nav-text"> 用户交互模块 (core&#x2F;prompt.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http%E8%AF%B7%E6%B1%82%E6%A8%A1%E5%9D%97-corerequesterpy"><span class="nav-text"> HTTP请求模块 (core&#x2F;requester.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%A8%A1%E5%9D%97-coreupdaterpy"><span class="nav-text"> 更新模块 (core&#x2F;updater.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97-coreutilspy"><span class="nav-text"> 工具函数模块 (core&#x2F;utils.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#waf%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97-corewafdetectorpy"><span class="nav-text"> WAF检测模块 (core&#x2F;wafDetector.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97-corezetanizepy"><span class="nav-text"> 表单处理模块 (core&#x2F;zetanize.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modes%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-text"> modes目录下文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bruteforcerpy"><span class="nav-text"> bruteforcer.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crawlpy"><span class="nav-text"> crawl.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scanpy"><span class="nav-text"> scan.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#singlefuzzpy"><span class="nav-text"> singleFuzz.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugins%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-text"> plugins目录下文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retirejspy"><span class="nav-text"> retireJs.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dalfox"><span class="nav-text"> dalfox</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90"><span class="nav-text"> 入口函数分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E4%BB%A3%E7%A0%81%E8%AF%A6%E7%BB%86%E5%88%86%E6%9E%90"><span class="nav-text"> 目录结构和代码详细分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd-%E7%9B%AE%E5%BD%95"><span class="nav-text"> cmd 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lib-%E7%9B%AE%E5%BD%95"><span class="nav-text"> lib 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pkg-%E7%9B%AE%E5%BD%95"><span class="nav-text"> pkg 目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scanning-%E5%8C%85"><span class="nav-text"> scanning 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#server-%E5%8C%85"><span class="nav-text"> server 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#har-%E5%8C%85"><span class="nav-text"> har 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#model-%E5%8C%85"><span class="nav-text"> model 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#printing-%E5%8C%85"><span class="nav-text"> printing 包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#samples-%E7%9B%AE%E5%BD%95"><span class="nav-text"> samples 目录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dalfox-%E5%92%8C-xsstrike-%E6%95%B4%E5%90%88%E5%88%86%E6%9E%90"><span class="nav-text"> DalFox 和 XSStrike 整合分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-text"> 两个项目概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dalfox-2"><span class="nav-text"> DalFox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xsstrike-2"><span class="nav-text"> XSStrike</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E8%87%AA%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text"> 各自的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dalfox-%E4%BC%98%E5%8A%BF"><span class="nav-text"> DalFox 优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xsstrike-%E4%BC%98%E5%8A%BF"><span class="nav-text"> XSStrike 优势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E6%96%B9%E6%A1%88"><span class="nav-text"> 整合方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%E9%80%89%E6%8B%A9"><span class="nav-text"> 基础架构选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E6%95%B4%E5%90%88%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-text"> 需要整合的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-text"> 具体实现步骤</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
@@ -1562,7 +1526,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-text"> 项目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xsstrike"><span class="nav-text"> XSStrike</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3-xsstrikepy"><span class="nav-text"> 主程序入口 (xsstrike.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%A3%80%E6%B5%8B%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9D%97-corecheckerpy"><span class="nav-text"> XSS检测验证模块 (core&#x2F;checker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97-corecolorspy"><span class="nav-text"> 终端颜色输出模块 (core&#x2F;colors.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97-coreconfigpy"><span class="nav-text"> 全局配置模块 (core&#x2F;config.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-xss%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-coredompy"><span class="nav-text"> DOM XSS扫描模块 (core&#x2F;dom.py)</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xsstrike"><span class="nav-text"> XSStrike</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3"><span class="nav-text"> 主程序入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%A3%80%E6%B5%8B%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9D%97-corecheckerpy"><span class="nav-text"> XSS检测验证模块 (core&#x2F;checker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97-corecolorspy"><span class="nav-text"> 终端颜色输出模块 (core&#x2F;colors.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97-coreconfigpy"><span class="nav-text"> 全局配置模块 (core&#x2F;config.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-xss%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-coredompy"><span class="nav-text"> DOM XSS扫描模块 (core&#x2F;dom.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%A8%A1%E5%9D%97-coreencoderspy"><span class="nav-text"> 编码模块 (core&#x2F;encoders.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97-corefiltercheckerpy"><span class="nav-text"> 过滤器检测模块 (core&#x2F;filterChecker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9D%97-corefuzzerpy"><span class="nav-text"> 模糊测试模块 (core&#x2F;fuzzer.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E8%BD%BD%E8%8D%B7%E7%94%9F%E6%88%90%E5%99%A8-coregeneratorpy"><span class="nav-text"> 有效载荷生成器 (core&#x2F;generator.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html%E8%A7%A3%E6%9E%90%E6%A8%A1%E5%9D%97-corehtmlparserpy"><span class="nav-text"> HTML解析模块 (core&#x2F;htmlParser.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%86%E6%9E%90%E6%A8%A1%E5%9D%97-corejscontexterpy"><span class="nav-text"> JavaScript上下文分析模块 (core&#x2F;jsContexter.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E6%A8%A1%E5%9D%97-corelogpy"><span class="nav-text"> 日志记录模块 (core&#x2F;log.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E7%88%AC%E8%99%AB%E6%A8%A1%E5%9D%97-corephotonpy"><span class="nav-text"> 网站爬虫模块 (core&#x2F;photon.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9D%97-corepromptpy"><span class="nav-text"> 用户交互模块 (core&#x2F;prompt.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http%E8%AF%B7%E6%B1%82%E6%A8%A1%E5%9D%97-corerequesterpy"><span class="nav-text"> HTTP请求模块 (core&#x2F;requester.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%A8%A1%E5%9D%97-coreupdaterpy"><span class="nav-text"> 更新模块 (core&#x2F;updater.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97-coreutilspy"><span class="nav-text"> 工具函数模块 (core&#x2F;utils.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#waf%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97-corewafdetectorpy"><span class="nav-text"> WAF检测模块 (core&#x2F;wafDetector.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97-corezetanizepy"><span class="nav-text"> 表单处理模块 (core&#x2F;zetanize.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modes%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-text"> modes目录下文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bruteforcerpy"><span class="nav-text"> bruteforcer.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crawlpy"><span class="nav-text"> crawl.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scanpy"><span class="nav-text"> scan.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#singlefuzzpy"><span class="nav-text"> singleFuzz.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugins%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-text"> plugins目录下文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retirejspy"><span class="nav-text"> retireJs.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dalfox"><span class="nav-text"> dalfox</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90"><span class="nav-text"> 入口函数分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E4%BB%A3%E7%A0%81%E8%AF%A6%E7%BB%86%E5%88%86%E6%9E%90"><span class="nav-text"> 目录结构和代码详细分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd-%E7%9B%AE%E5%BD%95"><span class="nav-text"> cmd 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lib-%E7%9B%AE%E5%BD%95"><span class="nav-text"> lib 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pkg-%E7%9B%AE%E5%BD%95"><span class="nav-text"> pkg 目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scanning-%E5%8C%85"><span class="nav-text"> scanning 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#server-%E5%8C%85"><span class="nav-text"> server 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#har-%E5%8C%85"><span class="nav-text"> har 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#model-%E5%8C%85"><span class="nav-text"> model 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#printing-%E5%8C%85"><span class="nav-text"> printing 包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#samples-%E7%9B%AE%E5%BD%95"><span class="nav-text"> samples 目录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dalfox-%E5%92%8C-xsstrike-%E6%95%B4%E5%90%88%E5%88%86%E6%9E%90"><span class="nav-text"> DalFox 和 XSStrike 整合分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-text"> 两个项目概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dalfox-2"><span class="nav-text"> DalFox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xsstrike-2"><span class="nav-text"> XSStrike</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E8%87%AA%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text"> 各自的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dalfox-%E4%BC%98%E5%8A%BF"><span class="nav-text"> DalFox 优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xsstrike-%E4%BC%98%E5%8A%BF"><span class="nav-text"> XSStrike 优势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E6%96%B9%E6%A1%88"><span class="nav-text"> 整合方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%E9%80%89%E6%8B%A9"><span class="nav-text"> 基础架构选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E6%95%B4%E5%90%88%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-text"> 需要整合的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-text"> 具体实现步骤</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
